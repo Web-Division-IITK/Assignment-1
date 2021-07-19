@@ -1,0 +1,59 @@
+
+.navContent{
+  margin:10px;
+  font-size: 22px;
+  padding:3px;
+  cursor: pointer;
+}
+#searchBar{
+  position:absolute;
+  right:10px;
+  top:2px;
+}
+.search{
+  border-radius: 5px;
+  outline: none;
+  height:25px;
+  text-align: center;
+}
+nav{
+background-color: black;
+  color:white;
+  display:flex;
+  padding:2vh;
+  height:8vh;
+  align-items:center;
+}
+.addNote{
+  margin-top:60px;
+  text-align: center;
+  outline: none;
+}
+#addTitle{
+  border:2px solid black;
+  display:block;
+  margin-top: 30px;
+  width:40vw;
+  margin:auto;
+  border-radius:10px;
+  padding:10px;
+}
+#addNote{
+  border:2px solid black;
+  display:block;
+  margin-top: 30px;
+  width:40vw;
+  margin:auto;
+  border-radius:10px;
+  padding:10px;
+}
+#saveButton{
+  background-color: rgb(11, 161, 11);
+  color:white;
+  border:2px solid rgb(5, 110, 5);
+  margin: 20px auto;
+  display: block;
+  height:30px;
+  width:100px;
+  border-radius:5px;
+}
