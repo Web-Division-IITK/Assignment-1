@@ -1,0 +1,15 @@
+<% include partials/header %>
+<!-- <link rel="icon" type="image/png" href="__dirname/image/favicon.png"/> -->
+    <h1>Welcome</h1>
+    <p><%=homeStartingContent%></p>
+    <%  posts.forEach(function(post){%>
+        <h1> <%= post.title %>  </h1>
+    <p><%= post.post %> </p>
+    <%})%>
+    <form action="/compose"method="get">
+            <button type="submit"  class="btn btn-outline-dark bt">ADD</button>
+     </form>
+  
+   
+    
+    <% include partials/footer %>
