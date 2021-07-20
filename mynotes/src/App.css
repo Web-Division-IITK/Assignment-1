@@ -31,6 +31,7 @@ background-color: black;
 }
 #addTitle{
   border:2px solid black;
+  background-color:rgb(202, 199, 199);
   display:block;
   margin-top: 30px;
   width:40vw;
@@ -39,6 +40,7 @@ background-color: black;
   padding:10px;
 }
 #addNote{
+  background-color:rgb(202, 199, 199);
   border:2px solid black;
   display:block;
   margin-top: 30px;
@@ -56,4 +58,34 @@ background-color: black;
   height:30px;
   width:100px;
   border-radius:5px;
+}
+#YourNotes{
+  display:block;
+  width: fit-content;
+  margin:auto;
+  font-size:40px;
+  margin-top:50px;
+}
+.Notes{
+  /* display:block; */
+  margin: 5px auto;
+  color:black;
+  width: 50vw;
+  text-align:center;
+  border:2px solid black;
+  background-color:rgb(202, 199, 199);
+  word-wrap: break-word;
+  margin:20px;
+  border-radius: 10px;
+  min-height: 200px;
+}
+.notePair{
+  display: flex;
+  margin :20px;
+}
+.noteTitle{
+  font-size:25px;
+}
+.noteBody{
+  font-size:20px
 }
