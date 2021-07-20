@@ -9,16 +9,11 @@ const addNotes=(
     <h3 id="Body">Add Note</h3>
         <textarea id="addNote" rows="15" columns="5"/>
     </div>
-    <button id="saveButton" className="addNote" >Save</button>
+    <button id="saveButton" className="addNote" onClick={saveNote} >Save</button>
     </div>
 )
-setTimeout(() =>{
-    
-    document.getElementById('saveButton').addEventListener('click',saveNote)
-},50)
 function saveNote(){
     var title=document.getElementById('addTitle').value;
-    // console.log(title)
     var note=document.getElementById('addNote').value;
 const reqBody={
     title: title,

@@ -17,7 +17,7 @@ function App() {
         </div>
     </nav>
     {inputNote}
-    <div id="savedNotes">{importNote}</div>
+    <h2 id="YourNotes">Your Notes</h2>
   </div>
   );
 }
