@@ -1,37 +1,38 @@
 import { useState, setState } from 'react';
 import { React } from 'react';
-import {Link} from 'react-router-dom';
-import {Button, Form, Input, Checkbox, Layout} from 'antd'
-import { UserOutlined, LockOutlined, MailOutlined } from '@ant-design/icons';
+import {Link, useHistory} from 'react-router-dom';
+import {Button, Form, Input, Checkbox, Layout, Alert, Spin} from 'antd'
+import {  LockOutlined, MailOutlined } from '@ant-design/icons';
 import './index.css'
-const {Header, Sider, Footer} = Layout;
+import {useAuth} from './../contexts/AuthContext';
 
-function SignInWindow(props){
 
-    const onFinish = (values)=>{
+ function SignInWindow(props){
+  const {currentUser, login} = useAuth();
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
+  const history = useHistory();
+    async function onFinish(values){
+        setLoading(true);
         console.log("Form Values received: ",values);
-
-        fetch('http://localhost:5000/verify',
-              {
-                method:'GET',
-                headers:new Headers({
-                  email:values['email'],
-                  password:values['password']
-                })
-              }
-        ).then(res=>res.text())
-        .then(res=>{
+        
+      
+        try{
           
-          console.log(res);
-          if(res==='yes'){
-            alert('Logged in!');
-          }
-          else{
-            alert('Wrong credentials');
-          }
-        });
+          await login(values['email'],values['password']);
+          setError('');
+          history.push('/');
+        }
+        catch{
+          setError("Invalid Username or Password");
+        }
+        setLoading(false);
+
     };
     return(
+      <div style={{minWidth:"300px"}}>
+      <h2 style={{textAlign:'center', marginBottom:'60'}}>Log In</h2>
+      {error &&<Alert type='error' message={error}/>}
         <Form
       name="normal_login"
       className="login-form"
@@ -40,17 +41,7 @@ function SignInWindow(props){
       }}
       onFinish={onFinish}
     >
-      {/* <Form.Item
-        name="username"
-        rules={[
-          {
-            required: true,
-            message: 'Please input your Username!',
-          },
-        ]}
-      >
-        <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Username" />
-      </Form.Item> */}
+    
       <Form.Item
         name="email"
         rules={[
@@ -79,6 +70,7 @@ function SignInWindow(props){
           prefix={<LockOutlined className="site-form-item-icon" />}
           type="password"
           placeholder="Password"
+          minLength="6"
         />
       </Form.Item>
       <Form.Item>
@@ -86,18 +78,19 @@ function SignInWindow(props){
           <Checkbox>Remember me</Checkbox>
         </Form.Item>
 
-        <a className="login-form-forgot" href="">
+        <Link className="login-form-forgot" to="/forgot-password" style={{float:"right"}}>
           Forgot password
-        </a>
+        </Link>
       </Form.Item>
 
       <Form.Item>
-        <Button type="primary" htmlType="submit" className="login-form-button">
-          Log In
+        <Button type="primary" htmlType="submit" className="login-form-button" disabled={loading}>
+          {loading?<Spin/>:<>Log In</>}
         </Button>
         Or <Link  to="/signUp">register now!</Link>
       </Form.Item>
     </Form>
+    </div>
   );
 
     

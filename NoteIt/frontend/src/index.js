@@ -8,17 +8,28 @@ import getPage from './routes.js';
 import MainPage from './Authentication/index.js';
 import SignInWindow from './Authentication/signIn.js';
 import SignUpWindow from './Authentication/signUp.js';
+import MyNotes from './NoteComponents/MyNotes/myNotes';
+import BaseLayout from './NoteComponents/index';
+import { AuthProvider} from './contexts/AuthContext';
+import ForgotPassword from './Authentication/forgotPassword';
+
 ReactDOM.render(
   <React.StrictMode>
+  <AuthProvider>
             <Router>
         <Switch>
-            <Route exact path='/'>
+        <Route exact path='/'>
+                <BaseLayout />
+            </Route>
+            <Route  path='/login'>
                 <MainPage display={<SignInWindow/>}/>
             </Route>
             <Route exact path='/signUp'>
                 <MainPage display={<SignUpWindow/>}/>
             </Route>
-            
+            <Route path='/forgot-password'>
+                <MainPage display={<ForgotPassword/>}/>
+            </Route>
             <Route path='/'>
                 ERROR 404 
                 Page not found
@@ -26,6 +37,7 @@ ReactDOM.render(
         </Switch>
         
     </Router>
+    </AuthProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

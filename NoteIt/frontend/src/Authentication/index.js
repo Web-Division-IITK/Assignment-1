@@ -28,7 +28,7 @@ function MainPage(props){
             <p
                 style={{textAlign:'center', color:'red'}}
             >
-                Note Taking App developed by ME :)
+                This Note Taking app is under development.
             </p>
         </Footer>
     </Layout>

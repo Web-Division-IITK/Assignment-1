@@ -1,8 +1,16 @@
 import './index.css';
-import { Form, Input, Checkbox, Button } from 'antd';
+import { Form, Input, Checkbox, Button, Alert, Spin } from 'antd';
 import React from 'react';
+import { useState } from 'react';
+import {useHistory, Link} from 'react-router-dom'
+import {useAuth} from './../contexts/AuthContext';
+
 
 function SignUpWindow(props){
+  const {signUp} = useAuth();
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const history = useHistory();
     const formItemLayout = {
         labelCol: {
           xs: {
@@ -33,28 +41,43 @@ function SignUpWindow(props){
             },
         },
     };
-    const onFinish = (values) => {
+    async function onFinish(values){
         console.log('Received values of form: ', values);
-        fetch("http://localhost:5000/create-user",{
-          method:"GET",
-          headers: new Headers({
-            email:values['email'],
-            password:values['password'],
-            nickname:values['nickname']
-          })
-        }
-        ).then(res=>res.text())
-        .then(res=>{
-          if(res===true)
-            alert("Account created successfully");
+        setLoading(true);
+      //   fetch("http://localhost:5000/create-user",{
+      //     method:"GET",
+      //     headers: new Headers({
+      //       email:values['email'],
+      //       password:values['password'],
+      //       nickname:values['nickname']
+      //     })
+      //   }
+      //   ).then(res=>res.text())
+      //   .then(res=>{
+      //     if(res===true)
+      //       alert("Account created successfully");
         
-        else{
-          alert("Error in creating account. Either account on this email already exists or email is not valid.")
-        }
-       } );
+      //   else{
+      //     alert("Error in creating account. Either account on this email already exists or email is not valid.")
+      //   }
+      //  } );
 
-      };
+      try{
+        await signUp(values['email'], values['password'], values['nickname']);
+        setError(null);
+        history.push('/');
+      }
+      catch{
+        setError("Error creating account");
+      }
+      setLoading(false);
+    }
     const comp = (
+      <div style={{minWidth:"500px"}}>
+      <h2 style={{textAlign:'center', marginBottom:'60'}}>
+        Sign Up
+      </h2>
+      {error &&<Alert type="error" message={error} style={{textAlign:"center"}}/>}
         <Form
       {...formItemLayout}
       
@@ -85,11 +108,16 @@ function SignUpWindow(props){
       <Form.Item
         name="password"
         label="Password"
+        
         rules={[
           {
             required: true,
             message: 'Please input your password!',
           },
+          {
+            min: 6,
+            message: 'The password should be at least 6 characters long!',
+          }
         ]}
         hasFeedback
       >
@@ -104,6 +132,7 @@ function SignUpWindow(props){
         rules={[
           {
             required: true,
+            
             message: 'Please confirm your password!',
           },
           ({ getFieldValue }) => ({
@@ -115,6 +144,10 @@ function SignUpWindow(props){
               return Promise.reject(new Error('The two passwords that you entered do not match!'));
             },
           }),
+          {
+            min: 6,
+            message: 'Password must be at least 6 characters long!',
+          }
         ]}
       >
         <Input.Password />
@@ -150,11 +183,15 @@ function SignUpWindow(props){
         </Checkbox>
       </Form.Item>
       <Form.Item {...tailFormItemLayout}>
-        <Button type="primary" htmlType="submit">
-          Register
+        <Button type="primary" htmlType="submit" disabled={loading}>
+         {loading?<Spin/>: <>Register</>}
         </Button>
       </Form.Item>
+      <Form.Item>
+        <p>Already have an account? <Link to='/login'>Log In</Link></p>
+      </Form.Item>
     </Form>
+    </div>
     );
     return comp;
 }
