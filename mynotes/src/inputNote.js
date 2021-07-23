@@ -21,10 +21,23 @@ const reqBody={
 }
     fetch('http://localhost:3100/savenote/',{
         method: 'POST',
-        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        headers: {'Content-Type': 'application/x-www-form-urlencoded',
+        'authorization': getCookie("token")},
         body:formurlencoded(reqBody)
     }).then((inputNote) => {console.log(inputNote);}).catch((error)=>{
         console.log(error);
     })
+}
+function getCookie(c_name) {
+    console.log(c_name);
+    var c_arr = document.cookie.split(';');
+    var jwtToken
+    c_arr.forEach((val) => {
+        if (c_name == val.split('=')[0]) {
+            var token = val.split('=')[1];
+            jwtToken = token
+        }
+    })
+    return decodeURI(jwtToken);
 }
 export default addNotes;

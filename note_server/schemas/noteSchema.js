@@ -8,6 +8,10 @@ const noteSchema = new Schema({
     },
     body: {
         type:"string"
+    },
+    user_id:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'users'
     }
 },
     {timestamp:true}

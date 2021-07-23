@@ -70,7 +70,7 @@ background-color: black;
   /* display:block; */
   margin: 5px auto;
   color:black;
-  width: 50vw;
+  width: 30vw;
   text-align:center;
   border:2px solid black;
   background-color:rgb(202, 199, 199);
@@ -79,13 +79,76 @@ background-color: black;
   border-radius: 10px;
   min-height: 200px;
 }
-.notePair{
-  display: flex;
-  margin :20px;
+#savedNotes{
+  display:flex;
 }
 .noteTitle{
   font-size:25px;
+  padding-top: 20px;
 }
 .noteBody{
-  font-size:20px
+  font-size:20px;
+  padding-top:30px;
+}
+#loginDiv{
+  max-width:40%;
+  min-width:fit-content;
+  margin: auto;
+  display: flex;
+  flex-direction:column;
+  align-items:center;
+  border:2px solid black;
+  margin-top: 100px;
+  min-height: 350px;
+  border-radius:15px;
+  background-color:ivory;
+  flex-wrap: wrap;
+  margin-bottom: 100px;
+  padding:10px;
+}
+input{
+  border-radius: 4px;
+  text-align: center;
+  min-height: fit-content;
+  font-size:15px;
+}
+#loginButton{
+  background-color: rgb(6, 95, 18);
+  color: white;
+  margin-top:25px;
+  margin-bottom:25px;
+  outline: none;
+  border-radius:4px;
+  width:70px;
+  height:30px;
+}
+#createAccountPara{
+  color:rgb(170, 49, 12);
+}
+#signupButton{
+  background-color: rgb(6, 95, 18);
+  color: white;
+  margin-top:10px;
+  margin-bottom:25px;
+  outline: none;
+  border-radius:4px;
+  width:70px;
+  height:30px;
+}
+#signupForm{
+  background-color:ivory;
+  /* color: rgb(144, 173, 253); */
+  text-align: center;
+  display: flex;
+  flex-direction:column;
+  width:40%;
+  margin:auto;
+  border: 2px solid #000000;
+  margin-top: 100px;
+  min-width:fit-content;
+  padding:10px;
+  align-items:center;
+  min-height:80vh;
+  margin-bottom: 100px;
+  border-radius:15px;
 }
