@@ -41,7 +41,7 @@ router.route('/login').post(cors.corsWithOptions,(req, res,next) => {
     else if(!user){ 
       res.statusCode=401;
       res.setHeader('Content-Type','application/json');
-      res.send({err:"user not exists"})
+      res.send({err:"user not found"})
     }
     else{
       if(user.password!==req.body.password){

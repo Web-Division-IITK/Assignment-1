@@ -28,6 +28,12 @@ class savedNotes extends React.Component {
         })
         return decodeURI(jwtToken);
     }
+    notification(){
+        
+        if(this.state.notes.length==0){
+            return(<p id="notification">You have not saved any notes. Save them to see here</p>)
+        }
+    }
     componentDidMount() {
         fetch('http://localhost:3100/savenote', {
             method: 'GET',
@@ -53,7 +59,7 @@ class savedNotes extends React.Component {
     }
     render() {
         if (this.state.notes != null) return (
-            <div className="App">
+            <div className="App" >
                 <nav >
                     <div className="navContent" id="appName">
                         Notes
@@ -66,7 +72,7 @@ class savedNotes extends React.Component {
                         this.setState({ notes: null })
                     }} />
                 </nav>
-                <div>
+                <div onClick={()=>{this.setState({editableNote:null})}}>
                     <div className="addNote" id="title">
                         <h2 id="title">Add Title</h2>
                         <textarea id="addTitle" rows="2" columns="5" />
@@ -78,6 +84,8 @@ class savedNotes extends React.Component {
                     <button id="saveButton" className="addNote" onClick={() => {
                         var title = document.getElementById('addTitle').value;
                         var note = document.getElementById('addNote').value;
+                        document.getElementById('addTitle').value='';
+                        document.getElementById('addNote').value='';
                         const reqBody = {
                             title: title,
                             body: note
@@ -102,6 +110,7 @@ class savedNotes extends React.Component {
                     }} >Save</button>
                 </div>
                 <h2 id="YourNotes">Your Notes</h2>
+                {this.notification()}
                 <div id="savedNotes">
                     {
                         this.state.notes.map((notes) => {
@@ -187,7 +196,7 @@ class savedNotes extends React.Component {
                         <input type="text" placeholder="enter your username" id="username"></input>
                         <br />
                         <h3>Password</h3>
-                        <input type="text" placeholder="enter your password" id="password"></input>
+                        <input type="password" placeholder="enter your password" id="password"></input>
                         <br />
                         <button id="loginButton" onClick={() => {
                             var reqBody = {
@@ -250,13 +259,13 @@ class savedNotes extends React.Component {
                     <div id="signupForm">
                         <h1> Create a new account</h1>
                         <h3>Username</h3>
-                        <input id="username" placeholder="enter your username"></input>
+                        <input type="text" id="username" placeholder="enter your username"></input>
                         <h3>Password</h3>
-                        <input id="password" placeholder="enter your password"></input>
+                        <input type="password" id="password" placeholder="enter your password"></input>
                         <h3>First Name</h3>
-                        <input id="FirstName" placeholder="enter your First Name"></input>
+                        <input type="text" id="FirstName" placeholder="enter your First Name"></input>
                         <h3>Last Name</h3>
-                        <input id="LastName" placeholder="enter your Last Name"></input>
+                        <input type="text" id="LastName" placeholder="enter your Last Name"></input>
                         <button id="signupButton" onClick={() => {
                             var reqBody = {
                                 username: document.getElementById('username').value,
