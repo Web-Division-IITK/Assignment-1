@@ -34,20 +34,20 @@ router.route('/').options((req,res)=>{
 router.route('/login').post(cors.corsWithOptions,(req, res,next) => {
   users.findOne({username:req.body.username}).then((user,err)=>{
     if(err){
-      res.statusCode=500;
+      res.statusCode=401;
       res.setHeader('Content-Type','application/json');
       res.send(err);
     }
     else if(!user){ 
-      res.statusCode=500;
+      res.statusCode=401;
       res.setHeader('Content-Type','application/json');
-      res.send({err:"no such user exists"})
+      res.send({err:"user not exists"})
     }
     else{
       if(user.password!==req.body.password){
-        res.statusCode=500;
+        res.statusCode=401;
         res.setHeader('Content-Type','application/json');
-        res.send({err:" incorrect password"})
+        res.send({err:"incorrect password"})
       }
       else{
         var token=authenticate.getToken({_id:user._id})

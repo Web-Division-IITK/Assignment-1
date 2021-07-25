@@ -46,4 +46,22 @@ router.route('/')
         }
         )
 })
+router.route('/:noteId').options(cors.corsWithOptions,(req, res) => {res.statusCode=200}).put(cors.corsWithOptions,authenticate.verifyUser,(req, res,next)=>{
+    console.log(req.body)
+    notes.findByIdAndUpdate(req.params.noteId,req.body).then((note)=>{
+        if(note){
+        notes.find({user_id:req.user._id}).then((notes)=>{
+            res.statusCode=200;
+            res.setHeader('Content-Type', 'application/json');
+            res.send(notes);
+        })}
+    },(err)=>next(err)).catch((err)=>next(err))
+}).delete(cors.corsWithOptions,authenticate.verifyUser,(req, res)=>{
+    notes.findOneAndDelete({_id:req.params.noteId}).then((results)=>{
+        console.log(results);
+        res.statusCode=200;
+        res.setHeader('Content-Type', 'application/json');
+        res.send(results);
+    })
+});
 module.exports=router;
