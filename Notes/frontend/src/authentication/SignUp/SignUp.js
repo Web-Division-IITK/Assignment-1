@@ -1,6 +1,6 @@
 import React ,{useState} from 'react';
 import {Form, Button, Select, Input,Alert,Checkbox} from 'antd';
- import {Auth} from '../context/AuthContext';
+ import {Auth} from '../../context/AuthContext';
  import {useHistory} from 'react-router-dom';
 const {Option } = Select;
 
@@ -80,17 +80,15 @@ const formItemLayout = {
     <div>
     <br/><br/>
     <h1 style={{
-      marginLeft:140,
+      marginLeft:'auto',
       marginBottom:'auto',
       fontSize:30,
     }} ><b>SIGNUP PAGE</b></h1>
     <br/><br/>
     <Form
     {...formItemLayout}
-    
     name="register"
     onFinish={onFinish}
-    
     scrollToFirstError
   >
     <Form.Item

@@ -4,29 +4,35 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter as Router, Switch, Route,Redirect } from 'react-router-dom';
+import {AuthProvider} from './context/AuthContext';
 import MainLayout from './authentication/index.js';
-import SignIn from './authentication/SignIn.js';
-import SignUp from './authentication/SignUp.js';
-import Dashboard from'./authentication/Dashboard';
-
+import SignIn from './authentication/SignIn/SignIn.js';
+import SignUp from './authentication/SignUp/SignUp.js';
+import Dashboard from'./content/Dashboard';
+import Forget from './authentication/ForgetPassword/forget';
+import Home from './content/Home/home';
+import Delete from './content/DeleteNote/delete';
+import {NoteContextProvider} from './context/NoteContext';
+import NavigationHandler from './content/NavigationHandler';
 
 ReactDOM.render(
- <Router>
+  <NoteContextProvider>
+  <AuthProvider>
+  <Router>
   <Switch>
     <Route exact path='/'>
       <Redirect to="/login" />
-     
-      </Route> 
+    </Route> 
+
     <Route path ="/login" children={ <MainLayout item={<SignIn />} />} />
     <Route path='/signup' children={<MainLayout item={<SignUp />}/>} />
-    <Route path="/dashboard" children={<Dashboard />} />
-    <Route path ='/home'>
-      <h1>
-        Welcome to My World
-      </h1>
-    </Route>
+    <Route path="/forget" children={<MainLayout item={<Forget />}/>} />
+    <Route path="/dashboard" children={<Dashboard body={<NavigationHandler />} />} />
   </Switch>
 </Router>
+</AuthProvider>
+</NoteContextProvider>
+
 ,
   document.getElementById('root')
 );

@@ -8,7 +8,7 @@ const { Header, Content, Footer } = Layout;
 
 export default function MainLayout(props) {
     return (
-        <AuthProvider>
+        
         <Layout >
             <Header>
                 <h1 style={{
@@ -35,7 +35,6 @@ export default function MainLayout(props) {
                 Note Taking Site
             </Footer>
         </Layout>
-        </AuthProvider>
         
     );
 }

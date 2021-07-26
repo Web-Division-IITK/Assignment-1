@@ -1,4 +1,4 @@
-import React, {useContext,useState,useEffect } from 'react'
+import React, {useContext,useState,useEffect } from 'react';
 import { auth } from '../firebase.js';
 
 const AuthContext=React.createContext();
@@ -19,19 +19,6 @@ export function AuthProvider({children}) {
 
     function login(email,password){
         return auth.signInWithEmailAndPassword(email,password);
-        //  .catch((error) => {
-        //      var errorCode = error.code;
-        //      var errorMessage= error.message;
-        //      if(errorCode=== 'auth/wrong-password') {
-        //          alert('Wrong Password');
-        //      }
-        //      else {
-        //          alert(errorMessage);
-        //      }
-        //      console.log(error);
-        //  });
-
-        //  return;
     }
  
     useEffect(()=>{
