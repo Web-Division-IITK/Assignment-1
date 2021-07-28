@@ -13,18 +13,28 @@ router.route('/').options((req,res)=>{
   res.send('respond with a resource');
 }).post(cors.corsWithOptions,(req, res, next) => {
   if(req.body.username&&req.body.password){
-  users.create(req.body).then((user,err) => {
-    if(err) {
-      res.statusCode=200;
-      res.setHeader('Content-Type', 'application/json');
-      res.json({err:err})
-    }
-    else{
-      res.statusCode=200;
-      res.setHeader('Content-Type', 'application/json');
-      res.send(user);
-    }
-  })}
+    users.findOne({username:req.body.username}).then((user)=>{
+      if(user){
+        res.statusCode=401;
+        res.setHeader('Content-Type', 'application/json');
+        res.send({err:'try a different username'});
+      }
+      else{
+        users.create(req.body).then((user,err) => {
+          if(err) {
+            res.statusCode=500;
+            res.setHeader('Content-Type', 'application/json');
+            res.json({err:err})
+          }
+          else{
+            res.statusCode=200;
+            res.setHeader('Content-Type', 'application/json');
+            res.send(user);
+          }
+        })
+      }
+    })
+  }
   else{
     res.statusCode=500;
     res.setHeader('Content-Type', 'application/json');
