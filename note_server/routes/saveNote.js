@@ -58,10 +58,43 @@ router.route('/:noteId').options(cors.corsWithOptions,(req, res) => {res.statusC
     },(err)=>next(err)).catch((err)=>next(err))
 }).delete(cors.corsWithOptions,authenticate.verifyUser,(req, res)=>{
     notes.findOneAndDelete({_id:req.params.noteId}).then((results)=>{
-        console.log(results);
+        notes.find({user_id:req.user._id}).then((results)=>{
+            res.statusCode=200;
+            res.setHeader('Content-Type', 'application/json');
+            res.send(results);
+        })
+    })
+.catch((err)=>{ res.statusCode=500;
+                res.setHeader('Content-Type', 'text/plain');
+                res.send({err:err})
+
+})
+});
+router.route('/important').options(cors.corsWithOptions,(req,res)=>{res.statusCode=200}).get(cors.corsWithOptions,authenticate.verifyUser,(req, res)=>{
+    notes.find({user_id:req.user._id,important:true}).then((notes)=>{
         res.statusCode=200;
         res.setHeader('Content-Type', 'application/json');
-        res.send(results);
+        res.send(notes)
+    });
+})
+router.route('/:noteId/important').options(cors.corsWithOptions,(req,res)=>{res.statusCode=200})
+.post(cors.corsWithOptions,authenticate.verifyUser,(req,res)=>{
+    notes.findByIdAndUpdate(req.params.noteId,{important:true}).then((note)=>{
+        if(note){
+            notes.find({user_id:req.user._id,important:true}).then((result)=>{ 
+                res.statusCode=200;
+                res.setHeader('Content-Type', 'application/json');
+                res.send(result)
+            })
+        }
     })
-});
+}).delete(cors.corsWithOptions,authenticate.verifyUser,(req, res)=>{
+    notes.findByIdAndUpdate(req.params.noteId,{important:false}).then((result)=>{ if(result){
+        notes.find({user_id:req.user._id,important:true}).then((result)=>{ 
+            res.statusCode=200;
+            res.setHeader('Content-Type', 'application/json');
+            res.send(result)
+        })
+        }})
+})
 module.exports=router;

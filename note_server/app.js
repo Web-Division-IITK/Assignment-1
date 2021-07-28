@@ -6,6 +6,7 @@ var logger = require('morgan');
 var config = require('./config')
 var mongoose = require('mongoose');
 const uri = `mongodb+srv://subodhkumar:${config.password}@cluster0.gm0lg.mongodb.net/test?retryWrites=true&w=majority`;
+// const uri = `mongodb://localhost:27017/`
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -27,7 +28,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/savenote', saveRouter);
 const url="mongodb://localhost:27017/";
-const connect = mongoose.connect(uri,{ useNewUrlParser:true, useUnifiedTopology:true}).then((db) => {console.log('connected successfully to database')},(err)=>{return err}).catch((error)=>{console.log(error)});
+mongoose.connect(uri,{ useNewUrlParser:true, useUnifiedTopology:true, useFindAndModify: false }).then(() => {console.log('connected successfully to database')}).catch((error)=>{console.log(error)});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
