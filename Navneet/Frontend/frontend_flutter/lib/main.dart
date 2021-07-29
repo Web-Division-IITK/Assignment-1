@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
-import 'screens/decider.dart';
+import 'screens/wrapper.dart';
 
 void main() {
-  runApp(NoteApp());
+  runApp(MyApp());
 }
 
-class NoteApp extends StatefulWidget {
-  @override
-  _NoteAppState createState() => _NoteAppState();
-}
-
-class _NoteAppState extends State<NoteApp> {
+class MyApp extends StatelessWidget {
+ 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: "Notekeeper",
+      title: 'Note Keeper',
       debugShowCheckedModeBanner: false,
-      home: Decider(),
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: Wrapper(),
     );
   }
 }
+

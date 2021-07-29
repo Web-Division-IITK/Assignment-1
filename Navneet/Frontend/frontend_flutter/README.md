@@ -1,6 +1,6 @@
 # frontend_flutter
 
-frontend part of the full stack notekeeper application
+A new Flutter project.
 
 ## Getting Started
 
