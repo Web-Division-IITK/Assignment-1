@@ -22,9 +22,13 @@ export function NoteContextProvider({children}) {
     function create_note(values){
         let notes_copy=notes.slice();
         const note={title:values['name'],description:values['description'],favourites:false};
-        notes_copy.push(note);
-        Setnotes(notes_copy);
-        return;
+        var duplicate=notes.filter((n)=>note.title===n.title);
+        if(duplicate.length>=1) return false;
+        else{
+            notes_copy.push(note);
+            Setnotes(notes_copy);
+            return true;
+        }
     }
 
     function delete_note(idx){

@@ -1,5 +1,5 @@
 import React,{useState} from 'react';
-import { Drawer, List, Avatar, Divider, Col, Row,Button,Modal,Input,Form,} from 'antd';
+import { Drawer, List, Avatar, Divider, Col, Row,Button,Modal,Input,Form, message,} from 'antd';
 import {DeleteOutlined,StarOutlined,StarFilled,StarTwoTone} from '@ant-design/icons';
 import './home.css';
 import {useNoteContext} from '../../context/NoteContext';
@@ -25,7 +25,13 @@ function Home(props) {
       };
 
       function onFinish(values) {
-          create_note(values);
+          var success=create_note(values);
+          if(success) {
+            message.success("Note created succesfully");
+            Setmodal2Visible(false);
+            
+          }
+          else message.error("Note already exists.Change the note name");
       }
 
       function setModal2Visible(modal2Visible) {
@@ -98,7 +104,7 @@ function Home(props) {
             </Form.Item>
 
             <Form.Item {...tailFormItemLayout} >
-              <Button type="primary" htmlType="submit">Create</Button>
+              <Button type="primary" htmlType="submit" >Create</Button>
             </Form.Item>
 
           </Form>
