@@ -4,7 +4,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
-import getPage from './routes.js';
+
 import MainPage from './Authentication/index.js';
 import SignInWindow from './Authentication/signIn.js';
 import SignUpWindow from './Authentication/signUp.js';
@@ -12,15 +12,18 @@ import MyNotes from './NoteComponents/MyNotes/myNotes';
 import BaseLayout from './NoteComponents/index';
 import { AuthProvider} from './contexts/AuthContext';
 import ForgotPassword from './Authentication/forgotPassword';
-
+import {NoteContextProvider} from './contexts/NoteContext';
 ReactDOM.render(
   <React.StrictMode>
   <AuthProvider>
+  <NoteContextProvider>
             <Router>
         <Switch>
+        
         <Route exact path='/'>
-                <BaseLayout />
+                <BaseLayout page={<MyNotes/>}/>
             </Route>
+           
             <Route  path='/login'>
                 <MainPage display={<SignInWindow/>}/>
             </Route>
@@ -37,6 +40,7 @@ ReactDOM.render(
         </Switch>
         
     </Router>
+    </NoteContextProvider>
     </AuthProvider>
   </React.StrictMode>,
   document.getElementById('root')

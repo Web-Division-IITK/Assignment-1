@@ -1,7 +1,7 @@
-import { useState, setState } from 'react';
+import { useState } from 'react';
 import { React } from 'react';
 import {Link, useHistory} from 'react-router-dom';
-import {Button, Form, Input, Checkbox, Layout, Alert, Spin} from 'antd'
+import {Button, Form, Input, Checkbox, Alert, Spin} from 'antd'
 import {  LockOutlined, MailOutlined } from '@ant-design/icons';
 import './index.css'
 import {useAuth} from './../contexts/AuthContext';

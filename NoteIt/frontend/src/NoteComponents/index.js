@@ -1,30 +1,39 @@
 import React, { useEffect } from 'react';
-import {Layout, Menu, Breadcrumb} from 'antd';
+import {Layout, Menu} from 'antd';
 import MyNotes from './MyNotes/myNotes';
-import {PaperClipOutlined,  } from '@ant-design/icons';
+import {PaperClipOutlined, EditOutlined, InfoCircleOutlined, DeleteColumnOutlined }from '@ant-design/icons';
 import {useAuth} from './../contexts/AuthContext'
 import {useHistory} from 'react-router-dom';
 import NavProfileMenu from "./navProfileMenu";
-
+import {useNoteContext} from './../contexts/NoteContext';
+import Editor from './Editor/editor';
+import About from "./About/about";
+import DeletedNotes from './DeletedNotes/deletedNotes';
+import "./index.css";
 const {Header, Sider, Content, Footer} = Layout;
 function BaseLayout(props){
-
-    const {currentUser, logout} = useAuth();
+    const {siderKey, currentPage, setCurrentDisplayPage} = useNoteContext();
+    const {currentUser} = useAuth();
     const history = useHistory();
     useEffect(()=>{
       if(currentUser == null){
         history.push(`/login`);
       }
+      setCurrentDisplayPage(<MyNotes/>,"1")
       
     },[]);
     
     return(
         <Layout>
-    <Header className="header">
+    <Header className="header" style={{textAlign:'center'}}>
     
 
- 
-      <h2 style={{color:'white',textAlign:'center'}} >Note It</h2>
+      <div  style={{textAlign:'center'}}>
+      
+        <h2 style={{color:'white', display:'inline'}} >Note It</h2> 
+        <NavProfileMenu/>
+      </div>
+      
       
     </Header>
     
@@ -33,14 +42,20 @@ function BaseLayout(props){
         <Menu
           mode="inline"
           theme="dark"
-          defaultSelectedKeys={"1"}
+          openKeys={[siderKey]}
+          selectedKeys={[siderKey]}
           style={{ height: '100%', borderRight: 0 }}
         >
           
-            <Menu.Item key="1" >My Notes</Menu.Item>
-            <Menu.Item key="2" >Editor</Menu.Item>
-            <Menu.Item key="3">About</Menu.Item>
-            <Menu.Item key="4">Deleted Notes</Menu.Item>
+            <Menu.Item key="1" onClick={()=>setCurrentDisplayPage(<MyNotes/>,"1")} 
+            icon={<PaperClipOutlined/>} >My Notes</Menu.Item>
+
+            <Menu.Item key="2" onClick={()=>setCurrentDisplayPage(<Editor/>,"2")}
+              icon={<EditOutlined/>} >Editor</Menu.Item>
+            <Menu.Item key="3" onClick={()=>setCurrentDisplayPage(<About/>,"3")}
+              icon={<InfoCircleOutlined/>}>About</Menu.Item>
+            <Menu.Item key="4" onClick={()=>setCurrentDisplayPage(<DeletedNotes/>,"4")}
+              icon={<DeleteColumnOutlined/>}>Deleted Notes</Menu.Item>
 
         </Menu>
       </Sider>
@@ -60,9 +75,9 @@ function BaseLayout(props){
 
           }}
         >
-       <NavProfileMenu/>
+       
         <p><strong>User email:</strong> {currentUser && currentUser.email}</p>
-          <MyNotes/>
+          {currentPage}
         </Content>
       </Layout>
     </Layout>

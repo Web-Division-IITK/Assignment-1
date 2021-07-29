@@ -3,24 +3,16 @@ import { useState} from 'react';
 import {Collapse,  Skeleton, Spin,Space } from 'antd';
 import {EditOutlined, DeleteOutlined, DeleteColumnOutlined } from '@ant-design/icons';
 import './myNotes.css';
-
-
+import {useNoteContext} from '../../contexts/NoteContext';
+import Editor from '../Editor/editor'
 function NoteCollapse(props){
+    const {Notes,editNote, deleteNote} = useNoteContext();
     const {Panel} = Collapse;
     const [processing, setProcessing] = useState(false);
 
-    function editNote(event,dx){
-        setProcessing(true);
-        //call backend to edit note for that user
-        setProcessing(false);
-        event.stopPropagation();
-    }
-    function deleteNote(event,idx){
-        setProcessing(true);
-        //call backend to delete note for that user
-        setProcessing(false);
-        event.stopPropagation();
-    }
+    
+    
+    
     useEffect(()=>{
         setProcessing(true);
         //fetch data for panels from mongoDB
@@ -30,7 +22,7 @@ function NoteCollapse(props){
     },[]);
     
     const noteEditOptions = (idx)=>(
-        <Space>
+        <Space size='large'>
             {!processing?<EditOutlined
                 onClick={(event)=>editNote(event,idx)}
                 />:<Spin />}
@@ -40,23 +32,25 @@ function NoteCollapse(props){
                 />:<Spin/>}
         </Space>
     );
-    const panels = [{header:"note1",text:"This is a text!"},
-                    {header:'note2',text:'This is just a sample text!'}];
-
-    var panelsList = panels.map((panel, index)=>(
+    if(Notes.length>0){
+    var panelsList = Notes.map((panel, index)=>(
         <>
-        {(!processing)?<Panel header={panel['header']} key={index} extra={noteEditOptions(index)}>
+        {(!processing)?<Panel header={panel['title']} key={index} extra={noteEditOptions(index)}>
             <div>{panel['text']}</div>
         </Panel>:<Skeleton/>}
         
         </>
     ));
+    }
+    else{
+        var panelsList = <h2 style={{textAlign:"center"}}>Make new note to get started!</h2>
+    }
 
    
     return(
         <>
         <Collapse style={{maxWidth:"600px", margin:"0px auto"}}>
-          
+         
           {panelsList}
         </Collapse>
       </>

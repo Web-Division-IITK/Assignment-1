@@ -1,8 +1,6 @@
 import React from 'react';
 import './index.css';
 import {Layout} from 'antd';
-import SignInWindow from './signIn.js';
-import SignUpWindow from './signUp.js';
 const {Header, Footer} = Layout;
 
 function MainPage(props){

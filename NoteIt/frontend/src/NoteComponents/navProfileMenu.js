@@ -3,16 +3,16 @@ import { Menu, Dropdown , message} from 'antd';
 import { DownOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons';
 import {useAuth} from "./../contexts/AuthContext";
 import {useHistory, Link} from 'react-router-dom';
-import { useState } from 'react';
+
 import './index.css';
 function NavProfileMenu(props){
     const {currentUser, logout}  = useAuth();
     
-    const [loading, setLoading] = useState(false);
+    
     
     const history = useHistory();
     async function logoutUser() {
-        setLoading(true);
+        
         try{
             await logout();
             history.push('/login');
@@ -20,19 +20,19 @@ function NavProfileMenu(props){
         }catch{
             message.error('Error occured while logging out!');
         }
-        setLoading(false);
+     
      
     }
 
-const menu = (
+var menu = (
   <Menu>
-    <Menu.Item>
-      <Link target="_blank" rel="noopener noreferrer" to="/profile" disabled>
+    <Menu.Item disabled>
+      <Link target="_blank" rel="noopener noreferrer" to="/profile">
         Profile
       </Link>
     </Menu.Item>
     <Menu.Item icon={<SettingOutlined />} disabled>
-      <a target="_blank" rel="noopener noreferrer" href="https://www.aliyun.com">
+      <a target="_blank" rel="noopener noreferrer" href="">
         Settings
       </a>
     </Menu.Item>
@@ -41,10 +41,10 @@ const menu = (
 );
 
 return(
-  <Dropdown overlay={menu} icon={<UserOutlined/>}>
-    <a className="ant-dropdown-link" onClick={e => e.preventDefault()} style={{color:'Darkblue'}}>
+  <Dropdown overlay={menu} icon={<UserOutlined/>} >
+    <a className="ant-dropdown-link" onClick={e => e.preventDefault()} style={{color:'white', float:'right'}}>
        <DownOutlined />
-       Welcome {currentUser && currentUser.displayName}
+       Welcome {currentUser && currentUser.username}
     </a>
   </Dropdown>
 );
