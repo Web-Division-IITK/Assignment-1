@@ -1,5 +1,8 @@
 {
   "dependencies": {
     "universal-cookie": "^4.0.4"
+  },
+  "devDependencies": {
+    "gh-pages": "^3.2.3"
   }
 }
