@@ -1,4 +1,4 @@
-* MyNoteIt
+**MyNoteIt**
 \
 Hosted at: https://mynoteit.netlify.app.
 \
