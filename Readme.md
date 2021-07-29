@@ -1,5 +1,7 @@
 * MyNoteIt
-Hosted at: https://mynoteit.netlify.app. 
+\
+Hosted at: https://mynoteit.netlify.app.
+\
 React App to create, edit and save notes.  
 
 Authentication is done using Firebase. 
