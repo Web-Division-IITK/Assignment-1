@@ -1,0 +1,126 @@
+* {
+  padding: 0px;
+  box-sizing: border-box;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+body{
+  background-color: yellow;
+}
+
+.notes-page{
+  width : 100%;
+  min-height: 100px;
+  color:red;
+}
+
+.notes-page header{
+  max-width: 1920px;
+  min-height: 100px;
+  overflow: hidden;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+}
+
+a{
+  text-decoration: none;
+  color: red;
+}
+
+.notes-page header .logo{
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.notes-page header ul li{
+  list-style: none;
+  display: inline-block;
+  padding: 10px 15px;
+  border: 2px solid red;
+  border-radius: 40px;
+  background-color: orange;
+}
+
+.notes-page header ul li a{
+  text-transform: uppercase;
+  opacity:0.5;
+}
+
+.notes-page header ul li a:hover{
+  opacity:1;
+}
+
+.notes-page section{
+  width: 100%;
+  box-shadow: 0 0 10px black;
+  padding: 5px 5px;
+}
+
+.note-box{
+  max-width: 1920px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin: auto;
+}
+
+.card{
+  width: 300px;
+  box-shadow: 0 0 5px black;
+  padding: 10px;
+  background-color: green;
+  color:yellow;
+  position: relative;
+}
+
+.card .close{
+  position: absolute;
+  top: 0px;
+  right: 10px;
+}
+
+.card h4{
+  margin-right: 10px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.card .text{
+  width: 100%;
+  height: 150px;
+  overflow:hidden;
+  margin: 10px 0px;
+}
+
+.card .date{
+  text-align: right;
+}
+
+.card .card-footer{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.create-note{
+  width: 300px;
+  box-shadow: 0 0 5px black;
+  padding: 10px;
+  background-color: green;
+  color:yellow;
+  position: relative;
+}
