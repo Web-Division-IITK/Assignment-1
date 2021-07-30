@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css file/notes.css">
+    <title>Notes</title>
+</head>
+
+<body>
+    <div class="container">
+        <div id='date1'> <label for="date">Date</label></div>
+        <div class="item"> <label for="notes">Notes</label></div>
+    </div>
+    <div class='container'>
+        <ul>
+
+            <% for (let i of notes) { %>
+                <li>
+                    <p>
+                        <%= i.date %>
+                    </p>
+                    <p>
+                        <%= i.notes %>
+                    </p>
+                    <p>
+                        <a href="/delete/?id=<%= i.id%>"> <img src="../images/icons8-delete-24.png" alt='delete'></a>
+                    </p>
+                </li>
+                <% } %>
+        </ul>
+
+    </div>
+    <div>
+        <form action="/save" method="POST" class="container">
+            <div class="item"><input type="date" id='date' name='date' required></div>
+            <div class="item" id='field'> <input type="text" name='notes' required></div>
+            <div class="item"> <input type="submit"></div>
+        </form>
+    </div>
+</body>
+
+</html>
