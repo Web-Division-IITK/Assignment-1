@@ -11,9 +11,9 @@ async function deleteNote(req,res){
     let result = await dbo.collection("Customers").find({email: req.body.email}).toArray();
     let index = parseInt(req.body.index);
     if(result[0].notes[index]){
-        result[0].notes.splice[index-1,1];
+        result[0].notes.splice(index,1);
         await dbo.collection("Customers").updateOne({email : req.body.email},{$set : {notes : result[0].notes}});
-        res.status(200).redirect('/view');
+        res.status(200).json({"data":result[0].notes,"msg":"Deleted successfully"});
     }
     return res.status(400);
 }
