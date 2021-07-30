@@ -1,0 +1,128 @@
+body, #root, .loginForm {
+  background-image: url('https://th.bing.com/th/id/R.ec137f7e1b0c0c5524b48fe144cbaf66?rik=11C%2bRTEqIAv%2btg&riu=http%3a%2f%2fwallpapercave.com%2fwp%2f3jQbonO.jpg&ehk=MALaOn2QmiwS5ArQaTp%2fWHOdPN77ArQ0VPQY9egQ%2bE4%3d&risl=&pid=ImgRaw');
+    /* background-image: url('https://static.vecteezy.com/system/resources/previews/000/316/402/original/abstract-white-background-with-folds-and-shadows-vector-illustration.jpg');  */
+    height : 100%;
+    width:100%;
+}
+
+.loginForm{
+  display : flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  /* background-color: tomato; */
+}
+
+.heading{
+  color : rgb(116, 9, 9);
+  font-family: cursive;
+  font-size: 75px;
+  text-align: center;
+}
+
+.heading2{
+  color : white;
+  font-family: sans-serif;
+  font-size: 55px;
+}
+
+.button{
+  display: flex;
+}
+
+.loginForm .inputField{
+  height : 40px;
+  width : 100%;
+  margin: 20px;
+  border: 2px solid rgb(52, 52, 54);
+}
+
+.registerButton, .loginButton{
+  color :rgb(52, 52, 54);
+  border-radius: 5%;
+  font-size: 20px;
+  margin-left: 12%;
+  margin-top: 15%;
+  padding-top : 10px;
+  padding-bottom : 10px;
+  width : 150px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.noteInput, .notePage{
+  display : flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.noteHeading{
+  background-color: black;
+  padding-top: 10px;
+  color: antiquewhite;
+  margin-top : 50px;
+  font-size: 40px;
+  height : 70px;
+  text-align: center;
+  width :70%;
+}
+
+.noteText{
+  background-color: black;
+  color: antiquewhite;
+  height : 550px;
+  font-size: 30px;;
+  width : 70%;
+  margin: 20px;
+}
+
+
+.notes{
+  display: flex;
+  width : 50%;
+  height : 50px;
+  margin : 10px;
+  border: 4px solid rgb(0, 0, 0);
+  border-radius: 10px;
+  background-color: rgb(0, 0, 0);
+  color:wheat;
+  align-items: center;
+}
+
+.notes .para{
+  padding : 10px;
+  font-size: large;
+  overflow: hidden;
+}
+
+.edit, .delete{
+  width : 60px;
+  margin : 7px;
+  height : 30px;
+  border-radius: 5px;
+  font-family:sans-serif;
+  text-shadow: grey;
+  cursor: pointer;
+}
+
+.edit{
+  background-color: rgb(0, 201, 0);
+  border: rgb(0, 201, 0);
+}
+.delete{
+  background-color: red;
+  border: red;
+}
+
+.Add, .save{
+  height : 40px;
+  width: 80px;
+  font-size: 15px;;
+  background-color: rgb(0, 201, 0);
+  border: rgb(0, 201, 0);
+  cursor: pointer;
+  margin-top: 25px;
+  margin-bottom: 25px;
+  border-radius: 10%;
+}
+
