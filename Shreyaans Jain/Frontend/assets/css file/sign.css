@@ -1,0 +1,13 @@
+.form div{
+  margin: 10px;
+ width: 80%;
+ height: 80%;
+}
+.form{
+    margin-left: 40%;
+  margin-top: 15%;
+}
+body{
+    background-color: cyan;
+    background-size: cover ;
+}
