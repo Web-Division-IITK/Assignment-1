@@ -16,7 +16,7 @@ async function login(req,res){
     let result = await checkEmail(req.body.email,dbo,res);
     if(result.check){
         if(!bcrypt.compareSync(req.body.password,result.result[0].password)){
-            return res.status(401).json("Invalid password");
+            return res.status(401).json({"msg":"Invalid password"});
         }
         let token = jwt.sign({email: req.body.email},config.secret,{expiresIn : 86400});
         return res.status(200).json({"auth" :true,"msg":"User logged in successfully","token":token});
