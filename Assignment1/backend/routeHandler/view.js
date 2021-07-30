@@ -9,7 +9,7 @@ MongoClient.connect(url,function(err,client){
 async function checkEmail(email,dbo,res){
     let result = await dbo.collection("Customers").find({email : email}).toArray();
     if(result.length == 0){
-        res.status(400).json({"msg" : `${email} is not registered`});
+        res.status(400).json({"msg" : `${email} is not registered. Kindly enter email and password and click register.`});
         return {check : false, result : result};
     }
     return {check : true, result : result};
