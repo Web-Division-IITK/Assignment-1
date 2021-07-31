@@ -1,15 +1,13 @@
-import ImportNotes from './importNote.js';
-import { render, screen } from '@testing-library/react';
+import Main from './components/main.js';
 import './App.css';
 import React from 'react';
-console.log(ImportNotes)
 class App extends React.Component {
   constructor(props) {
     super(props);
   }
   render() {
       return (
-          <ImportNotes/>
+          <Main/>
       )
   }
 }
