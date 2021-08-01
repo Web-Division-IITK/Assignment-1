@@ -7,8 +7,19 @@ const view = require('./routeHandler/view')
 const add = require('./routeHandler/addNote')
 const login = require('./routeHandler/login');
 const deleteNote = require('./routeHandler/delete');
+const path = require('path');
+const { dirname } = require('path');
 app.use(express.json());
 app.use(cors());
+
+if(process.env.NODE_ENV === 'production'){
+    app.use(express.static('../frontend/build'));
+    app.post('*',(req,res)=>{
+        res.sendFile(path.resolve(dirname,'build','index.html'));
+    })
+}
+
+const port = process.env.PORT || 5000;
 
 app.post('/login',login)
 app.post("/register",register);
@@ -18,6 +29,6 @@ app.post('/addNotes',add);
 app.post('/delete',deleteNote);
 // app.post("/login",auth.login);
 
-app.listen(5000);
+app.listen(port);
 
 

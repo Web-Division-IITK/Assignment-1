@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 const config = require('../config.json');
 var MongoClient = require('mongodb').MongoClient;
-var url = "mongodb://localhost:27017/";
+var url = "mongodb+srv://Arpitkr:Arpit299792458@cluster0.z2ut1.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 let db = null;
 MongoClient.connect(url,function(err,client){
     if(err) throw err
