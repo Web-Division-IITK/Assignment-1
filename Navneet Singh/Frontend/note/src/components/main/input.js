@@ -20,8 +20,8 @@ export class Input extends Component {
     onAdd = (e) => {
         e.preventDefault();
         const {title,description} =this.state;
-        const note ={title,description};
-        this.props.addNotes(note);
+        //const note ={title,description};
+        this.props.addNotes(title, description);
         this.setState({ 
             title: '',
             description: '',
