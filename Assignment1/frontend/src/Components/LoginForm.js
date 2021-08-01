@@ -4,7 +4,6 @@ import InputField from './InputField';
 class LoginForm extends React.Component{
     
       render(){
-
           return(
             <div >
               <InputField type = 'email'
@@ -17,6 +16,7 @@ class LoginForm extends React.Component{
               name = 'password'
               onChange = {(event)=>this.props.onChange(event)}
               />
+              <p className='error'>{this.props.err.check?'* '+this.props.err.msg:''}</p>
               <div className = 'button'>
                 <button className='loginButton' type = 'button'
                   onClick = {()=>this.props.onLogin()}

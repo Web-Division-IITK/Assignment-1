@@ -30,7 +30,7 @@ class NotePage extends React.Component{
                     email : this.state.email,
                   })
                 };
-                let res = await fetch('http://localhost:5000/view',req);
+                let res = await fetch('/view',req);
                 let response = await res.json();
                 // console.log(response.data);
                 if(res.status === 200){
@@ -84,7 +84,7 @@ class NotePage extends React.Component{
               index : i
             })
           };
-          let res = await fetch('http://localhost:5000/addNotes',req);
+          let res = await fetch('/addNotes',req);
           let response = await res.json();
           // console.log(response.data);
           if(res.status === 200){
@@ -118,7 +118,7 @@ class NotePage extends React.Component{
               index : i
             })
           };
-          let res = await fetch('http://localhost:5000/delete',req);
+          let res = await fetch('/delete',req);
           let response = await res.json();
           // console.log(response.data);
           if(res.status === 200){

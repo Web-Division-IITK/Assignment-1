@@ -30,6 +30,12 @@ body, #root, .loginForm {
   display: flex;
 }
 
+.error{
+  color:rgb(255, 27, 27);
+  padding-left: 30px;
+  padding-bottom: 0px;
+}
+
 .loginForm .inputField{
   height : 40px;
   width : 100%;
@@ -37,8 +43,16 @@ body, #root, .loginForm {
   border: 2px solid rgb(52, 52, 54);
 }
 
+.loginForm .inputField:focus{
+  outline: none;
+  box-shadow: 0 0 0 1px rgb(86, 86, 255);
+}
+
+
 .registerButton, .loginButton{
-  color :rgb(52, 52, 54);
+  color :white;
+  background-color: #517dfb;
+  border-color: #517dfb;
   border-radius: 5%;
   font-size: 20px;
   margin-left: 12%;
@@ -48,6 +62,11 @@ body, #root, .loginForm {
   width : 150px;
   text-align: center;
   cursor: pointer;
+}
+
+.registerButton:hover, .loginButton:hover{
+  background-color: #173380;
+  border-color: #173380;
 }
 
 .noteInput, .notePage{
@@ -109,9 +128,20 @@ body, #root, .loginForm {
   background-color: rgb(0, 201, 0);
   border: rgb(0, 201, 0);
 }
+
+.edit:hover{
+  background-color: rgb(0, 150, 0);
+  border: rgb(0, 150, 0);
+}
+
 .delete{
   background-color: red;
   border: red;
+}
+
+.delete:hover{
+  background-color: rgb(209, 3, 3);
+  border: rgb(209, 3, 3);
 }
 
 .Add, .save{
@@ -124,5 +154,10 @@ body, #root, .loginForm {
   margin-top: 25px;
   margin-bottom: 25px;
   border-radius: 10%;
+}
+
+.Add:hover, .save:hover{
+  background-color: rgb(0, 150, 0);
+  border: rgb(0, 150, 0);
 }
 

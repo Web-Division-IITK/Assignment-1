@@ -11,14 +11,15 @@ class App extends React.Component {
     password : '',
     isLoggedIn : false,
     isRegistered : true,
-    token : ''
+    token : '',
+    error : {check:false,msg:''}
     };
   }
 
   handleChange(event){
     let nam = event.target.name;
     if(event.target.value){
-      this.setState({[nam] : event.target.value});
+      this.setState({[nam] : event.target.value,error:{check:false,msg:''}});
     }
   }
 
@@ -32,7 +33,7 @@ class App extends React.Component {
 
   async handleRegister() {
     if(!this.state.email||!this.state.password){
-      alert('Incomplete submission');
+      this.setState({error:{check:true,msg:'Incomplete submission'}})
       return;
     }
     try{
@@ -47,14 +48,13 @@ class App extends React.Component {
           password : this.state.password
         })
       };
-      let res = await fetch('http://localhost:5000/register',req);
+      let res = await fetch('/register',req);
       let response = await res.json();
       if(res.status === 200){
         let token = response.token;
         this.setState({token : 'Bearer '+token,isLoggedIn : true,isRegistered:true});
       }else{
-        alert(response.msg);
-        this.setState({isRegistered:true});
+        this.setState({error:{check:true,msg:response.msg},isRegistered:true});
       }
     }
     catch(err){
@@ -65,7 +65,7 @@ class App extends React.Component {
 
   async handleLogin() {
     if(!this.state.email||!this.state.password){
-      alert('Incomplete submission');
+      this.setState({error:{check:true,msg:'Incomplete submission'}})
       return;
     }
     try{
@@ -79,14 +79,15 @@ class App extends React.Component {
           password : this.state.password
         })
       };
-      let res = await fetch('http://localhost:5000/login',req);
+      let res = await fetch('/login',req);
       let response = await res.json();
       if(res.status === 200){
         let token = response.token;
         this.setState({token : 'Bearer '+token,isLoggedIn : true,isRegistered:true});
+      }else if(res.status===400){
+        this.setState({error:{check:true,msg:response.msg},isRegistered:false});
       }else{
-        alert(response.msg);
-        this.setState({isRegistered:false});
+        this.setState({error:{check:true,msg:response.msg}});
       }
     }
     catch(err){
@@ -106,6 +107,7 @@ class App extends React.Component {
             onChange = {(event)=>this.handleChange(event) }
             onRegister = {()=>this.handleRegister()}
             onLogin = {()=>this.handleLogin()}
+            err = {this.state.error}
             />
         </div>
       )

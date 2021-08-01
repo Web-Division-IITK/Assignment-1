@@ -8,6 +8,7 @@ class InputField extends React.Component{
                name = {this.props.name}
                onChange = {(event)=>this.props.onChange(event)}
                value = {this.props.value}
+               required
                /> 
         )
     }
