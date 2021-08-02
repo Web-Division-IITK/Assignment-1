@@ -1,9 +1,62 @@
-body, #root, .loginForm {
+html,body, #root, .loginForm {
   background-image: url('https://th.bing.com/th/id/R.ec137f7e1b0c0c5524b48fe144cbaf66?rik=11C%2bRTEqIAv%2btg&riu=http%3a%2f%2fwallpapercave.com%2fwp%2f3jQbonO.jpg&ehk=MALaOn2QmiwS5ArQaTp%2fWHOdPN77ArQ0VPQY9egQ%2bE4%3d&risl=&pid=ImgRaw');
     /* background-image: url('https://static.vecteezy.com/system/resources/previews/000/316/402/original/abstract-white-background-with-folds-and-shadows-vector-illustration.jpg');  */
-    height : 100%;
-    width:100%;
+    height : 100vh;
+    width:100vw;
 }
+
+.homePage, .editorPage{
+  /* position:fixed; */
+  display: flex;
+  flex-direction: row;
+  flex:2;
+}
+
+.sideBar{
+  width : 20%;
+  color : white;
+  /* position: fixed; */
+  height: 100%;
+}
+
+.separator{
+  border : 2px white;
+  height : 4px;
+  width : 100%;
+}
+
+.user{
+  margin-top: 30px;
+  margin-bottom: 30px;
+  margin-left: 30px;
+  font-size: 20px;
+}
+
+.home, .homeUse, .editorUse, .editor, .signOut{
+  margin : 15px;
+  margin-left: 30px;;
+  font-size: 20px;
+}
+
+.signOut{
+  color :rgb(255, 27, 27);
+}
+
+
+.signOut:hover{
+  color:rgb(209, 3, 3);
+  cursor: pointer;
+}
+
+.homeUse, .editorUse{
+  color: #517dfb;
+}
+
+.home:hover, .editor:hover{
+  cursor: pointer;
+  color: #517dfb;
+}
+
 
 .loginForm{
   display : flex;
@@ -69,7 +122,12 @@ body, #root, .loginForm {
   border-color: #173380;
 }
 
+.notePage{
+  margin-top: 40px;
+}
+
 .noteInput, .notePage{
+  width : 100%;
   display : flex;
   align-items: center;
   flex-direction: column;

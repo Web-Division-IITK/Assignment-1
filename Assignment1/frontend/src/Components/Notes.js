@@ -5,9 +5,8 @@ class Notes extends React.Component{
     render(){
         return (
                <div className = 'notes' 
-                    onClick={()=>this.props.showNote()}
                >
-                   <p className='para'>{this.props.text}</p>
+                   <p className='para' onClick={()=>this.props.showNote()}>{this.props.text}</p>
                    <button className='edit'
                     type='button'
                     onClick = {()=>this.props.showNote()}

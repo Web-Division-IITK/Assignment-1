@@ -7,28 +7,33 @@ class App extends React.Component {
 
   constructor(props){
     super(props);
-    this.state={email : '',
+    this.state={email : localStorage.getItem('email'),
     password : '',
-    isLoggedIn : false,
+    token : localStorage.getItem('token'),
+    isLoggedIn : localStorage.getItem('token')?true:false,
     isRegistered : true,
-    token : '',
     error : {check:false,msg:''}
     };
   }
 
   handleChange(event){
     let nam = event.target.name;
+    if(nam==='email'){
+      localStorage.setItem('email',event.target.value);
+    }
     if(event.target.value){
       this.setState({[nam] : event.target.value,error:{check:false,msg:''}});
     }
   }
 
   changeRegister(){
-    this.setState({isRegistered:false});
+    localStorage.setItem('token','');
+    this.setState({isRegistered:false,token:''});
   }
 
   changeLogin(){
-    this.setState({isLoggedIn:false});
+    localStorage.setItem('token','');
+    this.setState({isLoggedIn:false,token:''});
   }
 
   async handleRegister() {
@@ -52,6 +57,7 @@ class App extends React.Component {
       let response = await res.json();
       if(res.status === 200){
         let token = response.token;
+        localStorage.setItem('token','Bearer '+token);
         this.setState({token : 'Bearer '+token,isLoggedIn : true,isRegistered:true});
       }else{
         this.setState({error:{check:true,msg:response.msg},isRegistered:true});
@@ -80,9 +86,11 @@ class App extends React.Component {
         })
       };
       let res = await fetch('/login',req);
+      console.log(res);
       let response = await res.json();
       if(res.status === 200){
         let token = response.token;
+        localStorage.setItem('token','Bearer '+token);
         this.setState({token : 'Bearer '+token,isLoggedIn : true,isRegistered:true});
       }else if(res.status===400){
         this.setState({error:{check:true,msg:response.msg},isRegistered:false});

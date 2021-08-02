@@ -145,6 +145,14 @@ class NotePage extends React.Component{
             data = this.state.data.map((item,index)=>{return <Notes text={item.heading} key={index.toString()} showNote= {()=>this.showNote(index)} deleteNote= {()=>this.deleteNote(index)}  />});
           }
           return (
+            <div className='homePage'>
+              <div className='sideBar'>
+                  <div className='user'>User signed in : {this.props.email}</div>
+                  <div className='separator'></div>
+                  <div className='homeUse' onClick={()=>this.setState({inputPage:false,index:-1,heading:'',text:''})}>Home</div>
+                  <div className='editor' onClick={()=>this.showNote(-1)}>Editor</div>
+                  <div className='signOut' onClick={()=>this.props.changeLogin()}>Sign Out</div>
+              </div>
               <div className = 'notePage'>
                   {data}
                   <button className='Add'
@@ -153,10 +161,20 @@ class NotePage extends React.Component{
                     >Add Note
                     </button>
               </div>
+
+            </div>
           )
         }
         else{
           return(
+            <div className='editorPage'>
+            <div className='sideBar'>
+                  <div className='user'>User signed in : {this.props.email}</div>
+                  <div className='separator'></div>
+                  <div className='home' onClick={()=>this.setState({inputPage:false,index:-1,heading:'',text:''})}>Home</div>
+                  <div className='editorUse' onClick={()=>this.showNote(-1)}>Editor</div>
+                  <div className='signOut' onClick={()=>this.changeLogin()}>Sign Out</div>
+              </div>
             <div className = 'noteInput'>
                 <textarea className='noteHeading' type = 'text'
                   name = 'heading'
@@ -174,6 +192,7 @@ class NotePage extends React.Component{
                 type = 'button'
                 onClick = {()=>{this.addNote(this.state.index)}}
               >Save</button>
+            </div>
             </div>
           )
         }
