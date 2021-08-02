@@ -19,3 +19,6 @@
 1. /frontend/src/App.js is entry point for the app using various react components defined in frontend/src/Components directory.
 
 2. /frontend/src/Components contains the various react components.
+
+# Access the app on https://immense-inlet-55002.herokuapp.com/
+
