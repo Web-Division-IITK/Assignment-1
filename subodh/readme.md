@@ -35,6 +35,8 @@
 
 1: i have used aws server to listen for requests and mongoAtlas database 
 
+2: the server is running at port 3100 (check bin/www.js )
+
 2: i have two models users and notes 
 3: users is for storing username and password firstname lastName
 
@@ -48,8 +50,8 @@
 
         (ii) savenote -> (a) get requset simply returns savednote with user_id==req.user._id    (since after authentictaing(check authenticate.js) user is loaded to request)
                         (b) post request simply save the notes and in response send that note(so that in frontend this note is concat to the notes state)
-                         (c) savenote/:noteId supports put and delete req
-                         uest which is used to delet and update the request respectively
+                         (c) savenote/:noteId supports put and delete request which is used to delet and update the request respectively
                          (d)savenote/important supports get request which sends the notes whose user_id==req.user._id && important == true
                          (e)savenote/:noteId/important supports post request(it set the important property of the note._id==req.params.noteId to true) and delete request (it set the important property of the note._id==req.params.noteId to false)
 
+6: the different routes restricted to only some origin (see cors.js)

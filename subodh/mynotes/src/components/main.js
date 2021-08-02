@@ -51,7 +51,7 @@ class mainComponent extends React.Component {
                     this.setState({ notes: notes.reverse() });
                 }
             }
-        })
+        }).catch(err => {this.setState({ notes:null })});
     }
 
 
