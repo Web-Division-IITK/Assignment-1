@@ -1,7 +1,7 @@
 # Assignment-1
 
 ## Instructions
- - Fork this repo and make your own folders and then make weekly pull request about your work.
+ - Fork this repo and make your own folders with your name and then make weekly pull request about your work.
  - Add two folders inside your folders -- one for frontend and other for backend
  - Add actions to your project and host the website on github.
  - Use aws services to host your mongo database.
