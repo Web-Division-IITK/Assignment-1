@@ -46,7 +46,6 @@ INSTALLED_APPS = [
 ]
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": ("knox.auth.TokenAuthentication",),
-    "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.IsAdminUser"),
 }
 
 MIDDLEWARE = [
@@ -59,7 +58,7 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "corsheaders.middleware.CorsMiddleware",
 ]
-CORS_ORIGIN_WHITELIST = ["http://localhost:8000"]
+CORS_ORIGIN_WHITELIST = ["http://localhost:3000"]
 ROOT_URLCONF = "notekeeper.urls"
 
 TEMPLATES = [

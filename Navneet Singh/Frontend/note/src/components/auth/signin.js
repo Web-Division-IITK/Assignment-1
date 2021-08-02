@@ -22,7 +22,6 @@ export class Signin extends Component {
 
     onChange=e=>{
         this.setState({ [e.target.name]: e.target.value});
-        console.log(e.target.value);
     };
 
     render() {

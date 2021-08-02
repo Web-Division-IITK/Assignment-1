@@ -1,27 +1,26 @@
-import React, { Component } from 'react'
-import { Link } from 'react-router-dom';
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 export class Signup extends Component {
-    state = {
-        username :'',
-        email: '',
-        password: '',
-        confirmPassword: '',
+  state = {
+    username: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  };
+  onSubmit = (e) => {
+    e.preventDefault();
+    console.log("Submit");
+  };
 
-    };
-    onSubmit=e =>{
-        e.preventDefault();
-        console.log("Submit")
-    }
+  onChange = (e) => {
+    this.setState({ [e.target.name]: e.target.value });
+  };
 
-    onChange=e=>{
-        this.setState({ [e.target.name]:e.target.value});
-    }
-
-    render() {
-        const { username, email , password, confirmPassword}= this.state;
-        return (
-            <div className="col-md-6 m-auto">
+  render() {
+    const { username, email, password, confirmPassword } = this.state;
+    return (
+      <div className="col-md-6 m-auto">
         <div className="card card-body mt-5">
           <h2 className="text-center">Register</h2>
           <form onSubmit={this.onSubmit}>
@@ -67,7 +66,7 @@ export class Signup extends Component {
             </div>
             <div className="form-group">
               <button type="submit" className="btn btn-primary">
-                Register
+                Sign Up
               </button>
             </div>
             <p>
@@ -76,8 +75,8 @@ export class Signup extends Component {
           </form>
         </div>
       </div>
-        )
-    }
+    );
+  }
 }
 
 export default Signup;

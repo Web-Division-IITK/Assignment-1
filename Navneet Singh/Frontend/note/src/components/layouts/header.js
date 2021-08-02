@@ -2,10 +2,12 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import { signout } from "../../actions/authentication";
 
 export class Header extends Component {
   static propTypes = {
     auth: PropTypes.object.isRequired,
+    signout: PropTypes.func.isRequired,
   };
 
   render() {
@@ -14,17 +16,20 @@ export class Header extends Component {
     const authLinks = (
       <ul className="navbar-nav ml-auto mt-2 mt-lg-0">
         <li className="nav-item">
-          <button className="nav-link btn btn-info btn-sm text-light">Sign out</button>
-        </li>
-        <li className="nav-item">
-          <Link to="/signin" className="nav-link">
-            Sign in
-          </Link>
+          <button
+            onClick={this.props.signout}
+            className="nav-link btn btn-info btn-sm text-light"
+          >
+            Sign out
+          </button>
         </li>
       </ul>
     );
     const guestLinks = (
       <ul className="navbar-nav ml-auto mt-2 mt-lg-0">
+        <span className="navbar-text mr-3">
+          <strong>{user ? `Hey ${user.username}` : ""}</strong>
+        </span>
         <li className="nav-item">
           <Link to="/signup" className="nav-link">
             Sign Up
@@ -58,7 +63,7 @@ export class Header extends Component {
               Note keeper
             </a>
           </div>
-          {isAuthenticated? authLinks:guestLinks}
+          {isAuthenticated ? authLinks : guestLinks}
         </div>
       </nav>
     );
@@ -69,4 +74,4 @@ const mapStateToProps = (state) => ({
   auth: state.auth,
 });
 
-export default connect(mapStateToProps)(Header);
+export default connect(mapStateToProps, { signout })(Header);

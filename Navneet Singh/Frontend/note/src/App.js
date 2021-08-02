@@ -10,6 +10,7 @@ import Dashboard from "./components/main/dashboard";
 import { HashRouter as Router, Route, Switch, Redirect} from "react-router-dom";
 import PrivateRoute from "./components/folder/PrivateRoute";
 
+
 export class App extends Component {
 componentDidMount(){
   store.dispatch(loaduser());
@@ -33,7 +34,7 @@ componentDidMount(){
       </Router>
       </Provider>
 
-    )
+    );
   }
 }
 

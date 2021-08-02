@@ -4,9 +4,11 @@ import {
   AUTH_ERROR,
   LOGIN_SUCCESS,
   LOGIN_FAILED,
+  LOGOUT_SUCCESS,
 } from "./types";
 
 import axios from "axios";
+import { useHistory } from "react-router";
 
 export const loaduser = () => (dispatch, getState) => {
   dispatch({ type: USER_LOADING });
@@ -29,10 +31,10 @@ export const signin = (username, password) => (dispatch) => {
       "Content-Type": "application/json",
     },
   };
-  //const body = JSON.stringify({ username, password });
+  const body = JSON.stringify({ username, password });
 
   axios
-    .post("/api/auth/login/", {username:"username", password:"password"}, config)
+    .post("/api/auth/signin", body, config)
     .then((res) => {
       dispatch({
         type: LOGIN_SUCCESS,
@@ -40,9 +42,29 @@ export const signin = (username, password) => (dispatch) => {
       });
     })
     .catch((err) => {
-      dispatch({ type: LOGIN_FAILED });
+      //dispatch({ type: LOGIN_FAILED });
+      alert("something went wrong");
     });
 };
+
+export const signout = () => (dispatch, getState) => {
+
+  const history= useHistory();
+
+  axios
+    .post("/api/auth/logout/",null, tokenConfig(getState))
+    .then((res) => {
+      dispatch({
+        type: LOGOUT_SUCCESS,
+        payload: res.data,
+      });
+      history.push('/signin');
+    })
+    .catch((err) => {
+      alert("Something went wrong");
+    });
+};
+
 export const tokenConfig = (getState) => {
   
   const token = getState().auth.token;

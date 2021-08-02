@@ -13,6 +13,9 @@ const PrivateRoute=({ component: Component, auth, ...rest })=> {
                     return <h2>Loading...</h2>
                 }else if(!auth.isAuthenticated){
                     return <Redirect to="/signin" />;
+                }
+                else if(auth.isAuthenticated){
+                    return <Redirect to="/App.js" />;
                 }else{
                     return <Component {...props} />;
                 }
@@ -22,7 +25,7 @@ const PrivateRoute=({ component: Component, auth, ...rest })=> {
 };
 
 const mapStateToProps = state=>({
-    auth: state.auth
+    auth: state.auth,
 });
 
 export default connect(mapStateToProps)(PrivateRoute);
