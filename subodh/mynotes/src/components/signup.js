@@ -25,9 +25,9 @@ class signup extends React.Component {
                     <h3>Password</h3>
                     <input type="password" id="password" placeholder="enter your password"></input>
                     <h3>First Name</h3>
-                    <input type="text" id="FirstName" placeholder="enter your First Name"></input>
+                    <input type="text" id="FirstName" placeholder="optional"></input>
                     <h3>Last Name</h3>
-                    <input type="text" id="LastName" placeholder="enter your Last Name"></input>
+                    <input type="text" id="LastName" placeholder="optional"></input>
                     <br />
                     <button id="signupButton" onClick={(e) => {
                         e.preventDefault();

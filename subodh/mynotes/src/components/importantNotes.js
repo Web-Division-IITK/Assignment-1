@@ -11,13 +11,13 @@ class important extends React.Component {
     notify(){
         if (this.props.important.length === 0) {
             //given this id to just make font color red
-            return (<p id="invalidCredentials" style={{ textAlign: 'center', marginTop: '100px' }}>You have not marked any note as important. Mark them to see here</p>)
+            return (<p id="notification" style={{ textAlign: 'center', marginTop: '100px' }}>You have not marked any note as important. Mark them to see here</p>)
         }
     }
 
     render(){
         return(
-            <div> 
+            <div id="importantContainer"> 
                 <Navbar active={this.props.active} important={this.props.important} logout={this.props.logout}/>
                 {this.notify()}
                 <div id="important">{

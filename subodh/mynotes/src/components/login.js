@@ -77,11 +77,9 @@ class login extends React.Component {
                         })
 
                     }}>Login</button>
-                    <p id="createAccountPara">don't have an account, create one</p>
-
-                    <button id="signupButton" onClick={(e) => {
+                    <p id="createAccountPara">don't have an account, <a href="/" onClick={(e) => {
                         this.props.navigateToSignup(e)
-                    }}>SignUp</button>
+                    }}>create one</a></p>
                 </form>
             </div>
         )

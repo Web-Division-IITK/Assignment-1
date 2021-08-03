@@ -17,6 +17,7 @@ class existingNotes extends React.Component {
                     return (<NotesWithOptions key={note._id} note={note}  getCookie={this.props.getCookie} importNote={this.props.importNote}
                         edit={(e,noteId)=>{e.preventDefault(); this.setState({ editableNote: noteId, options: null }) }}
                         importImportant={this.props.importImportant}
+                        options={(e,noteId)=>{e.preventDefault(); this.setState({options: noteId})}}
                     />)
                 }
                 else {
@@ -42,7 +43,7 @@ class EditableNotes extends React.Component {
                 <div className="noteBody editable" contentEditable='true' suppressContentEditableWarning={true}>{this.props.note.body}</div>
 
                 <div id='buttons'>
-                    <button className="deleteButton"
+                    <button className="deleteButton" id="editButton"
                         onClick={(e) => {
                             // var _id = e.currentTarget.parentElement.getAttribute('id');
                             var reqBody = {
@@ -76,7 +77,7 @@ class EditableNotes extends React.Component {
 class NotesWithOptions extends React.Component {
     render() {
         return (
-            <div key={this.props.note._id} id={this.props.note._id} className="Notes" >
+            <div key={this.props.note._id} id={this.props.note._id} className="Notes" onClick={(e)=>{this.props.options(e,null)}}>
                 <div className="rightCorner">
                     <div id="options">
                         <button onClick={(e) => {
@@ -125,7 +126,7 @@ class NotesWithOptions extends React.Component {
 class Note extends React.Component {
     render() {
         return (
-            <div key={this.props.note._id} id={this.props.note._id} className="Notes">
+            <div key={this.props.note._id} id={this.props.note._id} className="Notes" >
                 <div className="rightCorner">
                     <img src='/download1.png' className="threeDots" onClick={(e) => {
                         this.props.options(e,this.props.note._id)
