@@ -1,12 +1,14 @@
 var express = require('express');
 var router = express.Router();
-var authenticate = require('./authentication/verify-user');
-var createUser = require('./authentication/create-new-user');
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+const { MongoClient }  = require('mongodb');
+const path = require('path');
 
-});
+/* GET home page. */
+
+
+
+
+
 
 
 module.exports = router;

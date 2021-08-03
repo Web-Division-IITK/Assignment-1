@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { useState} from 'react';
 import {Collapse,  Skeleton, Spin,Space } from 'antd';
-import {EditOutlined, DeleteOutlined, DeleteColumnOutlined } from '@ant-design/icons';
 import './deletedNotes.css';
 import {useNoteContext} from '../../contexts/NoteContext';
 

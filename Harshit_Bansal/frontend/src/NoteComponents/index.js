@@ -6,20 +6,14 @@ import {useAuth} from './../contexts/AuthContext'
 import {useHistory} from 'react-router-dom';
 import NavProfileMenu from "./navProfileMenu";
 import {useNoteContext} from './../contexts/NoteContext';
-import Editor from './Editor/editor';
-import About from "./About/about";
-import DeletedNotes from './DeletedNotes/deletedNotes';
 import "./index.css";
 const {Header, Sider, Content, Footer} = Layout;
 function BaseLayout(props){
-    const {siderKey, currentPage, setCurrentDisplayPage} = useNoteContext();
+    const {siderKey} = useNoteContext();
     const {currentUser} = useAuth();
     const history = useHistory();
     useEffect(()=>{
-      if(currentUser == null){
-        history.push(`/login`);
-      }
-      setCurrentDisplayPage(<MyNotes/>,"1")
+      
       
     },[]);
     
@@ -42,19 +36,18 @@ function BaseLayout(props){
         <Menu
           mode="inline"
           theme="dark"
-          openKeys={[siderKey]}
-          selectedKeys={[siderKey]}
           style={{ height: '100%', borderRight: 0 }}
+          selectedKeys={[siderKey]}
         >
           
-            <Menu.Item key="1" onClick={()=>setCurrentDisplayPage(<MyNotes/>,"1")} 
-            icon={<PaperClipOutlined/>} >My Notes</Menu.Item>
+            <Menu.Item key="1"  onClick={()=>history.push('/')} 
+            icon={<PaperClipOutlined/>}>My Notes</Menu.Item>
 
-            <Menu.Item key="2" onClick={()=>setCurrentDisplayPage(<Editor/>,"2")}
+            <Menu.Item key="2" onClick={()=>history.push('/editor/new')}
               icon={<EditOutlined/>} >Editor</Menu.Item>
-            <Menu.Item key="3" onClick={()=>setCurrentDisplayPage(<About/>,"3")}
+            <Menu.Item key="3" onClick={()=>history.push('/about')}
               icon={<InfoCircleOutlined/>}>About</Menu.Item>
-            <Menu.Item key="4" onClick={()=>setCurrentDisplayPage(<DeletedNotes/>,"4")}
+            <Menu.Item key="4" onClick={()=>history.push('/deleted-notes')}
               icon={<DeleteColumnOutlined/>}>Deleted Notes</Menu.Item>
 
         </Menu>
@@ -76,8 +69,8 @@ function BaseLayout(props){
           }}
         >
        
-        <p><strong>User email:</strong> {currentUser && currentUser.email}</p>
-          {currentPage}
+        <p><strong>User email:</strong> {currentUser && currentUser.uid}</p>
+          {props.page || <MyNotes/>}
         </Content>
       </Layout>
     </Layout>

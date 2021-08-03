@@ -13,8 +13,8 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
     "web-vitals": "^1.1.2",
-    "homepage": "http://harshit-bansal18.github.io/notes_app",
-    "build": "react-scripts build && mv build docs"
+    "homepage": "http://harshit-bansal18.github.io/notes-app",
+    "proxy":"http://localhost:5000/"
   },
   "scripts": {
     "start": "react-scripts start",

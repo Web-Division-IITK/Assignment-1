@@ -21,12 +21,14 @@ import {useAuth} from './../contexts/AuthContext';
           
           await login(values['email'],values['password']);
           setError('');
+          setLoading(false);
           history.push('/');
         }
         catch{
           setError("Invalid Username or Password");
+          setLoading(false);
         }
-        setLoading(false);
+        
 
     };
     return(

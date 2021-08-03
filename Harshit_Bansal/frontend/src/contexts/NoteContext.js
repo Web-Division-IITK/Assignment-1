@@ -1,18 +1,16 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {useContext, useState} from "react";
-import Editor from '../NoteComponents/Editor/editor';
-import MyNotes from '../NoteComponents/MyNotes/myNotes';
+import { useAuth } from './AuthContext';
+import { useHistory } from 'react-router-dom';
+import axios from 'axios';
 const NoteContext = React.createContext();
 export function useNoteContext() {
     return useContext(NoteContext);
 }
 export function NoteContextProvider({children}) {
-    var NOTES = [
-        {title:"Welcome",text:"Welcome to NoteIt"},
-        {title:"Edit Me",text:"Try editing me"},
-    ]
-
-    const [Notes, setNotes] = useState(NOTES);
+    
+    const {currentUser} = useAuth();
+    const [Notes, setNotes] = useState([]);
     const [deletedNotes, setDeletedNotes] = useState([])
     const [currentNote, setCurrentNote] = useState(null);
     const [currentPage, setCurrentPage] = useState();
@@ -24,16 +22,15 @@ export function NoteContextProvider({children}) {
         deletedNotes,
         currentPage,
         siderKey,
-        error,
         setCurrentDisplayPage,
         setChosenNote,
         saveNote,
         editNote,
-        deleteNote,
         newNote,
         onCancelClick
         
     }
+    
     function setCurrentDisplayPage(component, key){
         setCurrentPage(component);
         setSiderKey(key);
@@ -42,31 +39,50 @@ export function NoteContextProvider({children}) {
     function setChosenNote(idx){
         setCurrentNote([Notes[idx],idx]);
     }
-    function saveNote(note, update){
+    async function saveNote(note, index){
         var notes = Notes.slice();
+        console.log(note)
     try{
-        if(update){
+        if(index !=='new'){
+            console.log("update")
+            var i = parseInt(index, 10);
             var duplicate = notes.filter(function(n, idx){
-                return (n.title===note.title) && idx != currentNote[1];
+                return (n.title===note.title) && idx !== i;
             })
+            console.log(duplicate)
             if(duplicate.length>0){
                 setError("File name already exists");
                 return false;
             }
+            console.log('request sent');
+            await axios.post(`http://localhost:5000/server/update-note/${currentUser.uid}/${index}`
+            ,JSON.stringify(note), {
+                headers:{"Content-Type": "application/json"},
+                
+            }).then(res=>res.data.notes)
+            .then(notesData=>setNotes(notesData))
+         
+
             notes[currentNote[1]]=note;
         }
         else{
             //check for duplicate file name
-            var duplicate = notes.filter(function(n){
+            duplicate = notes.filter(function(n){
                 return n.title===note.title;
             })
             if(duplicate.length>0){
-                setError("File name already exists");
+           
                 return false;
             }
-            notes.push(note);
+            console.log(note);
+            await axios.post(`http://localhost:5000/server/add-note/${currentUser.uid}`
+            , JSON.stringify(note),{
+                headers:{"Content-Type": "application/json"}
+            }).then(res=>res.data.notes)
+            .then(notesData=>setNotes(notesData))
+          
+           
         }
-        setNotes(notes);
         setCurrentNote(null);
         return true;  
         
@@ -78,31 +94,20 @@ export function NoteContextProvider({children}) {
     function editNote(event,idx){
       
         setCurrentNote([Notes[idx],idx]);
-        setCurrentPage(<Editor/>)
         setSiderKey("2")
         
         event.stopPropagation();
       
     }
-    function deleteNote(event, idx){
-        
-        var notes = Notes.slice();
-        var delnote = notes[idx]
-        notes.splice(idx,1);
-        setNotes(notes);
-        var dnotes = deletedNotes.slice();
-        dnotes.push(delnote);
-        setDeletedNotes(dnotes);
-        event.stopPropagation();
-    }
+   
     function newNote(){
         setCurrentNote(null);
-        setCurrentPage(<Editor/>);
+        
         setSiderKey("2");
     }
     function onCancelClick(){
         setCurrentNote(null);
-        setCurrentPage(<MyNotes/>);
+        
         setSiderKey("1");
     }
     return (

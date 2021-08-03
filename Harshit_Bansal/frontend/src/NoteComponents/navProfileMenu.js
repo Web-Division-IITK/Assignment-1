@@ -44,7 +44,7 @@ return(
   <Dropdown overlay={menu} icon={<UserOutlined/>} >
     <a className="ant-dropdown-link" onClick={e => e.preventDefault()} style={{color:'white', float:'right'}}>
        <DownOutlined />
-       Welcome {currentUser && currentUser.username}
+       Welcome {currentUser && currentUser.displayName}
     </a>
   </Dropdown>
 );
