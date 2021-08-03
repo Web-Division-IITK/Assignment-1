@@ -5,7 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var config = require('./config')
 var mongoose = require('mongoose');
-const uri = `mongodb+srv://subodhkumar:${config.password}@cluster0.gm0lg.mongodb.net/test?retryWrites=true&w=majority`;
+const uri = process.env.MONGODB_URI;
 // const uri = `mongodb://localhost:27017/`
 
 var indexRouter = require('./routes/index');
