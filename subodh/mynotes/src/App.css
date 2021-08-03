@@ -1,4 +1,20 @@
 
+body{
+  font-family: 'Bree Serif', serif;
+}
+#home::before{
+  background:url('./45192.jpg') no-repeat center center/cover;
+  content: "";
+  height: 100%;
+  width: 100%;
+  display: block;
+  position:fixed;
+  z-index: -1;
+  opacity: 0.6;
+}
+button,textarea,input{
+  font-family: 'Bree Serif', serif;
+}
 .navContent{
   margin:10px;
   font-size: 22px;
@@ -12,17 +28,23 @@
   height:45px;
   cursor: pointer;
 }
-.search{
-  border-radius: 5px;
-  outline: none;
-  height:25px;
-  text-align: center;
+
+nav::before{
+  content: "";
+  position: absolute;
+  background-color:black;
+  display: block;
+  height: 80px;
+  width:100%;
+  z-index: -1;
+  opacity: 0.51;
 }
 nav{
-background-color: black;
+/* background-color: black; */
   color:rgb(255, 255, 255);
   display:flex;
-  padding:2vh;
+  /* padding:2vh; */
+  padding-top: 10px;
   height:50px;
   align-items:center;
 }
@@ -33,27 +55,31 @@ background-color: black;
 }
 #addTitle{
   border:2px solid black;
-  background-color:rgb(202, 199, 199);
+  background-color:white;
   display:block;
   margin-top: 30px;
   width:40vw;
+  min-width:250px;
   margin:auto;
   border-radius:10px;
   padding:10px;
   font-size: 20px;
   outline: none;
+  box-shadow: 0px 3px 5px rgb(70,71,71);
 }
 #addNote{
-  background-color:rgb(202, 199, 199);
+  background-color:white;
   border:2px solid black;
   display:block;
   margin-top: 30px;
   width:40vw;
+  min-width:250px;
   margin:auto;
   border-radius:10px;
   padding:10px;
   font-size:20px;
   outline: none;
+  box-shadow: 0px 3px 5px rgb(70, 71, 71)
 }
 #saveButton{
   background-color: rgb(10, 175, 10);
@@ -85,13 +111,14 @@ background-color: black;
   width: 27vw;
   text-align:center;
   border:2px solid black;
-  background-color:rgb(202, 199, 199);
+  background-color:#e9ffff;
   word-wrap: break-word;
   margin:20px;
   border-radius: 10px;
-  min-height: 200px;
-  min-width: fit-content;
+  min-height: 220px;
+  min-width: 250px;
   padding: 10px;
+  box-shadow:0px 3px 5px rgb(70, 71, 71)
 }
 .editableNotes{
   /* display:block; */
@@ -100,12 +127,12 @@ background-color: black;
   /* width: 27vw; */
   text-align:center;
   border:2px solid black;
-  background-color:#dbe9f5;
+  background-color:#e9ffff;
   word-wrap: break-word;
   margin:20px;
   border-radius: 10px;
-  min-height: 200px;
-  min-width: fit-content;
+  min-height: 220px;
+  min-width: 250px;
   padding: 10px;
 }
 .editable{
@@ -114,10 +141,13 @@ background-color: black;
   margin:5px;
   padding-bottom:30px;
   border-radius:10px;
-  min-width: fit-content;
+  min-width: 250px;
   /* max-width:27vw; */
   width:27vw;
   outline:none;
+}
+#editButton{
+  position:absolute;
 }
 .threeDots{
   height:20px;
@@ -130,9 +160,9 @@ background-color: black;
 }
 #options{
   display: flex;
-  position: relative;
+  position: absolute;
   flex-direction:column;
-  margin-right: 10px;
+  margin-right: 15px;
   /* justify-content: flex-end; */
   /* align-items: flex-end; */
   min-width: fit-content;
@@ -144,23 +174,17 @@ background-color: black;
   
 }
 #options>*{
-  /* border: 1px solid black; */
-  /* padding-left: 10px; */
   width: 100%;
-  /* margin:2px; */
-  /* padding-top:-5px; */
-
 }
 #savedNotes,#important{
   display:flex;
   flex-direction:row;
   flex-wrap: wrap;
-  min-width: fit-content;
+  min-width: 250px;
   max-width:100vw;
   justify-content: center;
 }
 #notification{
-  color:rgb(170, 49, 12);
   display: flex;
   /* width:60%; */
   margin:auto;
@@ -189,7 +213,7 @@ background-color: black;
   margin-top: 100px;
   min-height: 350px;
   border-radius:15px;
-  background-color:ivory;
+  background-color:#e8f8ff;
   flex-wrap: wrap;
   margin-bottom: 100px;
   padding:10px;
@@ -226,7 +250,7 @@ input{
   cursor: pointer;
 }
 #signupForm{
-  background-color:ivory;
+  background-color:#e8f8ff;
   /* color: rgb(144, 173, 253); */
   text-align: center;
   display: flex;
@@ -271,4 +295,14 @@ input{
 }
 #important{
   margin-top:100px;
+}
+#importantContainer::before{
+  background:url('./45192.jpg') no-repeat center center/cover;
+  content: "";
+  height: 100%;
+  width: 100%;
+  display: block;
+  position:fixed;
+  z-index: -1;
+  opacity: 0.6;
 }

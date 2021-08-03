@@ -3,14 +3,14 @@ import formurlencoded from 'form-urlencoded'
 class savenote extends React.Component {
     render(){
         return(
-            <div>
+            <div id="savenote">
                     <div className="addNote" id="title">
                         <h2 id="title">Add Title</h2>
                         <textarea id="addTitle" rows="2" columns="5" />
                     </div>
                     <div className="addNote" id="title">
                         <h3 id="Body">Add Note</h3>
-                        <textarea id="addNote" rows="15" columns="5" />
+                        <textarea id="addNote" rows="12" columns="5" />
                     </div>
                     <button id="saveButton" className="addNote" onClick={(e) => {
                         e.preventDefault();

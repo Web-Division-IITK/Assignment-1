@@ -62,7 +62,7 @@ class mainComponent extends React.Component {
                     this.setState({ active: active })
                     }}
                     logout={()=>{this.setState({notes:null})}}
-                    importImportant={(important) => { this.setState({ important: important }) }}
+                    importImportant={(important) => { this.setState({ important: important ,options:null}) }}
                     important={this.state.important}
                     getCookie={this.getCookie}    
                 />

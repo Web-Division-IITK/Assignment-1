@@ -13,7 +13,7 @@ class homepage extends React.Component {
     render() {
         return (
 
-            <div className="App" >
+            <div className="App" id='home'>
                <Navbar 
                 logout={this.props.logout} active={this.props.active} importImportant={this.props.importImportant} getCookie={this.props.getCookie} important={this.props.important}
                />
