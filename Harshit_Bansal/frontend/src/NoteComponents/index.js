@@ -69,7 +69,7 @@ function BaseLayout(props){
           }}
         >
        
-        <p><strong>User email:</strong> {currentUser && currentUser.uid}</p>
+        <p><strong>User email:</strong> {currentUser && currentUser.email}</p>
           {props.page || <MyNotes/>}
         </Content>
       </Layout>

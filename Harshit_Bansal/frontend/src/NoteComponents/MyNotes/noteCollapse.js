@@ -20,6 +20,7 @@ function NoteCollapse(props){
     }
     const [visible, setVisible] = useState(arr);
     useEffect(()=>{
+        setProcessing(true);
         async function loadNotes(){
             await axios.get('http://localhost:5000/server/get-notes/'+currentUser.uid)
             .then(res=> res.data.notes)
@@ -27,12 +28,14 @@ function NoteCollapse(props){
             .catch(err=>console.log(err))
         }
         loadNotes();
+        setProcessing(false);
     },[])
     async function deleteNote(idx){
-        
+        setProcessing(true);
         await axios.get(`http://localhost:5000/server/delete/${currentUser.uid}/${idx}`)
         .then(res=>res.data.notes)
         .then(notesData=>setNotesList(notesData))
+        setProcessing(false);
     }
     const noteEditOptions = (idx)=>(
         <Space size='large'>
@@ -85,6 +88,7 @@ function NoteCollapse(props){
 
    
     return(
+        processing?<Spin/>:
         <>
         <Collapse style={{maxWidth:"600px", margin:"0px auto"}}>
          
