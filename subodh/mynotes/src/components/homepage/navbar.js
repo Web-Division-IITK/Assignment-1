@@ -11,7 +11,7 @@ class navbar extends React.Component {
             <div className="navContent" id="importantNav" onClick={(e) => {
                 this.props.active(e, 'important')
                 if (this.props.important.length === 0) {
-                    fetch(`http://3.142.94.241:3100/savenote/important/`, {
+                    fetch(`https://yournoteserver.herokuapp.com/savenote/important/`, {
                         method: 'GET',
                         headers: {
                             'content-type': 'text/plain',
@@ -19,7 +19,6 @@ class navbar extends React.Component {
                         }
                     }).then((response) => {
                         if (response.status !== 200 && response.status != 304) {
-                            console.log('Error')
                             return { err: "error" }
                         }
                         else {

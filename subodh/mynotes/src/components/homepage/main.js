@@ -1,6 +1,4 @@
 import React from 'react';
-import formurlencoded from 'form-urlencoded'
-import { render } from '@testing-library/react';
 import Navbar from './navbar'
 import Savenote from './savenote'
 import ExistingNotes from './existingNotes'

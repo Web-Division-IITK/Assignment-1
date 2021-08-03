@@ -37,7 +37,7 @@ class signup extends React.Component {
                             firstName: document.getElementById('FirstName').value,
                             lastName: document.getElementById('LastName').value
                         }
-                        fetch('http://3.142.94.241:3100/users', {
+                        fetch('https://yournoteserver.herokuapp.com/users', {
                             method: 'POST',
                             headers: {
                                 'content-type': 'application/x-www-form-urlencoded'

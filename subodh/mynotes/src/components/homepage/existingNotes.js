@@ -49,8 +49,7 @@ class EditableNotes extends React.Component {
                                 title: document.getElementById(this.props.note._id).firstChild.innerText,
                                 body: document.getElementById(this.props.note._id).firstChild.nextSibling.innerText
                             }
-                            console.log(reqBody)
-                            fetch(`http://3.142.94.241:3100/savenote/${this.props.note._id}`, {
+                            fetch(`https://yournoteserver.herokuapp.com/savenote/${this.props.note._id}`, {
                                 method: 'PUT',
                                 headers: {
                                     'authorization': this.props.getCookie("token"),
@@ -82,7 +81,7 @@ class NotesWithOptions extends React.Component {
                     <div id="options">
                         <button onClick={(e) => {
                             this.setState({ editableNote: null, options: null })
-                            fetch(`http://3.142.94.241:3100/savenote/${this.props.note._id}`, {
+                            fetch(`https://yournoteserver.herokuapp.com/savenote/${this.props.note._id}`, {
                                 method: 'DELETE',
                                 headers: {
                                     'authorization': this.props.getCookie("token"),
@@ -100,7 +99,7 @@ class NotesWithOptions extends React.Component {
                         <button onClick={(e) => { this.props.edit(e,this.props.note._id)}}>edit</button>
                         <button onClick={(e) => {
                             e.preventDefault();
-                            fetch(`http://3.142.94.241:3100/savenote/${this.props.note._id}/important`, {
+                            fetch(`https://yournoteserver.herokuapp.com/savenote/${this.props.note._id}/important`, {
                                 method: 'POST',
                                 headers: {
                                     'Content-Type': 'text/plain',
@@ -112,7 +111,7 @@ class NotesWithOptions extends React.Component {
                                 response.json().then((response) => { this.props.importImportant(response) }) } })
                         }}>important</button>
                     </div>
-                    <img src='../download1.png' className="threeDots" onClick={(e) => {
+                    <img src='/download1.png' className="threeDots" onClick={(e) => {
                         e.preventDefault();
                         this.setState({ options: null })
                     }}></img>
@@ -128,7 +127,7 @@ class Note extends React.Component {
         return (
             <div key={this.props.note._id} id={this.props.note._id} className="Notes">
                 <div className="rightCorner">
-                    <img src='../../public/download1.png' className="threeDots" onClick={(e) => {
+                    <img src='/download1.png' className="threeDots" onClick={(e) => {
                         this.props.options(e,this.props.note._id)
                     }}></img>
                 </div>

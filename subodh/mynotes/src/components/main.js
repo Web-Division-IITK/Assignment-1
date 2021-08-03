@@ -1,7 +1,5 @@
-import { render } from '@testing-library/react';
 import '../App.css'
 import React from 'react';
-import formurlencoded from 'form-urlencoded'
 import Login from './login'
 import Signup from './signup'
 import Homepage from './homepage/main'
@@ -12,7 +10,7 @@ class mainComponent extends React.Component {
 
     }
     state = {
-        notes: [],
+        notes: null,
         important: [],
         accountExists: true,
         active: 'home'
@@ -33,7 +31,7 @@ class mainComponent extends React.Component {
 
 
     componentDidMount() {
-        fetch('http://3.142.94.241:3100/savenote', {
+        fetch('https://yournoteserver.herokuapp.com/savenote', {
             method: 'GET',
             headers: {
                 'Content-Type': 'text/plain',
@@ -51,7 +49,7 @@ class mainComponent extends React.Component {
                     this.setState({ notes: notes.reverse() });
                 }
             }
-        })
+        }).catch(err => {this.setState({ notes:null })});
     }
 
 

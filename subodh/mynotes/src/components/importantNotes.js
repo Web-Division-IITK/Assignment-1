@@ -29,7 +29,7 @@ class important extends React.Component {
                                         <div id="options">
                                             <button onClick={(e) => {
                                                 e.preventDefault();
-                                                fetch(`http://3.142.94.241:3100/savenote/${notes._id}/important`, {
+                                                fetch(`https://yournoteserver.herokuapp.com/savenote/${notes._id}/important`, {
                                                     method: 'DELETE',
                                                     headers: {
                                                         'Content-Type': 'text/plain',
