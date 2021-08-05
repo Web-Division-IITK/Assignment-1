@@ -74,7 +74,7 @@
 <details>
   <summary>:zap: GitHub Stats</summary>
 
-  [![navneet's GitHub stats](https://github-readme-stats.vercel.app/api?username=Sahilsingh0808)](https://github.com/Sahilsingh0808/Sahilsingh0808.git)
+  [![Sahil's GitHub stats](https://github-readme-stats.vercel.app/api?username=Sahilsingh0808)](https://github.com/Sahilsingh0808/Sahilsingh0808.git)
   [![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=Sahilsingh0808)](https://github.com/Sahilsingh0808/Sahilsingh0808.git)
 
 
