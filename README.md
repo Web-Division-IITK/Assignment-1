@@ -2,7 +2,7 @@
 
 [![Website](https://img.shields.io/badge/Mail%20me-%40CONNECT-orange)](mailto:sahilsingh08062001@gmail.com)
 [![Twitter Follow](https://img.shields.io/badge/Follow%20-%40GITHUB-black)](https://github.com/Sahilsingh0808)
-![counter](https://[YourEndpoint].m.pipedream.net)
+![Profile Views](https://komarev.com/ghpvc/?username=Sahilsingh0808)
 
 ## I'm a Developer, Engineering Student, Designer, etc !!
 
