@@ -2,6 +2,7 @@
 
 [![Website](https://img.shields.io/badge/Mail%20me-%40CONNECT-orange)](mailto:sahilsingh08062001@gmail.com)
 [![Twitter Follow](https://img.shields.io/badge/Follow%20-%40GITHUB-black)](https://github.com/Sahilsingh0808)
+![counter](https://[YourEndpoint].m.pipedream.net)
 
 ## I'm a Developer, Engineering Student, Designer, etc !!
 
@@ -73,7 +74,9 @@
 <details>
   <summary>:zap: GitHub Stats</summary>
 
-  <img align="left" alt="codeSTACKr's GitHub Stats" src="https://github-readme-stats.vercel.app/api?username=Sahilsingh0808" />
+  [![navneet's GitHub stats](https://github-readme-stats.vercel.app/api?username=Sahilsingh0808)](https://github.com/Sahilsingh0808/Sahilsingh0808.git)
+  [![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=Sahilsingh0808)](https://github.com/Sahilsingh0808/Sahilsingh0808.git)
+
 
 </details>
 
