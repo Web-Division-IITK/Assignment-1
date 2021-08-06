@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:noted/ui/profile.dart';
 import 'addNotes.dart';
+import 'editNode.dart';
 import 'note_model.dart';
+import 'package:http/http.dart' as http;
 
 class NotesScreen extends StatefulWidget {
   @override
@@ -11,6 +13,12 @@ class NotesScreen extends StatefulWidget {
 
 class _NotesScreenState extends State<NotesScreen>
     with SingleTickerProviderStateMixin {
+  deleteData() async {
+    var response = await http.delete(
+        Uri.parse("https://immense-castle-94326.herokuapp.com/aliens/610d8bb5e50403001569b5b4"),);
+    print(response.body);
+  }
+
   int _selectedCategoryIndex = 0;
   late TabController _tabController;
   final DateFormat _dateFormatter = DateFormat('dd MMM');
@@ -22,11 +30,10 @@ class _NotesScreenState extends State<NotesScreen>
     _tabController = TabController(initialIndex: 0, length: 3, vsync: this);
   }
 
- 
   Widget _buildCategoryCard(int index, String title, int count) {
     return GestureDetector(
       onTap: () {
-        setState(() {
+        this.setState(() {
           _selectedCategoryIndex = index;
         });
       },
@@ -98,25 +105,26 @@ class _NotesScreenState extends State<NotesScreen>
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
                   GestureDetector(
-                    onTap:(){
+                    onTap: () {
                       Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) => ProfilePage()),
                       );
-                    } ,
+                    },
                     child: Container(
                       height: 50.0,
                       width: 50.0,
                       decoration: BoxDecoration(
                         image: DecorationImage(
                           image: AssetImage('assets/images/user.png'),
-                          
                         ),
                         borderRadius: BorderRadius.circular(10.0),
                       ),
                     ),
                   ),
-                  SizedBox(width: 10,),
+                  SizedBox(
+                    width: 10,
+                  ),
                   Text(
                     'NOTED',
                     textAlign: TextAlign.center,
@@ -240,18 +248,22 @@ class _NotesScreenState extends State<NotesScreen>
                           fontWeight: FontWeight.w500,
                         ),
                       ),
-                      // Container(
-                      //   height: 50.0,
-                      //   width: 50.0,
-                      //   decoration: BoxDecoration(
-                      //     color: Color(0xFF417BFB),
-                      //     borderRadius: BorderRadius.circular(15.0),
-                      //   ),
-                      //   child: Icon(
-                      //     Icons.location_on,
-                      //     color: Colors.white,
-                      //   ),
-                      // ),
+                      InkWell(
+                        onTap: (){deleteData();},
+                        child: Container(
+                          
+                          height: 30.0,
+                          width: 30.0,
+                          decoration: BoxDecoration(
+                            color: Color(0xFF417BFB),
+                            borderRadius: BorderRadius.circular(15.0),
+                          ),
+                          child: Icon(
+                            Icons.delete,
+                            color: Colors.black,
+                          ),
+                        ),
+                      ),
                     ],
                   ),
                 ],
@@ -262,13 +274,15 @@ class _NotesScreenState extends State<NotesScreen>
         ),
       ),
       floatingActionButton: new FloatingActionButton(
-      elevation: 0.0,
-      child: new Icon(Icons.add),
-      backgroundColor: new Color(0xFF417BFB),
-      onPressed: (){
-        Navigator.push(context,MaterialPageRoute(builder: (context) => AddNotes()),);
-      }
-    ),
+          elevation: 0.0,
+          child: new Icon(Icons.add),
+          backgroundColor: new Color(0xFF417BFB),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => EditNotes()),
+            );
+          }),
     );
   }
 }

@@ -1,6 +1,7 @@
 import 'package:favorite_button/favorite_button.dart';
 import 'package:flutter/material.dart';
 import 'package:noted/api/api_call.dart';
+import 'package:http/http.dart' as http;
 class AddNotes extends StatefulWidget {
 
 
@@ -11,6 +12,24 @@ class AddNotes extends StatefulWidget {
 }
 
 class _AddNotesState extends State<AddNotes> {
+
+  postData() async{
+    var response= await http.post(Uri.parse("https://immense-castle-94326.herokuapp.com/aliens/"),
+    body:{
+          "important": false.toString(),
+          "performed": false.toString(),
+          "work": false.toString(),
+          "home": false.toString(),
+          "others": false.toString(),
+          "heading": "HEADING",
+          "desc": "note making app",
+          "id": "111",
+          "date": "2018-01-01",
+          "time": "12:00",
+    });
+    print(response.body);
+  }
+
   int _value=0;
   final ButtonStyle raisedButtonStyle = ElevatedButton.styleFrom(
     onPrimary: Colors.white,
@@ -135,10 +154,11 @@ class _AddNotesState extends State<AddNotes> {
               width: 100,
               child: ElevatedButton(
                 onPressed: (){
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => ApiCall()),
-                      );
+                      // Navigator.push(
+                      //   context,
+                      //   MaterialPageRoute(builder: (context) => ApiCall()),
+                      // );
+                      postData();
                     }, 
                 child: Text('SAVE',style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold),),
                 style: raisedButtonStyle,),

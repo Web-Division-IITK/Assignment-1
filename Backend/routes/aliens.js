@@ -48,7 +48,7 @@ router.get('/:id',async(req,res)=>{
 
 router.patch('/:id',async(req,res)=>{
     try{
-        const alien=await ALien.findById(req.params.id)
+        const alien=await Alien.findById(req.params.id)
         alien.heading=req.body.heading
         alien.desc=req.body.desc
         alien.date=req.body.date
