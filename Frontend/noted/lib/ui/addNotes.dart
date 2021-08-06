@@ -104,7 +104,7 @@ class _AddNotesState extends State<AddNotes> {
                       ),
                
                 FavoriteButton(
-                  isFavorite: true,
+                  isFavorite: false,
                         valueChanged: (_isFavourite) {
                           print('Is Favourite $_isFavourite)');
                           if(_isFavourite==true)
