@@ -1,5 +1,6 @@
 import 'package:favorite_button/favorite_button.dart';
 import 'package:flutter/material.dart';
+import 'package:noted/api/api_call.dart';
 class AddNotes extends StatefulWidget {
 
 
@@ -133,7 +134,12 @@ class _AddNotesState extends State<AddNotes> {
               height: 50,
               width: 100,
               child: ElevatedButton(
-                onPressed: (){}, 
+                onPressed: (){
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => ApiCall()),
+                      );
+                    }, 
                 child: Text('SAVE',style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold),),
                 style: raisedButtonStyle,),
             ),
