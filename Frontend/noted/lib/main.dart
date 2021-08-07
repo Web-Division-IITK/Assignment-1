@@ -1,5 +1,7 @@
+// --no-sound-null-safety
 import 'package:flutter/material.dart';
 
+import 'authentication/start.dart';
 import 'ui/Notes.dart';
 
 void main() {
@@ -13,7 +15,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
-      home: NotesScreen(),
+      home: Start(),
     );
   }
 }
