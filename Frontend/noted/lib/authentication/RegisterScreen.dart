@@ -14,15 +14,17 @@ class _RegsiterState extends State<Regsiter> {
   CollectionReference users=Firestore.instance.collection('users');
   final FirebaseAuth _auth= FirebaseAuth.instance;
   final _formKey=GlobalKey<FormState>();
+  late FirebaseUser firebaseUser;
   late String _email,_password,_password1,_name;
 
   checkAuthentication() async
   {
     _auth.onAuthStateChanged.listen((user)
-    {
+    async {
       if (user!=null)
       {
-        Navigator.push(context, MaterialPageRoute(builder: (context)=>NotesScreen()));
+        
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>NotesScreen()));
       }
     }
     );
@@ -61,7 +63,19 @@ class _RegsiterState extends State<Regsiter> {
         _formKey.currentState!.save();
         try{
           FirebaseUser user=await _auth.createUserWithEmailAndPassword(email:_email,password:_password);
-          await users.add({'name':_name, 'email':_email, 'password':_password}).then((value)=>print('User Added to Firestore'));
+          print("Email"+_email);
+          
+          try{
+            await users.document(user.uid).setData({
+            'id': user.uid,
+            'name': _name,
+            'email': _email,
+            'password': _password
+          }).then((value) => print("Registered"));
+          }
+          catch(e){
+            print("abcdef"+e.toString());
+          }
           if(user!=null)
           {
             UserUpdateInfo updateUser=UserUpdateInfo();
@@ -174,7 +188,7 @@ class _RegsiterState extends State<Regsiter> {
                                         ))),
                                 SizedBox(height: 40),
                                 TextFormField(
-                                  onSaved: (input) => _email = input!,
+                                  onSaved: (input) => _name = input!,
                                     decoration: InputDecoration(
                                         border: OutlineInputBorder(
                                             borderRadius:

@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 
 import 'authentication/start.dart';
-import 'authentication/test.dart';
+import 'authentication/LoginScreen.dart';
 import 'ui/Notes.dart';
 
 void main() {

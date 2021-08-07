@@ -28,10 +28,7 @@ class _StartState extends State<Start> {
         child: Container(
           child: Column(
             children: <Widget>[
-              Container(
-                child: Image(image: AssetImage("assets/images/girls/img_1.jpeg"),fit:BoxFit.contain),
-                
-              ),
+              
               SizedBox(height: 5,),
               RichText( 
                 text:TextSpan(text: 'Welcome to ',style: TextStyle(fontSize: 25.0,fontWeight: FontWeight.bold,

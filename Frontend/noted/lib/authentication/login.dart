@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:noted/ui/Notes.dart';
-import 'package:noted/authentication/test1.dart';
+import 'package:noted/authentication/RegisterScreen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 

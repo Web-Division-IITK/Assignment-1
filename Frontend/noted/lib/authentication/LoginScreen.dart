@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:noted/authentication/test1.dart';
+import 'package:noted/authentication/RegisterScreen.dart';
 import 'package:noted/ui/Notes.dart';
 class Test extends StatefulWidget {
   Test({Key? key}) : super(key: key);
@@ -19,8 +19,8 @@ class _TestState extends State<Test> {
   checkAuthentication() async {
     _auth.onAuthStateChanged.listen((user) {
       if (user != null) {
-        // Navigator.push(
-        //     context, MaterialPageRoute(builder: (context) => NotesScreen()));
+        Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (context) => NotesScreen()));
       }
     });
   }
@@ -51,7 +51,7 @@ class _TestState extends State<Test> {
 
   
 navigateToSignUp() async {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => Test()));
+    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Regsiter()));
   }
 
   navigateToHome() async {
@@ -146,6 +146,7 @@ navigateToSignUp() async {
                     ),
                     SizedBox(height:40),
                     TextFormField(
+                      obscureText: true,
                        onSaved: (input) => _password = input!,
                        validator: (input) {
                                     if (input!.length < 6)
@@ -201,7 +202,7 @@ navigateToSignUp() async {
                                         SizedBox(height: 20.0,),
                                         GestureDetector(
                                           onTap: ()  {
-                                              Navigator.push(context,MaterialPageRoute(builder: (context)=>Regsiter()));
+                                              Navigator.pushReplacement(context,MaterialPageRoute(builder: (context)=>Regsiter()));
                                           },
                                           child: Text(
                                               "Create a new account",

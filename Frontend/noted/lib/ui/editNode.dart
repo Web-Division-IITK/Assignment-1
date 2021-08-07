@@ -101,7 +101,7 @@ class _EditNotesState extends State<EditNotes> {
                   ),
                 ),
                 SizedBox(
-                  height: 20,
+                  height: 5,
                 ),
 
                 Center(
@@ -145,7 +145,7 @@ class _EditNotesState extends State<EditNotes> {
                   ),
                 ),
                 SizedBox(
-                  height: 50,
+                  height: 20,
                 ),
                 SizedBox(
                   height: 50,
@@ -167,7 +167,9 @@ class _EditNotesState extends State<EditNotes> {
                   ),
                 ),
                 // SizedBox(height: 20,),
-                Image.asset('assets/images/NOTED.png')
+                Padding(
+                  padding: EdgeInsets.only(left:50.0,right: 50.0,top:25,bottom:50),
+                  child: Image.asset('assets/images/books.png'))
               ],
             ),
           ),

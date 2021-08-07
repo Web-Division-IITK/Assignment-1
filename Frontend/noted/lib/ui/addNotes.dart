@@ -103,7 +103,7 @@ class _AddNotesState extends State<AddNotes> {
                 ),
               ),
             ),
-            SizedBox(height: 20,),
+            SizedBox(height: 5,),
               
             Center(
               child: Wrap(
@@ -148,7 +148,7 @@ class _AddNotesState extends State<AddNotes> {
                 ],
               ),
             ),
-            SizedBox(height: 50,),
+            SizedBox(height: 20,),
             SizedBox(
               height: 50,
               width: 100,
@@ -164,7 +164,10 @@ class _AddNotesState extends State<AddNotes> {
                 style: raisedButtonStyle,),
             ),
             // SizedBox(height: 20,),
-            Image.asset('assets/images/NOTED.png')
+           Padding(
+                    padding: EdgeInsets.only(
+                        left: 50.0, right: 50.0, top: 25, bottom: 50),
+                    child: Image.asset('assets/images/books.png'))
           ],
           ),
         ),
