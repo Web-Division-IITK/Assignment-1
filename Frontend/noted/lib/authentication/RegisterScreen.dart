@@ -16,6 +16,9 @@ class _RegsiterState extends State<Regsiter> {
   final _formKey=GlobalKey<FormState>();
   late FirebaseUser firebaseUser;
   late String _email,_password,_password1,_name;
+  bool _passwordVisible=false,_passwordVisible1=false;
+  final TextEditingController _pass = TextEditingController();
+
 
   checkAuthentication() async
   {
@@ -35,6 +38,8 @@ class _RegsiterState extends State<Regsiter> {
     {
       super.initState();
       this.checkAuthentication();
+      _passwordVisible=false;
+      _passwordVisible1=false;
     }
 
     showError(String errormessage) {
@@ -94,6 +99,7 @@ class _RegsiterState extends State<Regsiter> {
 
   @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(
@@ -103,7 +109,7 @@ class _RegsiterState extends State<Regsiter> {
           ),
           decoration: BoxDecoration(
             gradient: LinearGradient(
-              colors: [Color(0xFF0042D1), Color(0xFF417BFB)],
+              colors: [Color(0xFF0029E2), Color(0xFF417BFB)],
               begin: Alignment.topLeft,
               end: Alignment.centerRight,
             ),
@@ -147,7 +153,7 @@ class _RegsiterState extends State<Regsiter> {
                   child: SingleChildScrollView(
                     child: Container(
                       width: double.infinity,
-                      height:MediaQuery.of(context).size.height-250,
+                      height:MediaQuery.of(context).size.height,
                       decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.only(
@@ -163,16 +169,17 @@ class _RegsiterState extends State<Regsiter> {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 SizedBox(
-                                  height: 70,
+                                  height: 50,
                                 ),
                                 TextFormField(
+                                  onSaved: (input) => _email = input!,
                                    validator: (input) {
                                       if (input!.isEmpty) return 'Enter Email';
                                       if (!input.contains('@') ||!input.contains('.'))
                                         return 'Invalid Email';
                                       return null;
                                     },
-                                    onSaved: (input) => _email = input!,
+                                    
                                     keyboardType: TextInputType.emailAddress,
                                     decoration: InputDecoration(
                                         border: OutlineInputBorder(
@@ -189,6 +196,12 @@ class _RegsiterState extends State<Regsiter> {
                                 SizedBox(height: 40),
                                 TextFormField(
                                   onSaved: (input) => _name = input!,
+                                  validator: (input) {
+                                      if (input!.length ==0)
+                                        return 'Provide your name';
+                                      return null;
+                                    },
+                                  
                                     decoration: InputDecoration(
                                         border: OutlineInputBorder(
                                             borderRadius:
@@ -203,9 +216,30 @@ class _RegsiterState extends State<Regsiter> {
                                         ))),
                                 SizedBox(height: 40),
                                 TextFormField(
-                                  obscureText: true,
+                                  controller: _pass,
                                   onSaved: (input) => _password = input!,
+                                  validator: (input) {
+                                      if (input!.length < 6)
+                                        return 'Provide Minimum 6 Character';
+                                      return null;
+                                    },
+                                  obscureText: !_passwordVisible,
+                                  
                                     decoration: InputDecoration(
+                                      suffixIcon: IconButton(
+                                          icon: Icon(
+                                            // Based on passwordVisible state choose the icon
+                                            _passwordVisible
+                                            ? Icons.visibility
+                                            : Icons.visibility_off,
+                                            color: Theme.of(context).primaryColorDark,
+                                            ),
+                                          onPressed: () {
+                                            // Update the state i.e. toogle the state of passwordVisible variable
+                                            setState(() {
+                                                _passwordVisible = !_passwordVisible;
+                                            });
+                                          },),
                                         border: OutlineInputBorder(
                                             borderRadius:
                                                 BorderRadius.circular(8.0),
@@ -218,6 +252,46 @@ class _RegsiterState extends State<Regsiter> {
                                           color: Color(0xFF417BFB),
                                         ))),
                                
+                                SizedBox(height: 40),
+                                TextFormField(
+                                  onSaved: (input) => _password1 = input!,
+                                  validator: (input) {
+                                      if(_pass.text!=(input)||input!.isEmpty)
+                                        return 'Passwords do Not Match';
+                                      return null;
+                                    },
+                                    obscureText: !_passwordVisible1,
+                                    decoration: InputDecoration(
+                                        suffixIcon: IconButton(
+                                          icon: Icon(
+                                            // Based on passwordVisible state choose the icon
+                                            _passwordVisible1
+                                                ? Icons.visibility
+                                                : Icons.visibility_off,
+                                            color: Theme.of(context)
+                                                .primaryColorDark,
+                                          ),
+                                          onPressed: () {
+                                            // Update the state i.e. toogle the state of passwordVisible variable
+                                            setState(() {
+                                              _passwordVisible1 =
+                                                  !_passwordVisible1;
+
+                                            });
+                                          },
+                                        ),
+                                        border: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(8.0),
+                                            borderSide: BorderSide.none),
+                                        filled: true,
+                                        fillColor: Color(0xFFD9F0FC),
+                                        hintText: "Confirm Password",
+                                        prefixIcon: Icon(
+                                          Icons.password,
+                                          color: Color(0xFF417BFB),
+                                        ))),
+                               
                                 SizedBox(height: 70),
                                 SizedBox(
                                   width: double.infinity,
@@ -225,15 +299,18 @@ class _RegsiterState extends State<Regsiter> {
                                   child: ElevatedButton(
                                       onPressed: () {signUp();},
                                       style: ButtonStyle(
+                                        backgroundColor:
+                                              MaterialStateProperty.all(
+                                                  Color(0xFF0029E2)),
                                           shape: MaterialStateProperty.all<
                                                   RoundedRectangleBorder>(
                                               RoundedRectangleBorder(
                                                   borderRadius:
                                                       BorderRadius.circular(18.0),
                                                   side: BorderSide(
-                                                      color: Color(0xFF0042D1))))),
+                                                      color: Color(0xFF0029E2))))),
                                       child: Text(
-                                        "REGSITER",
+                                        "REGISTER",
                                         style: TextStyle(
                                             fontSize: 25,
                                             fontWeight: FontWeight.w600),

@@ -109,7 +109,7 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color(0xFF417BFB),
+        backgroundColor: Color(0xFF0029E2),
         title: Text('My Profile',
           style: TextStyle(fontSize: 25.0, fontWeight: FontWeight.bold))
       ),
@@ -183,7 +183,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 Center(
                     child:ElevatedButton(onPressed: () { signOut(); },
                     style: ElevatedButton.styleFrom(
-                      primary: Color(0xFF417BFB),
+                      primary: Color(0xFF0029E2),
                       
                       textStyle:
                           TextStyle(fontSize: 30, fontWeight: FontWeight.bold)), 
@@ -205,7 +205,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 },
                 child: Text(
                   "Developed by Sahil",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w400, color: Color(0xFF417BFB)),
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w400, color: Color(0xFF0029E2)),
                 ),
               ),
               ]

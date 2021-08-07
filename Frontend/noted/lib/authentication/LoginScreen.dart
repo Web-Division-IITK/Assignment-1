@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:noted/authentication/RegisterScreen.dart';
 import 'package:noted/ui/Notes.dart';
 class Test extends StatefulWidget {
@@ -15,6 +16,7 @@ class _TestState extends State<Test> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   late String _email="", _password;
 
+  bool _passwordVisible = false;
   
   checkAuthentication() async {
     _auth.onAuthStateChanged.listen((user) {
@@ -29,6 +31,7 @@ class _TestState extends State<Test> {
   void initState() {
     super.initState();
     this.checkAuthentication();
+    _passwordVisible = false;
     setState(() {
       
     });
@@ -77,6 +80,7 @@ navigateToSignUp() async {
         });
   }
 
+  
 
   @override
   Widget build(BuildContext context) {
@@ -85,7 +89,7 @@ navigateToSignUp() async {
          constraints: BoxConstraints(maxHeight: MediaQuery.of(context).size.height,
          maxWidth: MediaQuery.of(context).size.width,),
          decoration: BoxDecoration(
-           gradient: LinearGradient(colors: [Color(0xFF0042D1),Color(0xFF417BFB)],
+           gradient: LinearGradient(colors: [Color(0xFF0029E2),Color(0xFF417BFB)],
            begin: Alignment.topLeft,
            end: Alignment.centerRight,
           ),
@@ -123,7 +127,7 @@ navigateToSignUp() async {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  SizedBox(height: 70,),
+                  SizedBox(height: 50,),
                   TextFormField(
                     controller: myController,
                     onSaved: (input) => _email = input!,
@@ -146,7 +150,7 @@ navigateToSignUp() async {
                     ),
                     SizedBox(height:40),
                     TextFormField(
-                      obscureText: true,
+                      obscureText: !_passwordVisible,
                        onSaved: (input) => _password = input!,
                        validator: (input) {
                                     if (input!.length < 6)
@@ -154,6 +158,20 @@ navigateToSignUp() async {
                                     return null;
                                   },
                                   decoration: InputDecoration(
+                                    suffixIcon: IconButton(
+                                        icon: Icon(
+                                          // Based on passwordVisible state choose the icon
+                                          _passwordVisible
+                                          ? Icons.visibility
+                                          : Icons.visibility_off,
+                                          color: Theme.of(context).primaryColorDark,
+                                          ),
+                                        onPressed: () {
+                                          // Update the state i.e. toogle the state of passwordVisible variable
+                                          setState(() {
+                                              _passwordVisible = !_passwordVisible;
+                                          });
+                                        },),
                                       border: OutlineInputBorder(
                                           borderRadius:
                                               BorderRadius.circular(8.0),
@@ -225,11 +243,13 @@ navigateToSignUp() async {
                       height: 50,
                       child: ElevatedButton(onPressed: (){login();}, 
                       style: ButtonStyle(
+                       backgroundColor: MaterialStateProperty.all(Color(0xFF0029E2)),
                         shape: MaterialStateProperty.all<
                                   RoundedRectangleBorder>(
                                   RoundedRectangleBorder(
+                                    
                                   borderRadius:BorderRadius.circular(18.0), 
-                                        side: BorderSide(color: Color(0xFF0042D1))))
+                                        side: BorderSide(color: Color(0xFF0029E2))))
                       ),
                       child: Text("LOGIN",style: TextStyle(fontSize: 25,fontWeight: FontWeight.w600),)),
                     )

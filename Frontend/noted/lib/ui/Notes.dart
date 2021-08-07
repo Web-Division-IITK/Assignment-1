@@ -43,7 +43,7 @@ class _NotesScreenState extends State<NotesScreen>
         width: 175.0,
         decoration: BoxDecoration(
           color: _selectedCategoryIndex == index
-              ? Color(0xFF417BFB)
+              ? Color(0xFF2950FF)
               : Color(0xFFF5F7FB),
           borderRadius: BorderRadius.circular(20.0),
           boxShadow: [
@@ -98,46 +98,93 @@ class _NotesScreenState extends State<NotesScreen>
         color: Color(0xFFD9F0FC),
         child: ListView(
           children: <Widget>[
-            SizedBox(height: 40.0),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 30.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: <Widget>[
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => ProfilePage()),
-                      );
-                    },
-                    child: Container(
-                      height: 50.0,
-                      width: 50.0,
+            Container(child: SizedBox(height: 20.0),color: Colors.lightBlueAccent,),
+            Container(
+              color: Colors.lightBlueAccent,
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 30.0),
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => ProfilePage()),
+                    );
+                  },
+                  child: Wrap(
+                    children:[ Container(
                       decoration: BoxDecoration(
-                        image: DecorationImage(
-                          image: AssetImage('assets/images/user.png'),
+                        color: Color(0xFF0029E2),
+                                border: Border.all(color: Color(0xFF0029E2), width: 2.0),
+                                borderRadius: BorderRadius.circular(20)),
+                      child: Container(
+                      child: Container(
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: <Widget>[
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => ProfilePage()),
+                                  );
+                              },
+                              child: Padding(
+                                padding: EdgeInsets.all(10.0),
+                                child: Container(
+                                  height: 50.0,
+                                  width: 50.0,
+                                  decoration: BoxDecoration(
+                                    
+                                    image: DecorationImage(
+                                      image: AssetImage('assets/images/user.png',),
+                                      colorFilter: new ColorFilter.mode(
+                                            Colors.white.withOpacity(1),
+                                            BlendMode.dstATop),
+                                    ),
+                                    borderRadius: BorderRadius.circular(7.0),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Padding(
+                              padding: EdgeInsets.all(0.0),
+                              child: Text(
+                                'NOTED',
+                                
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 28.0,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                                width: 10,
+                              ),
+                          ],
                         ),
-                        borderRadius: BorderRadius.circular(10.0),
+                       
                       ),
                     ),
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Text(
-                    'NOTED',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 28.0,
-                      fontWeight: FontWeight.bold,
                     ),
+                    
+                    ]
                   ),
-                ],
+                ),
               ),
             ),
-            SizedBox(height: 40.0),
+             Container(
+              child: SizedBox(height: 20.0),
+              color: Colors.lightBlueAccent,
+            ),
             Container(
+              color: Colors.lightBlueAccent,
               height: 200.0,
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
@@ -155,50 +202,85 @@ class _NotesScreenState extends State<NotesScreen>
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(left: 15.0),
-              child: TabBar(
-                controller: _tabController,
-                labelColor: Colors.black,
-                unselectedLabelColor: Colors.blueGrey,
-                indicatorColor: Color(0xFF417BFB),
-                indicatorSize: TabBarIndicatorSize.label,
-                indicatorWeight: 4.0,
-                isScrollable: true,
-                tabs: <Widget>[
-                  Tab(
-                    child: Text(
-                      'Notes',
-                      style: TextStyle(
-                        fontSize: 22.0,
-                        fontWeight: FontWeight.bold,
+              padding: EdgeInsets.all(15.0),
+              child: Container(
+                //  decoration: BoxDecoration(
+                //     color: Color(0xFF0029E2),
+                //     border: Border.all(color: Color(0xFF0029E2), width: 2.0),
+                //     borderRadius: BorderRadius.circular(20)),
+                child: TabBar(
+                  controller: _tabController,
+                  labelColor: Colors.white,
+                  unselectedLabelColor: Color(0xFFB9CFFF),
+                  indicatorColor: Color(0xFF0029E2),
+                  indicatorSize: TabBarIndicatorSize.label,
+                  indicatorWeight: 4.0,
+                  isScrollable: true,
+                  tabs: <Widget>[
+                    Tab(
+                      child: Container(
+                        decoration: BoxDecoration(
+                    color: Color(0xFF2950FF),
+                    border: Border.all(color: Color(0xFF2950FF), width: 2.0),
+                    borderRadius: BorderRadius.circular(10)),
+                        child: Padding(
+                          padding: EdgeInsets.all(5.0),
+                          child: Text(
+                            'Notes',
+                            style: TextStyle(
+                              fontSize: 22.0,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
                       ),
                     ),
-                  ),
-                  Tab(
-                    child: Text(
-                      'Important',
-                      style: TextStyle(
-                        fontSize: 22.0,
-                        fontWeight: FontWeight.bold,
+                     Tab(
+                      child: Container(
+                        decoration: BoxDecoration(
+                            color: Color(0xFF2950FF),
+                            border: Border.all(
+                                color: Color(0xFF2950FF), width: 2.0),
+                            borderRadius: BorderRadius.circular(10)),
+                        child: Padding(
+                          padding: EdgeInsets.all(3.0),
+                          child: Text(
+                            'Important',
+                            style: TextStyle(
+                              fontSize: 22.0,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
                       ),
                     ),
-                  ),
-                  Tab(
-                    child: Text(
-                      'Performed',
-                      style: TextStyle(
-                        fontSize: 22.0,
-                        fontWeight: FontWeight.bold,
+                     Tab(
+                      child: Container(
+                        decoration: BoxDecoration(
+                            color: Color(0xFF2950FF),
+                            border: Border.all(
+                                color: Color(0xFF2950FF), width: 2.0),
+                            borderRadius: BorderRadius.circular(10)),
+                        child: Padding(
+                          padding: EdgeInsets.all(3.0),
+                          child: Text(
+                            'Performed',
+                            style: TextStyle(
+                              fontSize: 22.0,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
             SizedBox(height: 20.0),
             Container(
               margin: EdgeInsets.symmetric(horizontal: 30.0),
-              padding: EdgeInsets.all(30.0),
+              padding: EdgeInsets.all(23.0),
               decoration: BoxDecoration(
                 color: Color(0xFFF5F7FB),
                 borderRadius: BorderRadius.circular(30.0),
@@ -235,7 +317,7 @@ class _NotesScreenState extends State<NotesScreen>
                       fontWeight: FontWeight.w500,
                     ),
                   ),
-                  SizedBox(height: 15.0),
+                  SizedBox(height: 20.0),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.end,
@@ -248,22 +330,67 @@ class _NotesScreenState extends State<NotesScreen>
                           fontWeight: FontWeight.w500,
                         ),
                       ),
-                      InkWell(
-                        onTap: (){deleteData();},
-                        child: Container(
-                          
-                          height: 30.0,
-                          width: 30.0,
-                          decoration: BoxDecoration(
-                            color: Color(0xFF417BFB),
-                            borderRadius: BorderRadius.circular(15.0),
+                      Row(
+                        children:[
+                         
+                          InkWell(
+                            onTap: () {
+                              
+                            },
+                            child: Container(
+                              height: 30.0,
+                              width: 30.0,
+                              decoration: BoxDecoration(
+                                color: Color(0xFF0029E2),
+                                borderRadius: BorderRadius.circular(15.0),
+                              ),
+                              child: Icon(
+                                Icons.remove_red_eye,
+                                color: Colors.white,
+                              ),
+                            ),
                           ),
-                          child: Icon(
-                            Icons.delete,
-                            color: Colors.black,
+                           SizedBox(
+                            width: 15,
+                          ),
+                           InkWell(
+                          onTap: () {
+                            
+                          },
+                          child: Container(
+                            height: 30.0,
+                            width: 30.0,
+                            decoration: BoxDecoration(
+                              color: Color(0xFF0029E2),
+                              borderRadius: BorderRadius.circular(15.0),
+                            ),
+                            child: Icon(
+                              Icons.edit,
+                              color: Colors.white,
+                            ),
                           ),
                         ),
+                        SizedBox(width: 15,),
+                        InkWell(
+                            onTap: () {
+                              deleteData();
+                            },
+                            child: Container(
+                              height: 30.0,
+                              width: 30.0,
+                              decoration: BoxDecoration(
+                                color: Color(0xFF0029E2),
+                                borderRadius: BorderRadius.circular(15.0),
+                              ),
+                              child: Icon(
+                                Icons.delete,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
+                      
                     ],
                   ),
                 ],
@@ -276,7 +403,7 @@ class _NotesScreenState extends State<NotesScreen>
       floatingActionButton: new FloatingActionButton(
           elevation: 0.0,
           child: new Icon(Icons.add),
-          backgroundColor: new Color(0xFF417BFB),
+          backgroundColor: new Color(0xFF0029E2),
           onPressed: () {
             Navigator.push(
               context,

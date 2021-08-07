@@ -1,6 +1,5 @@
 import 'package:favorite_button/favorite_button.dart';
 import 'package:flutter/material.dart';
-import 'package:noted/api/api_call.dart';
 import 'package:http/http.dart' as http;
 class AddNotes extends StatefulWidget {
 
@@ -33,7 +32,7 @@ class _AddNotesState extends State<AddNotes> {
   int _value=0;
   final ButtonStyle raisedButtonStyle = ElevatedButton.styleFrom(
     onPrimary: Colors.white,
-    primary: Color(0xFF417BFB),
+    primary: Color(0xFF0029E2),
     minimumSize: Size(88, 36),
     padding: EdgeInsets.symmetric(horizontal: 16),
     shape: const RoundedRectangleBorder(
@@ -62,7 +61,7 @@ class _AddNotesState extends State<AddNotes> {
                     fontWeight: FontWeight.w500,
                   ),
         ),
-        backgroundColor: Color(0xFF417BFB),
+        backgroundColor: Color(0xFF0029E2),
       ), 
 
       body: SingleChildScrollView(
@@ -131,7 +130,7 @@ class _AddNotesState extends State<AddNotes> {
                           {
                             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                               content: Text("Marked as Favorite"),
-                              backgroundColor: Color(0xFF417BFB),
+                              backgroundColor: Color(0xFF0029E2),
                               duration: Duration(milliseconds: 500),
                             ));
                           }
@@ -139,7 +138,7 @@ class _AddNotesState extends State<AddNotes> {
                           {
                             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                               content: Text("Unmarked from Favorite"),
-                              backgroundColor: Color(0xFF417BFB),
+                              backgroundColor: Color(0xFF0029E2),
                               duration: Duration(milliseconds: 500),
                             ));
                           }
