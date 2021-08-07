@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 
 import 'authentication/start.dart';
+import 'authentication/test.dart';
 import 'ui/Notes.dart';
 
 void main() {
@@ -15,7 +16,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
-      home: Start(),
+      home: Test(),
     );
   }
 }

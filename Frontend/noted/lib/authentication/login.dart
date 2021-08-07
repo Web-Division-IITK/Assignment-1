@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:noted/ui/Notes.dart';
-import 'package:noted/authentication/SignUp.dart';
+import 'package:noted/authentication/test1.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 
@@ -73,7 +73,7 @@ showError(String errormessage) {
 
 navigateToSignUp() async
 {
-  Navigator.push(context, MaterialPageRoute(builder: (context) => SignUp()));
+  Navigator.push(context, MaterialPageRoute(builder: (context) => Regsiter()));
 }
 
 navigateToHome() async
