@@ -42,7 +42,7 @@ export const signin = (username, password) => (dispatch) => {
       });
     })
     .catch((err) => {
-      //dispatch({ type: LOGIN_FAILED });
+      dispatch({ type: LOGIN_FAILED });
       alert("something went wrong");
     });
 };
