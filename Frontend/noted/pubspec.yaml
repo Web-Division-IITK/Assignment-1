@@ -40,6 +40,8 @@ dependencies:
   flutter_signin_button: ^2.0.0
   cloud_firestore:
   url_launcher: ^6.0.9
+  simpleprogressdialog: ^1.0.8
+  simple_fontellico_progress_dialog: ^0.2.0
 
 dev_dependencies:
   flutter_test:

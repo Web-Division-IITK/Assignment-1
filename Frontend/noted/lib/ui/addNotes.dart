@@ -1,6 +1,12 @@
+import 'dart:async';
+
+import 'package:intl/intl.dart';
 import 'package:favorite_button/favorite_button.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:noted/ui/Notes.dart';
+import 'package:simple_fontellico_progress_dialog/simple_fontico_loading.dart';
 class AddNotes extends StatefulWidget {
 
 
@@ -11,22 +17,144 @@ class AddNotes extends StatefulWidget {
 }
 
 class _AddNotesState extends State<AddNotes> {
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  late FirebaseUser user;
+  late String _heading,_desc;
+  late int _tag=0;
+  late Timer _timer;
+  int _start = 3;
+  bool imp=false;
+  late SimpleFontelicoProgressDialog _dialog;
+
+  @override
+  initState(){
+    super.initState();
+    this.getUser();
+    
+  }
+
+  void _showDialog(BuildContext context, SimpleFontelicoProgressDialogType type,
+      String text) async {
+    _dialog = SimpleFontelicoProgressDialog(
+        context: context, barrierDimisable: false);
+
+    if (type == SimpleFontelicoProgressDialogType.custom) {
+      _dialog.show(
+          message: text,
+          type: type,
+          width: 150.0,
+          height: 75.0,
+          loadingIndicator: Text(
+            'C',
+            style: TextStyle(fontSize: 24.0),
+          ));
+    } else {
+      _dialog.show(
+          message: text,
+          type: type,
+          horizontal: true,
+          width: 150.0,
+          height: 75.0,
+          hideText: true,
+          indicatorColor: Colors.red);
+    }
+    await Future.delayed(Duration(seconds: 1));
+    _dialog.hide();
+  }
+
+  getUser() async{
+    user= await _auth.currentUser();
+  }
+
+  showError(String errormessage,String x) {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text(x),
+            content: Text(errormessage),
+            actions: <Widget>[
+              FlatButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: Text('OK'))
+            ],
+          );
+        });
+  }
+
+  void startTimer() {
+    const oneSec = const Duration(seconds: 1);
+    _timer = new Timer.periodic(
+      oneSec,
+      (Timer timer) {
+        if (_start == 0) {
+          setState(() {
+            timer.cancel();
+          });
+        } else {
+          setState(() {
+            _start--;
+          });
+        }
+      },
+    );
+  }
+
 
   postData() async{
-    var response= await http.post(Uri.parse("https://immense-castle-94326.herokuapp.com/aliens/"),
-    body:{
-          "important": false.toString(),
-          "performed": false.toString(),
-          "work": false.toString(),
-          "home": false.toString(),
-          "others": false.toString(),
-          "heading": "HEADING",
-          "desc": "note making app",
-          "id": "111",
-          "date": "2018-01-01",
-          "time": "12:00",
-    });
-    print(response.body);
+    String date = DateFormat("dd-MM-yyyy").format(DateTime.now());
+    String time = DateFormat("hh:mm").format(DateTime.now());
+    if (_formKey.currentState!.validate()) {
+      _formKey.currentState!.save();
+      if(_tag>0){
+        bool work=false,home=false,others=false;
+        if(_tag==1)
+          work=true;
+        else if(_tag==2)
+          home=true;
+        else if(_tag==3)
+          others=true;
+          try{
+            _showDialog(context, SimpleFontelicoProgressDialogType.hurricane,
+              'Hurricane');
+        var response= await http.post(Uri.parse("https://immense-castle-94326.herokuapp.com/aliens/"),
+        body:{
+              "important": imp.toString(),
+              "performed": false.toString(),
+              "work": work.toString(),
+              "home": home.toString(),
+              "others": others.toString(),
+              "heading": _heading,
+              "desc": _desc,
+              "id": user.uid.toString(),
+              "date": date,
+              "time": time,
+        });
+        _dialog.hide();
+        Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => NotesScreen()),
+          );
+        print(response.body);
+        showError("Success","Note saved");
+        
+          }
+          catch(e)
+          {
+            showError(e.toString(),'ERROR');
+          }
+          }
+      else{
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text("Please choose between work/home/others"),
+          backgroundColor: Color(0xFF0029E2),
+          duration: Duration(milliseconds: 1500),
+        ));
+      }
+    }
   }
 
   int _value=0;
@@ -46,6 +174,7 @@ class _AddNotesState extends State<AddNotes> {
      onSelected: (bool selected){
        this.setState((){
             _value = selected ? selectNumber : 0;
+            _tag=_value;
           });
      });
    }
@@ -65,109 +194,131 @@ class _AddNotesState extends State<AddNotes> {
       ), 
 
       body: SingleChildScrollView(
-        child: Container(
-          color: Color(0xFFD9F0FC),
-          child: Column(
-            children: <Widget>[
-              Container(
-              child: Padding(
-                padding: EdgeInsets.all(16.0),
-                child: TextField(
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    hintText: 'Enter heading'
-                  ),
-                ),
-              ),
-            ),
-              
-            Container(
-              child: Padding(
-                padding: EdgeInsets.all(32.0),
-                child: Container(
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.black)
-                  ),
-                  child: Padding(
-                    padding: EdgeInsets.all(20.0),
-                    child: TextFormField(
-                    keyboardType: TextInputType.multiline,
-                    maxLines: null,
-                    decoration: InputDecoration(
-                    border: UnderlineInputBorder(),
-                    labelText: 'Your note goes here'
-                    ),
-                   ),
-                  ),
-                ),
-              ),
-            ),
-            SizedBox(height: 5,),
-              
-            Center(
-              child: Wrap(
+        child: Form(
+          key: _formKey,
+          child: SizedBox(
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height,
+            child: Container(
+              color: Color(0xFFD9F0FC),
+              child: Column(
                 children: <Widget>[
+                  Container(
+                  child: Padding(
+                    padding: EdgeInsets.all(16.0),
+                    child: TextFormField(
+                          onSaved: (input) => _heading = input!,
+                          validator: (input) {
+                            if (input!.isEmpty) return 'Enter Heading';
+                            
+                            return null;
+                          },
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(),
+                        hintText: 'Enter heading'
+                      ),
+                    ),
+                  ),
+                              ),
                   
-                 SizedBox(width: 20,),
-                 _showChoiceChip('Work',1),
-                 SizedBox(
-                        width: 20,
+                Container(
+                  child: Padding(
+                    padding: EdgeInsets.all(32.0),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.black)
                       ),
-                 _showChoiceChip('Home',2),
-                 SizedBox(
-                        width: 20,
+                      child: Padding(
+                        padding: EdgeInsets.all(20.0),
+                        child: TextFormField(
+                          onSaved: (input) => _desc = input!,
+                              validator: (input) {
+                                if (input!.isEmpty) return 'Enter your note';
+          
+                                return null;
+                              },
+                        keyboardType: TextInputType.multiline,
+                        maxLines: null,
+                        decoration: InputDecoration(
+                        border: UnderlineInputBorder(),
+                        labelText: 'Your note goes here'
+                        ),
+                       ),
                       ),
-                 _showChoiceChip('Others',3),
-                 SizedBox(
-                        width: 20,
-                      ),
-               
-                FavoriteButton(
-                  isFavorite: false,
-                        valueChanged: (_isFavourite) {
-                          print('Is Favourite $_isFavourite)');
-                          if(_isFavourite==true)
-                          {
-                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                              content: Text("Marked as Favorite"),
-                              backgroundColor: Color(0xFF0029E2),
-                              duration: Duration(milliseconds: 500),
-                            ));
-                          }
-                          else
-                          {
-                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                              content: Text("Unmarked from Favorite"),
-                              backgroundColor: Color(0xFF0029E2),
-                              duration: Duration(milliseconds: 500),
-                            ));
-                          }
-                        },
+                    ),
+                  ),
                 ),
-                ],
+                SizedBox(height: 5,),
+                  
+                Center(
+                  child: Wrap(
+                    children: <Widget>[
+                      
+                     SizedBox(width: 20,),
+                     _showChoiceChip('Work',1),
+                     SizedBox(
+                            width: 20,
+                          ),
+                     _showChoiceChip('Home',2),
+                     SizedBox(
+                            width: 20,
+                          ),
+                     _showChoiceChip('Others',3),
+                     SizedBox(
+                            width: 20,
+                          ),
+                   
+                    FavoriteButton(
+                      isFavorite: false,
+                            valueChanged: (_isFavourite) {
+                              this.setState(() {
+                                imp=_isFavourite;
+                              });
+                              print('Is Favourite $_isFavourite)');
+                              if(_isFavourite==true)
+                              {
+                                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                  content: Text("Marked as Favorite"),
+                                  backgroundColor: Color(0xFF0029E2),
+                                  duration: Duration(milliseconds: 500),
+                                ));
+                              }
+                              else
+                              {
+                                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                  content: Text("Unmarked from Favorite"),
+                                  backgroundColor: Color(0xFF0029E2),
+                                  duration: Duration(milliseconds: 500),
+                                ));
+                              }
+                            },
+                    ),
+                    ],
+                  ),
+                ),
+                SizedBox(height: 20,),
+                SizedBox(
+                  height: 50,
+                  width: 100,
+                  child: ElevatedButton(
+                    onPressed: (){
+                          // Navigator.push(
+                          //   context,
+                          //   MaterialPageRoute(builder: (context) => ApiCall()),
+                          // );
+                          postData();
+                        }, 
+                    child: Text('SAVE',style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold),),
+                    style: raisedButtonStyle,),
+                ),
+                // SizedBox(height: 20,),
+               Padding(
+                        padding: EdgeInsets.only(
+                            left: 50.0, right: 50.0, top: 25, bottom: 50),
+                        child: Image.asset('assets/images/books.png'))
+              ],
               ),
             ),
-            SizedBox(height: 20,),
-            SizedBox(
-              height: 50,
-              width: 100,
-              child: ElevatedButton(
-                onPressed: (){
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(builder: (context) => ApiCall()),
-                      // );
-                      postData();
-                    }, 
-                child: Text('SAVE',style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold),),
-                style: raisedButtonStyle,),
-            ),
-            // SizedBox(height: 20,),
-           Padding(
-                    padding: EdgeInsets.only(
-                        left: 50.0, right: 50.0, top: 25, bottom: 50),
-                    child: Image.asset('assets/images/books.png'))
-          ],
           ),
         ),
       )    
