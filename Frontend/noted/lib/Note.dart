@@ -34,7 +34,7 @@ class NoteClass {
       time: json['time'] as String,
       important: json['important'] as bool,
       home: json['home'] as bool,
-      performed: json['perfromed'] as bool,
+      performed: json['performed'] as bool,
       others: json['others'] as bool,
       work: json['work'] as bool,
       mongoId: json['_id'] as String,

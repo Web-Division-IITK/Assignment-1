@@ -608,6 +608,7 @@ late SimpleFontelicoProgressDialog _dialog;
                            onTap: () {
                              this.setState(() {
                                 _selectedTag = 2;
+                                print("2 selected");
                                 _tabController.index = _selectedTag;
                              });
                           },
@@ -663,8 +664,8 @@ late SimpleFontelicoProgressDialog _dialog;
                                   
                                   if (snapshot.data![index].id == user.uid&&_selectedCategoryIndex==0 ) {
                                    if(_selectedTag==0){
+                                     print("PERFORMED"+snapshot.data![index].performed.toString());
                                      notesCount++;
-                                     print(notesCount.toString()+"NOTES");
                                     return Column(
                                       children: [
                                         _builderList(
@@ -679,14 +680,14 @@ late SimpleFontelicoProgressDialog _dialog;
                                           snapshot.data![index].home,
                                           snapshot.data![index].others,
                                           snapshot.data![index].mongoId
+                                          
                                         ),
                                         SizedBox(height: 20),
                                       ],
                                     );
                                    }
-                                   else if(_selectedTag==1&&snapshot.data![index].important==true){
+                                    if(_selectedTag==1&&snapshot.data![index].important==true){
                                       notesCount++;
-                                      print(notesCount.toString() + "NOTES");
                                       return Column(
                                         children: [
                                           _builderList(
@@ -705,11 +706,10 @@ late SimpleFontelicoProgressDialog _dialog;
                                         ],
                                       );
                                    }
-                                    else if(_selectedTag == 2&&
+                                     if(_selectedTag == 2&&
                                         snapshot.data![index].performed ==
                                             true){
                                       notesCount++;
-                                      print(notesCount.toString() + "NOTES");
                                       return Column(
                                         children: [
                                           _builderList(
@@ -733,7 +733,6 @@ late SimpleFontelicoProgressDialog _dialog;
                                       _selectedCategoryIndex == 1&&snapshot.data![index].work ==true) {
                                    if (_selectedTag == 0) {
                                       notesCount++;
-                                      print(notesCount.toString() + "NOTES");
                                       return Column(
                                         children: [
                                           _builderList(
@@ -755,7 +754,6 @@ late SimpleFontelicoProgressDialog _dialog;
                                         snapshot.data![index].important ==
                                             true) {
                                       notesCount++;
-                                      print(notesCount.toString() + "NOTES");
                                       return Column(
                                         children: [
                                           _builderList(
@@ -777,7 +775,6 @@ late SimpleFontelicoProgressDialog _dialog;
                                         snapshot.data![index].performed ==
                                             true) {
                                       notesCount++;
-                                      print(notesCount.toString() + "NOTES");
                                       return Column(
                                         children: [
                                           _builderList(
@@ -802,7 +799,6 @@ late SimpleFontelicoProgressDialog _dialog;
                                       snapshot.data![index].home == true) {
                                     if (_selectedTag == 0) {
                                       notesCount++;
-                                      print(notesCount.toString() + "NOTES");
                                       return Column(
                                         children: [
                                           _builderList(
@@ -824,7 +820,6 @@ late SimpleFontelicoProgressDialog _dialog;
                                         snapshot.data![index].important ==
                                             true) {
                                       notesCount++;
-                                      print(notesCount.toString() + "NOTES");
                                       return Column(
                                         children: [
                                           _builderList(
@@ -846,7 +841,6 @@ late SimpleFontelicoProgressDialog _dialog;
                                         snapshot.data![index].performed ==
                                             true) {
                                       notesCount++;
-                                      print(notesCount.toString() + "NOTES");
                                       return Column(
                                         children: [
                                           _builderList(
@@ -872,7 +866,6 @@ late SimpleFontelicoProgressDialog _dialog;
                                       snapshot.data![index].others == true) {
                                     if (_selectedTag == 0) {
                                       notesCount++;
-                                      print(notesCount.toString() + "NOTES");
                                       return Column(
                                         children: [
                                           _builderList(
@@ -894,7 +887,6 @@ late SimpleFontelicoProgressDialog _dialog;
                                         snapshot.data![index].important ==
                                             true) {
                                       notesCount++;
-                                      print(notesCount.toString() + "NOTES");
                                       return Column(
                                         children: [
                                           _builderList(
@@ -916,7 +908,6 @@ late SimpleFontelicoProgressDialog _dialog;
                                         snapshot.data![index].performed ==
                                             true) {
                                       notesCount++;
-                                      print(notesCount.toString() + "NOTES");
                                       return Column(
                                         children: [
                                           _builderList(

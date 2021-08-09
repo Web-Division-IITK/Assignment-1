@@ -312,10 +312,10 @@ class _AddNotesState extends State<AddNotes> {
                     style: raisedButtonStyle,),
                 ),
                 // SizedBox(height: 20,),
-               Padding(
-                        padding: EdgeInsets.only(
-                            left: 50.0, right: 50.0, top: 25, bottom: 50),
-                        child: Image.asset('assets/images/books.png'))
+              //  Padding(
+              //           padding: EdgeInsets.only(
+              //               left: 50.0, right: 50.0, top: 25, bottom: 50),
+              //           child: Image.asset('assets/images/books.png'))
               ],
               ),
             ),

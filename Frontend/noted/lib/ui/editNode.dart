@@ -37,6 +37,7 @@ class _EditNotesState extends State<EditNotes> {
   late Timer _timer;
   int _start = 3;
   bool imp = false;
+  bool first=true;
   late SimpleFontelicoProgressDialog _dialog;
   bool selectedCheck=false;
   late TabController headingController,descController,tagController;
@@ -46,6 +47,16 @@ class _EditNotesState extends State<EditNotes> {
     super.initState();
     this.getUser();
     imp=widget.important;
+    if (first) {
+      if (widget.work == true)
+        _value = 1;
+      else if (widget.home == true)
+        _value = 2;
+      else if (widget.others == true) _value = 3;
+      print("FIRST");
+      first = false;
+    }
+    _tag=_value;
   }
 
   void _showDialog(BuildContext context, SimpleFontelicoProgressDialogType type,
@@ -117,7 +128,7 @@ class _EditNotesState extends State<EditNotes> {
     );
   }
 
-  postData() async {
+  postData(String id) async {
     String date = DateFormat("dd-MM-yyyy").format(DateTime.now());
     String time = DateFormat("hh:mm").format(DateTime.now());
     if (_formKey.currentState!.validate()) {
@@ -132,25 +143,27 @@ class _EditNotesState extends State<EditNotes> {
         try {
           _showDialog(context, SimpleFontelicoProgressDialogType.hurricane,
               'Hurricane');
-          var response = await http.post(
-              Uri.parse("https://immense-castle-94326.herokuapp.com/aliens/"),
+          var response = await http.patch(
+              Uri.parse("https://immense-castle-94326.herokuapp.com/aliens/"+id),
               body: {
                 "important": imp.toString(),
-                "performed": false.toString(),
+                "performed": selectedCheck.toString(),
                 "work": work.toString(),
                 "home": home.toString(),
                 "others": others.toString(),
                 "heading": _heading,
                 "desc": _desc,
-                "id": user.uid.toString(),
-                "date": date,
-                "time": time,
+                "date": widget.date,
+                "time": widget.time,
+                "id"  :widget.id
+               
               });
           _dialog.hide();
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => NotesScreen()),
           );
+          print("EDITED");
           print(response.body);
           showError("Success", "Note saved");
         } catch (e) {
@@ -183,7 +196,18 @@ class _EditNotesState extends State<EditNotes> {
         selected: this._value == selectNumber,
         onSelected: (bool selected) {
           this.setState(() {
-            _value = selected ? selectNumber : 0;
+            print("FIRST"+first.toString());
+            
+            {
+            if(selected)
+              _value = selectNumber;
+              else
+              {
+                _value = 0;
+
+              }
+            }
+              
             _tag = _value;
           });
         });
@@ -335,7 +359,7 @@ class _EditNotesState extends State<EditNotes> {
                       width: 100,
                       child: ElevatedButton(
                         onPressed: () {
-                          postData();
+                          postData(widget.mongoId);
                         },
                         child: Text(
                           'SAVE',
@@ -346,10 +370,10 @@ class _EditNotesState extends State<EditNotes> {
                       ),
                     ),
                     // SizedBox(height: 20,),
-                    Padding(
-                        padding: EdgeInsets.only(
-                            left: 50.0, right: 50.0, top: 25, bottom: 50),
-                        child: Image.asset('assets/images/books.png'))
+                    // Padding(
+                    //     padding: EdgeInsets.only(
+                    //         left: 50.0, right: 50.0, top: 25, bottom: 50),
+                    //     child: Image.asset('assets/images/books.png'))
                   ],
                 ),
               ),
