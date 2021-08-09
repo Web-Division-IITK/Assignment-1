@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:intl/intl.dart';
 import 'package:favorite_button/favorite_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -84,30 +85,45 @@ class _EditNotesState extends State<EditNotes> {
           hideText: true,
           indicatorColor: Colors.red);
     }
-    await Future.delayed(Duration(seconds: 1));
-    _dialog.hide();
+    
   }
 
   getUser() async {
     user = await _auth.currentUser();
   }
 
-  showError(String errormessage, String x) {
-    showDialog(
+ showError(String errormessage) {
+    AwesomeDialog(
         context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text(x),
-            content: Text(errormessage),
-            actions: <Widget>[
-              FlatButton(
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                  child: Text('OK'))
-            ],
-          );
-        });
+        dialogType: DialogType.ERROR,
+        animType: AnimType.RIGHSLIDE,
+        headerAnimationLoop: true,
+        title: 'Error',
+        desc: errormessage,
+        btnOkOnPress: () {},
+        btnOkIcon: Icons.cancel,
+        btnOkColor: Colors.red)
+      ..show();
+  }
+
+  showSuccess(String successmessage) {
+    AwesomeDialog(
+        context: context,
+        animType: AnimType.LEFTSLIDE,
+        headerAnimationLoop: false,
+        dialogType: DialogType.SUCCES,
+        showCloseIcon: true,
+        title: 'Succes',
+        desc: successmessage,
+        btnOkColor: Color(0xFF0029E2),
+        btnOkOnPress: () {
+          debugPrint('OnClcik');
+        },
+        btnOkIcon: Icons.check_circle,
+        onDissmissCallback: (type) {
+          debugPrint('Dialog Dissmiss from callback $type');
+        })
+      ..show();
   }
 
   void startTimer() {
@@ -165,9 +181,9 @@ class _EditNotesState extends State<EditNotes> {
           );
           print("EDITED");
           print(response.body);
-          showError("Success", "Note saved");
+          showSuccess( "Your note has been updated");
         } catch (e) {
-          showError(e.toString(), 'ERROR');
+          showError(e.toString());
         }
       } else {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(

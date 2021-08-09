@@ -1,8 +1,10 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:noted/authentication/RegisterScreen.dart';
 import 'package:noted/ui/Notes.dart';
+import 'package:simple_fontellico_progress_dialog/simple_fontico_loading.dart';
 class Test extends StatefulWidget {
   Test({Key? key}) : super(key: key);
 
@@ -15,6 +17,7 @@ class _TestState extends State<Test> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   late String _email="", _password;
+  
 
   bool _passwordVisible = false;
   
@@ -37,12 +40,67 @@ class _TestState extends State<Test> {
     });
   }
 
+  late SimpleFontelicoProgressDialog _dialog;
+
+  showSuccess(String successmessage) {
+    AwesomeDialog(
+        context: context,
+        animType: AnimType.LEFTSLIDE,
+        headerAnimationLoop: false,
+        dialogType: DialogType.SUCCES,
+        showCloseIcon: true,
+        title: 'Succes',
+        desc: successmessage,
+        btnOkColor: Color(0xFF0029E2),
+        btnOkOnPress: () {
+          debugPrint('OnClcik');
+        },
+        btnOkIcon: Icons.check_circle,
+        onDissmissCallback: (type) {
+          debugPrint('Dialog Dissmiss from callback $type');
+        })
+      ..show();
+  }
+
+  void _showDialog(BuildContext context, SimpleFontelicoProgressDialogType type,
+      String text) async {
+    _dialog = SimpleFontelicoProgressDialog(
+        context: context, barrierDimisable: false);
+
+    if (type == SimpleFontelicoProgressDialogType.custom) {
+      _dialog.show(
+          message: text,
+          type: type,
+          width: 150.0,
+          height: 75.0,
+          loadingIndicator: Text(
+            'C',
+            style: TextStyle(fontSize: 24.0),
+          ));
+    } else {
+      _dialog.show(
+          message: text,
+          type: type,
+          horizontal: true,
+          width: 150.0,
+          height: 75.0,
+          hideText: true,
+          indicatorColor: Colors.red);
+    }
+  }
+
+  
+
   login() async {
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
       try {
+        _showDialog(
+            context, SimpleFontelicoProgressDialogType.hurricane, 'Hurricane');
         await _auth.signInWithEmailAndPassword(
             email: _email, password: _password);
+            _dialog.hide();
+            showSuccess('Log-in completed');
 
         navigateToHome();
       } catch (e) {
@@ -52,6 +110,7 @@ class _TestState extends State<Test> {
     }
   }
 
+  
   
 navigateToSignUp() async {
     Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Regsiter()));
@@ -63,22 +122,20 @@ navigateToSignUp() async {
   }
 
   showError(String errormessage) {
-    showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text('ERROR'),
-            content: Text(errormessage),
-            actions: <Widget>[
-              FlatButton(
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                  child: Text('OK'))
-            ],
-          );
-        });
-  }
+   AwesomeDialog(
+                        context: context,
+                        dialogType: DialogType.ERROR,
+                        animType: AnimType.RIGHSLIDE,
+                        headerAnimationLoop: true,
+                        title: 'Error',
+                        desc:errormessage,
+                            
+                        btnOkOnPress: () {},
+                        btnOkIcon: Icons.cancel,
+                        btnOkColor: Colors.red)
+                      ..show();
+                  }
+  
 
   
 

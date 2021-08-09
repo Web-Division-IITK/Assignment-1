@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -24,7 +25,23 @@ class NotesScreen extends StatefulWidget {
 class _NotesScreenState extends State<NotesScreen>
     with SingleTickerProviderStateMixin {
   deleteData(String id) async {
-    try{
+    AwesomeDialog(
+                        context: context,
+                        dialogType: DialogType.WARNING,
+                        headerAnimationLoop: false,
+                        animType: AnimType.TOPSLIDE,
+                        showCloseIcon: true,
+                        closeIcon: Icon(Icons.close_fullscreen_outlined),
+                        title: 'Warning',
+                        btnOkColor: Color(0xFF0029E2),
+                        btnCancelColor: Color(0xFF353B57),
+                        desc:'Are you sure you want to delete this note?',
+                        btnCancelOnPress: () {},
+                        onDissmissCallback: (type) {
+                          debugPrint('Dialog Dissmiss from callback $type');
+                        },
+                        btnOkOnPress: () async{
+                           try{
     //  _showDialog(context, SimpleFontelicoProgressDialogType.multiHurricane,
     //       'MultiHurricane');
     //  _showDialog(
@@ -62,6 +79,10 @@ class _NotesScreenState extends State<NotesScreen>
       print(e);
       showError(e.toString());
     }
+                        })
+                      ..show();
+                  
+   
   }
 
   void edit(
@@ -85,22 +106,19 @@ class _NotesScreenState extends State<NotesScreen>
 
 
  showError(String errormessage) {
-    showDialog(
+    AwesomeDialog(
         context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text('ERROR'),
-            content: Text(errormessage),
-            actions: <Widget>[
-              FlatButton(
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                  child: Text('OK'))
-            ],
-          );
-        });
+        dialogType: DialogType.ERROR,
+        animType: AnimType.RIGHSLIDE,
+        headerAnimationLoop: true,
+        title: 'Error',
+        desc: errormessage,
+        btnOkOnPress: () {},
+        btnOkIcon: Icons.cancel,
+        btnOkColor: Colors.red)
+      ..show();
   }
+
 
    void _showDialog(BuildContext context, SimpleFontelicoProgressDialogType type,
       String text) async {
@@ -128,8 +146,7 @@ class _NotesScreenState extends State<NotesScreen>
           hideText: true,
           indicatorColor: Colors.red);
     }
-    await Future.delayed(Duration(seconds: 1));
-    _dialog.hide();
+
   }
 
 late SimpleFontelicoProgressDialog _dialog;
@@ -203,7 +220,24 @@ late SimpleFontelicoProgressDialog _dialog;
     }
   }
 
- 
+  view(String heading,String desc)
+  {
+                    AwesomeDialog(
+                      context: context,
+                      headerAnimationLoop: false,
+                      dialogType: DialogType.NO_HEADER,
+                      title: heading,
+                      desc:desc,
+                      btnOkColor:  Color(0xFF0029E2),
+                      btnOkOnPress: () {
+                        debugPrint('OnClcik');
+                      },
+                      btnOkIcon: Icons.check_circle,
+                    )..show();
+                  }
+                
+  
+
 
   Widget _builderList(
       String heading,
@@ -277,7 +311,9 @@ late SimpleFontelicoProgressDialog _dialog;
                   children: [
                     Material(
                       child: InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          view(heading,desc);
+                          },
                         child: Container(
                           height: 30.0,
                           width: 30.0,

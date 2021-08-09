@@ -1,7 +1,9 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:noted/ui/Notes.dart';
+import 'package:simple_fontellico_progress_dialog/simple_fontico_loading.dart';
 
 class Regsiter extends StatefulWidget {
   Regsiter({Key? key}) : super(key: key);
@@ -33,6 +35,56 @@ class _RegsiterState extends State<Regsiter> {
     );
   }
 
+  late SimpleFontelicoProgressDialog _dialog;
+
+  showSuccess(String successmessage) {
+    AwesomeDialog(
+        context: context,
+        animType: AnimType.LEFTSLIDE,
+        headerAnimationLoop: false,
+        dialogType: DialogType.SUCCES,
+        showCloseIcon: true,
+        title: 'Succes',
+        desc: successmessage,
+        btnOkColor: Color(0xFF0029E2),
+        btnOkOnPress: () {
+          debugPrint('OnClcik');
+        },
+        btnOkIcon: Icons.check_circle,
+        onDissmissCallback: (type) {
+          debugPrint('Dialog Dissmiss from callback $type');
+        })
+      ..show();
+  }
+
+  void _showDialog(BuildContext context, SimpleFontelicoProgressDialogType type,
+      String text) async {
+    _dialog = SimpleFontelicoProgressDialog(
+        context: context, barrierDimisable: false);
+
+    if (type == SimpleFontelicoProgressDialogType.custom) {
+      _dialog.show(
+          message: text,
+          type: type,
+          width: 150.0,
+          height: 75.0,
+          loadingIndicator: Text(
+            'C',
+            style: TextStyle(fontSize: 24.0),
+          ));
+    } else {
+      _dialog.show(
+          message: text,
+          type: type,
+          horizontal: true,
+          width: 150.0,
+          height: 75.0,
+          hideText: true,
+          indicatorColor: Colors.red);
+    }
+  }
+
+
   @override
     void initState()
     {
@@ -42,23 +94,20 @@ class _RegsiterState extends State<Regsiter> {
       _passwordVisible1=false;
     }
 
-    showError(String errormessage) {
-    showDialog(
+     showError(String errormessage) {
+    AwesomeDialog(
         context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text('ERROR'),
-            content: Text(errormessage),
-            actions: <Widget>[
-              FlatButton(
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                  child: Text('OK'))
-            ],
-          );
-        });
+        dialogType: DialogType.ERROR,
+        animType: AnimType.RIGHSLIDE,
+        headerAnimationLoop: true,
+        title: 'Error',
+        desc: errormessage,
+        btnOkOnPress: () {},
+        btnOkIcon: Icons.cancel,
+        btnOkColor: Colors.red)
+      ..show();
   }
+  
 
 
   signUp() async
@@ -67,19 +116,26 @@ class _RegsiterState extends State<Regsiter> {
       {
         _formKey.currentState!.save();
         try{
+           _showDialog(
+            context, SimpleFontelicoProgressDialogType.hurricane, 'Hurricane');
           FirebaseUser user=await _auth.createUserWithEmailAndPassword(email:_email,password:_password);
-          print("Email"+_email);
+          _dialog.hide();
           
           try{
+             _showDialog(context, SimpleFontelicoProgressDialogType.hurricane,
+              'Hurricane');
             await users.document(user.uid).setData({
             'id': user.uid,
             'name': _name,
             'email': _email,
             'password': _password
           }).then((value) => print("Registered"));
+          _dialog.hide();
+          showSuccess('Account created');
           }
           catch(e){
             print("abcdef"+e.toString());
+            showError(e.toString());
           }
           if(user!=null)
           {
@@ -91,6 +147,7 @@ class _RegsiterState extends State<Regsiter> {
         }
           catch(e)
           {
+            showError(e.toString());
             showError(e.toString());
           }
         

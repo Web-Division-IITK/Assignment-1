@@ -1,7 +1,9 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:noted/authentication/start.dart';
+import 'package:simple_fontellico_progress_dialog/simple_fontico_loading.dart';
 import 'package:url_launcher/url_launcher.dart';
 class ProfilePage extends StatefulWidget {
   const ProfilePage({ Key? key }) : super(key: key);
@@ -62,10 +64,68 @@ class _ProfilePageState extends State<ProfilePage> {
     }
   }
 
+  late SimpleFontelicoProgressDialog _dialog;
+
+  showSuccess(String successmessage) {
+    AwesomeDialog(
+        context: context,
+        animType: AnimType.LEFTSLIDE,
+        headerAnimationLoop: false,
+        dialogType: DialogType.SUCCES,
+        showCloseIcon: true,
+        title: 'Succes',
+        desc: successmessage,
+        btnOkColor: Color(0xFF0029E2),
+        btnOkOnPress: () {
+          debugPrint('OnClcik');
+        },
+        btnOkIcon: Icons.check_circle,
+        onDissmissCallback: (type) {
+          debugPrint('Dialog Dissmiss from callback $type');
+        })
+      ..show();
+  }
+
+  void _showDialog(BuildContext context, SimpleFontelicoProgressDialogType type,
+      String text) async {
+    _dialog = SimpleFontelicoProgressDialog(
+        context: context, barrierDimisable: false);
+
+    if (type == SimpleFontelicoProgressDialogType.custom) {
+      _dialog.show(
+          message: text,
+          type: type,
+          width: 150.0,
+          height: 75.0,
+          loadingIndicator: Text(
+            'C',
+            style: TextStyle(fontSize: 24.0),
+          ));
+    } else {
+      _dialog.show(
+          message: text,
+          type: type,
+          horizontal: true,
+          width: 150.0,
+          height: 75.0,
+          hideText: true,
+          indicatorColor: Colors.red);
+    }
+  }
+
   _launchURL() async {
     const url = 'https://www.instagram.com/sahil.void/';
     if (await canLaunch(url)) {
+      try{
+         _showDialog(
+            context, SimpleFontelicoProgressDialogType.hurricane, 'Hurricane');
       await launch(url);
+      _dialog.hide();
+      }
+      catch(e)
+      {
+        showError(e.toString());
+      }
     } else {
       throw 'Could not launch $url';
     }
@@ -80,30 +140,52 @@ class _ProfilePageState extends State<ProfilePage> {
     });
   }
 
+  
+
   signOut() async {
     try{
-    _auth.signOut();
-    }catch(e){
-      showError('Could not Sign Out. Please Try Again.');
+      AwesomeDialog(
+                        context: context,
+                        dialogType: DialogType.WARNING,
+                        headerAnimationLoop: false,
+                        animType: AnimType.TOPSLIDE,
+                        showCloseIcon: true,
+                        closeIcon: Icon(Icons.close_fullscreen_outlined),
+                        title: 'Warning',
+                        btnOkColor: Color(0xFF0029E2),
+                        btnCancelColor: Color(0xFF353B57),
+                        desc:'Are you sure you want to sign out?',
+                        btnCancelOnPress: () {},
+                        onDissmissCallback: (type) {
+                          debugPrint('Dialog Dissmiss from callback $type');
+                        },
+                        btnOkOnPress: () async{
+                           try{   _auth.signOut();
+                           }catch(e){
+                            showError(e.toString());
+                             }
+                        }
+                        ).show();
+                  }
+    catch(e)
+    {
+        showError(e.toString());
     }
   }
   showError(String errormessage) {
-    showDialog(
+    AwesomeDialog(
         context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text('ERROR'),
-            content: Text(errormessage),
-            actions: <Widget>[
-              FlatButton(
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                  child: Text('OK'))
-            ],
-          );
-        });
+        dialogType: DialogType.ERROR,
+        animType: AnimType.RIGHSLIDE,
+        headerAnimationLoop: true,
+        title: 'Error',
+        desc: errormessage,
+        btnOkOnPress: () {},
+        btnOkIcon: Icons.cancel,
+        btnOkColor: Colors.red)
+      ..show();
   }
+
 
   @override
   Widget build(BuildContext context) {
