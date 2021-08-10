@@ -195,128 +195,132 @@ class _ProfilePageState extends State<ProfilePage> {
         title: Text('My Profile',
           style: TextStyle(fontSize: 25.0, fontWeight: FontWeight.bold))
       ),
-      body: Container(
-        color: Color(0xFFD9F0FC),
-        child: Column(
-          children:<Widget>[
-            SingleChildScrollView(
-              child: Padding(
-                padding: EdgeInsets.all(15.0),
-                child: Container(
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      color: Colors.blue,
-                      width: 3.0,
-                      
+      body: SingleChildScrollView(
+        
+        child: Container(
+          height: MediaQuery.of(context).size.height,
+          color: Color(0xFFD9F0FC),
+          child: Column(
+            children:<Widget>[
+              SingleChildScrollView(
+                child: Padding(
+                  padding: EdgeInsets.all(15.0),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: Colors.blue,
+                        width: 3.0,
+                        
+                      ),
+                                       
+                     borderRadius: BorderRadius.circular(10)
                     ),
-                                     
-                   borderRadius: BorderRadius.circular(10)
-                  ),
-                  child: Card(
-                    
-                    color: Color(0xFFF5F7FB),
-                   child: new Column(
-                    children: <Widget>[
-                      new Image.asset('assets/images/NOTED.png'),
-                      new Padding(
-                          padding: new EdgeInsets.all(5.0),
-                          child: new Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              new Padding(
-                                padding: new EdgeInsets.all(7.0),
-                                child: new Icon(Icons.person)
-                              ),
-                              new Padding(
-                                padding: new EdgeInsets.all(7.0),
-                                child: new Text(
-                                  "Welcome $name",
-                                  
-                                  style: new TextStyle(fontSize: 25.0),
-                                ),
-                              ),
-                              
-                            ],
-                          ))
-                    ],
-                  ),
-                          ),
-                ),
-              ),
-            ),
-          SizedBox(
-              height: 10.0,
-            ),
-          Padding(
-            padding: EdgeInsets.all(5.0),
-            child: Card(
-              color: Color(0xFFF5F7FB),
-              child:  Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                Center(child: Padding(padding: EdgeInsets.all(10.0),
-                child: Text('Note-Keeping made easy',style: TextStyle(fontSize: 20,fontWeight: FontWeight.w300),)))
-              ],)),
-          ),
-            SizedBox(
-              height: 40.0,
-            ),
-            Center(
-                child: Column(
-                children: [
-                Center(
-                    child:ElevatedButton(onPressed: () { signOut(); },
-                    style: ElevatedButton.styleFrom(
-                      primary: Color(0xFF0029E2),
+                    child: Card(
                       
-                      textStyle:
-                          TextStyle(fontSize: 30, fontWeight: FontWeight.bold)), 
-                    child: Padding(
-                      padding: EdgeInsets.all(10.0),
-                      child: Text('Sign Out',style: TextStyle(fontSize: 30),)),
-                    )
+                      color: Color(0xFFF5F7FB),
+                     child: new Column(
+                      children: <Widget>[
+                        new Image.asset('assets/images/NOTED.png'),
+                        new Padding(
+                            padding: new EdgeInsets.all(5.0),
+                            child: new Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                new Padding(
+                                  padding: new EdgeInsets.all(7.0),
+                                  child: new Icon(Icons.person)
+                                ),
+                                new Padding(
+                                  padding: new EdgeInsets.all(7.0),
+                                  child: new Text(
+                                    "Welcome $name",
+                                    
+                                    style: new TextStyle(fontSize: 25.0),
+                                  ),
+                                ),
+                                
+                              ],
+                            ))
+                      ],
+                    ),
+                            ),
+                  ),
                 ),
-              ],
-            )),
-            SizedBox(height: 50.0),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [GestureDetector(
-                onTap: () => {
-                    _launchURL()
-                },
-                child:Row(
-                          children: <Widget>[
-                            SizedBox(width: 30,),
-                              Expanded(
-                                  child: Divider(color: Color(0xFF0029E2))
-                              ),       
-
-                              Text(
-                                 "Developed by Sahil",
-                        style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.w400,
-                            color: Color(0xFF0029E2)),
-                              ),        
-
-                              Expanded(
-                                  child: Divider(
-                              color: Color(0xFF0029E2),
-                            )
-                              ),
-                              SizedBox(
-                        width: 30,
-                      ),
-                          ]
-                      ),
-             
               ),
-              ]
+            SizedBox(
+                height: 10.0,
+              ),
+            Padding(
+              padding: EdgeInsets.all(5.0),
+              child: Card(
+                color: Color(0xFFF5F7FB),
+                child:  Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                  Center(child: Padding(padding: EdgeInsets.all(10.0),
+                  child: Text('Note-Keeping made easy',style: TextStyle(fontSize: 20,fontWeight: FontWeight.w300),)))
+                ],)),
             ),
-          ],
+              SizedBox(
+                height: 40.0,
+              ),
+              Center(
+                  child: Column(
+                  children: [
+                  Center(
+                      child:ElevatedButton(onPressed: () { signOut(); },
+                      style: ElevatedButton.styleFrom(
+                        primary: Color(0xFF0029E2),
+                        
+                        textStyle:
+                            TextStyle(fontSize: 30, fontWeight: FontWeight.bold)), 
+                      child: Padding(
+                        padding: EdgeInsets.all(10.0),
+                        child: Text('Sign Out',style: TextStyle(fontSize: 30),)),
+                      )
+                  ),
+                ],
+              )),
+              SizedBox(height: 50.0),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [GestureDetector(
+                  onTap: () => {
+                      _launchURL()
+                  },
+                  child:Row(
+                            children: <Widget>[
+                              SizedBox(width: 30,),
+                                Expanded(
+                                    child: Divider(color: Color(0xFF0029E2))
+                                ),       
+      
+                                Text(
+                                   "Developed by Sahil",
+                          style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.w400,
+                              color: Color(0xFF0029E2)),
+                                ),        
+      
+                                Expanded(
+                                    child: Divider(
+                                color: Color(0xFF0029E2),
+                              )
+                                ),
+                                SizedBox(
+                          width: 30,
+                        ),
+                            ]
+                        ),
+               
+                ),
+                ]
+              ),
+            ],
+          ),
         ),
       ),
     );

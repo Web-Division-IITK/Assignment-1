@@ -125,6 +125,7 @@ class _StartState extends State<Start> {
           'password': "Null"
         }).then((value) => print("Registered"));
         _dialog.hide();
+        navigateToHome();
       } catch (e) {
         showError(e.toString());
       }

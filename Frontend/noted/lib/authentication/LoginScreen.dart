@@ -256,8 +256,14 @@ navigateToSignUp() async {
                                               if(_email.length>0&&_email.contains('@')&&_email.contains('.'))
                                               {
                                                 try{
+                                                 _showDialog(
+                                                        context,
+                                                        SimpleFontelicoProgressDialogType
+                                                            .hurricane,
+                                                        'Hurricane');
                                                 await _auth.sendPasswordResetEmail(email: _email);
-                                                showError(
+                                                _dialog.hide();
+                                                showSuccess(
                                                       "Password Reset Link has been sent to your E-mail");
                                                 }
                                                 catch(e)

@@ -131,8 +131,11 @@ class _RegsiterState extends State<Regsiter> {
             'password': _password
           }).then((value) => print("Registered"));
           
-          showSuccess('Account created');
+          
           _dialog.hide();
+           Navigator.pushReplacement(
+              context, MaterialPageRoute(builder: (context) => NotesScreen()));
+          showSuccess('Account created');
           }
           catch(e){
             print("abcdef"+e.toString());
