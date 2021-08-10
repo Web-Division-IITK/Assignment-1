@@ -667,18 +667,17 @@ late SimpleFontelicoProgressDialog _dialog;
                         ),
                         Tab(
                           child: GestureDetector(
-                             onTap: () {
-                               this.setState(() {
-                                  _selectedTag = 2;
-                                  _tabController.index = _selectedTag;
-                               });
+                            onTap: () {
+                              this.setState(() {
+                                _selectedTag = 2;
+                                _tabController.index = _selectedTag;
+                              });
                             },
                             child: Container(
-                              alignment: Alignment.center,
                               decoration: BoxDecoration(
                                   color: Color(0xFF2950FF),
                                   border: Border.all(
-                                      color: Color(0xFF2950FF), width: 2.0),
+                                      color: Color(0xFF2950FF), width: 1.0),
                                   borderRadius: BorderRadius.circular(10)),
                               child: Padding(
                                 padding: EdgeInsets.all(5.0),
@@ -693,6 +692,7 @@ late SimpleFontelicoProgressDialog _dialog;
                             ),
                           ),
                         ),
+                      
                       ],
                     ),
                   ),
