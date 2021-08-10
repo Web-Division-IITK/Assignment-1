@@ -68,6 +68,7 @@ class _NotesScreenState extends State<NotesScreen>
     var response = await http.delete(
       Uri.parse("https://immense-castle-94326.herokuapp.com/aliens/" + id),
     );
+    showSuccess('Note deleted');
     _dialog.hide();
     print(response.body);
     this.setState(() {
@@ -84,6 +85,28 @@ class _NotesScreenState extends State<NotesScreen>
                   
    
   }
+
+   showSuccess(String successmessage) {
+    AwesomeDialog(
+        context: context,
+        animType: AnimType.LEFTSLIDE,
+        headerAnimationLoop: false,
+        dialogType: DialogType.SUCCES,
+        showCloseIcon: true,
+        title: 'Succes',
+        desc: successmessage,
+        btnOkColor: Color(0xFF0029E2),
+        btnOkOnPress: () {
+          debugPrint('OnClcik');
+        },
+        btnOkIcon: Icons.check_circle,
+        onDissmissCallback: (type) {
+          debugPrint('Dialog Dissmiss from callback $type');
+        })
+      ..show();
+  }
+
+  
 
   void edit(
       String heading,
@@ -576,103 +599,108 @@ late SimpleFontelicoProgressDialog _dialog;
                   //     color: Color(0xFF0029E2),
                   //     border: Border.all(color: Color(0xFF0029E2), width: 2.0),
                   //     borderRadius: BorderRadius.circular(20)),
-                  child: TabBar(
-                    controller: _tabController,
-                    labelColor: Colors.white,
-                    unselectedLabelColor: Color(0xFFB9CFFF),
-                    indicatorColor: Color(0xFF0029E2),
-                    indicatorSize: TabBarIndicatorSize.label,
-                    indicatorWeight: 5.0,
-                    isScrollable: true,
-                    tabs: <Widget>[
-                      Tab(
-                        child: GestureDetector(
-                          onTap: () {
-                            this.setState(() {
-                              _selectedTag = 0;
-                              _tabController.index = _selectedTag;
-                            });
-                          },
-                          child: Container(
-                            decoration: BoxDecoration(
-                                color: Color(0xFF2950FF),
-                                border: Border.all(
-                                    color: Color(0xFF2950FF), width: 2.0),
-                                borderRadius: BorderRadius.circular(10)),
-                            child: Padding(
-                              padding: EdgeInsets.all(5.0),
-                              child: Text(
-                                'Notes',
-                                style: TextStyle(
-                                  fontSize: 22.0,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      Tab(
-                        child: GestureDetector(
-                           onTap: () {
-                             this.setState(() {
-                              _selectedTag = 1;
-                              _tabController.index=_selectedTag;
-                             });
-                          },
-                          child: Container(
-                            decoration: BoxDecoration(
-                                color: Color(0xFF2950FF),
-                                border: Border.all(
-                                    color: Color(0xFF2950FF), width: 2.0),
-                                borderRadius: BorderRadius.circular(10)),
-                            child: Padding(
-                              padding: EdgeInsets.all(3.0),
-                              child: Text(
-                                'Favorite',
-                                style: TextStyle(
-                                  fontSize: 22.0,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      Tab(
-                        child: GestureDetector(
-                           onTap: () {
-                             this.setState(() {
-                                _selectedTag = 2;
-                                print("2 selected");
+                  child: Align(
+                    alignment: Alignment.center,
+                    child: TabBar(
+                      controller: _tabController,
+                      labelColor: Colors.white,
+                      unselectedLabelColor: Color(0xFFA9C3FA),
+                      indicatorColor: Color(0xFF0029E2),
+                      indicatorSize: TabBarIndicatorSize.label,
+                      indicatorWeight: 5.0,
+                      isScrollable: true,
+                      tabs: <Widget>[
+                        Tab(
+                          child: GestureDetector(
+                            onTap: () {
+                              this.setState(() {
+                                _selectedTag = 0;
                                 _tabController.index = _selectedTag;
-                             });
-                          },
-                          child: Container(
-                            decoration: BoxDecoration(
-                                color: Color(0xFF2950FF),
-                                border: Border.all(
-                                    color: Color(0xFF2950FF), width: 2.0),
-                                borderRadius: BorderRadius.circular(10)),
-                            child: Padding(
-                              padding: EdgeInsets.all(3.0),
-                              child: Text(
-                                'Performed',
-                                style: TextStyle(
-                                  fontSize: 22.0,
-                                  fontWeight: FontWeight.bold,
+                              });
+                            },
+                            child: Container(
+                              
+                              decoration: BoxDecoration(
+                                  color: Color(0xFF2950FF),
+                                  border: Border.all(
+                                      color: Color(0xFF2950FF), width: 2.0),
+                                  borderRadius: BorderRadius.circular(10)),
+                              child: Padding(
+                                padding: EdgeInsets.all(5.0),
+                                child: Text(
+                                  'Notes',
+                                  style: TextStyle(
+                                    fontSize: 22.0,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 ),
                               ),
                             ),
                           ),
                         ),
-                      ),
-                    ],
+                        Tab(
+                          child: GestureDetector(
+                             onTap: () {
+                               this.setState(() {
+                                _selectedTag = 1;
+                                _tabController.index=_selectedTag;
+                               });
+                            },
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  color: Color(0xFF2950FF),
+                                  border: Border.all(
+                                      color: Color(0xFF2950FF), width: 2.0),
+                                  borderRadius: BorderRadius.circular(10)),
+                              child: Padding(
+                                padding: EdgeInsets.all(3.0),
+                                child: Text(
+                                  'Favorite',
+                                  style: TextStyle(
+                                    fontSize: 22.0,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        Tab(
+                          child: GestureDetector(
+                             onTap: () {
+                               this.setState(() {
+                                  _selectedTag = 2;
+                                  print("2 selected");
+                                  _tabController.index = _selectedTag;
+                               });
+                            },
+                            child: Container(
+                              alignment: Alignment.center,
+                              decoration: BoxDecoration(
+                                  color: Color(0xFF2950FF),
+                                  border: Border.all(
+                                      color: Color(0xFF2950FF), width: 2.0),
+                                  borderRadius: BorderRadius.circular(10)),
+                              child: Padding(
+                                padding: EdgeInsets.all(3.0),
+                                child: Text(
+                                  'Done',
+                                  style: TextStyle(
+                                    fontSize: 22.0,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
             ),
-            SizedBox(height: 20.0),
+            SizedBox(height: 25.0),
             FutureBuilder<List<NoteClass>>(
               future: fetchPhotos(),
               builder: (context, snapshot) {

@@ -174,7 +174,7 @@ class _EditNotesState extends State<EditNotes> {
                 "id"  :widget.id
                
               });
-          _dialog.hide();
+         
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => NotesScreen()),
@@ -182,6 +182,7 @@ class _EditNotesState extends State<EditNotes> {
           print("EDITED");
           print(response.body);
           showSuccess( "Your note has been updated");
+           _dialog.hide();
         } catch (e) {
           showError(e.toString());
         }

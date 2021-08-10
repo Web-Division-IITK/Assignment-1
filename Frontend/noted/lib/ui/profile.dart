@@ -199,47 +199,49 @@ class _ProfilePageState extends State<ProfilePage> {
         color: Color(0xFFD9F0FC),
         child: Column(
           children:<Widget>[
-            Padding(
-              padding: EdgeInsets.all(15.0),
-              child: Container(
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    color: Colors.blue,
-                    width: 3.0,
-                    
+            SingleChildScrollView(
+              child: Padding(
+                padding: EdgeInsets.all(15.0),
+                child: Container(
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: Colors.blue,
+                      width: 3.0,
+                      
+                    ),
+                                     
+                   borderRadius: BorderRadius.circular(10)
                   ),
-                                   
-                 borderRadius: BorderRadius.circular(10)
-                ),
-                child: Card(
-                  
-                  color: Color(0xFFF5F7FB),
-                 child: new Column(
-                  children: <Widget>[
-                    new Image.asset('assets/images/NOTED.png'),
-                    new Padding(
-                        padding: new EdgeInsets.all(5.0),
-                        child: new Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            new Padding(
-                              padding: new EdgeInsets.all(7.0),
-                              child: new Icon(Icons.person)
-                            ),
-                            new Padding(
-                              padding: new EdgeInsets.all(7.0),
-                              child: new Text(
-                                "Welcome $name",
-                                
-                                style: new TextStyle(fontSize: 25.0),
+                  child: Card(
+                    
+                    color: Color(0xFFF5F7FB),
+                   child: new Column(
+                    children: <Widget>[
+                      new Image.asset('assets/images/NOTED.png'),
+                      new Padding(
+                          padding: new EdgeInsets.all(5.0),
+                          child: new Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              new Padding(
+                                padding: new EdgeInsets.all(7.0),
+                                child: new Icon(Icons.person)
                               ),
-                            ),
-                            
-                          ],
-                        ))
-                  ],
+                              new Padding(
+                                padding: new EdgeInsets.all(7.0),
+                                child: new Text(
+                                  "Welcome $name",
+                                  
+                                  style: new TextStyle(fontSize: 25.0),
+                                ),
+                              ),
+                              
+                            ],
+                          ))
+                    ],
+                  ),
+                          ),
                 ),
-                        ),
               ),
             ),
           SizedBox(
@@ -253,7 +255,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                 Center(child: Padding(padding: EdgeInsets.all(10.0),
-                child: Text('You have crafted 0 notes',style: TextStyle(fontSize: 20),)))
+                child: Text('Note-Keeping made easy',style: TextStyle(fontSize: 20,fontWeight: FontWeight.w300),)))
               ],)),
           ),
             SizedBox(
@@ -285,10 +287,32 @@ class _ProfilePageState extends State<ProfilePage> {
                 onTap: () => {
                     _launchURL()
                 },
-                child: Text(
-                  "Developed by Sahil",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w400, color: Color(0xFF0029E2)),
-                ),
+                child:Row(
+                          children: <Widget>[
+                            SizedBox(width: 30,),
+                              Expanded(
+                                  child: Divider(color: Color(0xFF0029E2))
+                              ),       
+
+                              Text(
+                                 "Developed by Sahil",
+                        style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w400,
+                            color: Color(0xFF0029E2)),
+                              ),        
+
+                              Expanded(
+                                  child: Divider(
+                              color: Color(0xFF0029E2),
+                            )
+                              ),
+                              SizedBox(
+                        width: 30,
+                      ),
+                          ]
+                      ),
+             
               ),
               ]
             ),

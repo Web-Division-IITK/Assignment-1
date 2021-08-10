@@ -99,8 +99,8 @@ class _TestState extends State<Test> {
             context, SimpleFontelicoProgressDialogType.hurricane, 'Hurricane');
         await _auth.signInWithEmailAndPassword(
             email: _email, password: _password);
-            _dialog.hide();
             showSuccess('Log-in completed');
+            _dialog.hide();
 
         navigateToHome();
       } catch (e) {
@@ -117,8 +117,8 @@ navigateToSignUp() async {
   }
 
   navigateToHome() async {
-    // Navigator.push(
-    //     context, MaterialPageRoute(builder: (context) => NotesScreen()));
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => NotesScreen()));
   }
 
   showError(String errormessage) {
@@ -177,144 +177,146 @@ navigateToSignUp() async {
                 topRight: Radius.circular(30),
               )
             ),
-            child: Padding(padding: const EdgeInsets.all(24.0),
-            child: Form(
-              key: _formKey,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  SizedBox(height: 50,),
-                  TextFormField(
-                    controller: myController,
-                    onSaved: (input) => _email = input!,
-                    validator: (input) {
-                                    if (input!.isEmpty) return 'Enter Email';
-                                    if (!input.contains('@') ||
-                                        !input.contains('.'))
-                                      return 'Invalid Email';
-                                    return null;
-                                  },
-                    keyboardType: TextInputType.emailAddress,
-                    decoration: InputDecoration(
-                      border:OutlineInputBorder(borderRadius: BorderRadius.circular(8.0),
-                      borderSide: BorderSide.none),
-                      filled: true,
-                      fillColor: Color(0xFFD9F0FC),
-                      hintText: "E-mail",
-                      
-                      prefixIcon: Icon(Icons.email,color:Color(0xFF417BFB) ,))
-                    ),
-                    SizedBox(height:40),
+            child: SingleChildScrollView(
+              child: Padding(padding: const EdgeInsets.all(24.0),
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    SizedBox(height: 50,),
                     TextFormField(
-                      obscureText: !_passwordVisible,
-                       onSaved: (input) => _password = input!,
-                       validator: (input) {
-                                    if (input!.length < 6)
-                                      return 'Provide Minimum 6 Character';
-                                    return null;
-                                  },
-                                  decoration: InputDecoration(
-                                    suffixIcon: IconButton(
-                                        icon: Icon(
-                                          // Based on passwordVisible state choose the icon
-                                          _passwordVisible
-                                          ? Icons.visibility
-                                          : Icons.visibility_off,
-                                          color: Theme.of(context).primaryColorDark,
-                                          ),
-                                        onPressed: () {
-                                          // Update the state i.e. toogle the state of passwordVisible variable
-                                          setState(() {
-                                              _passwordVisible = !_passwordVisible;
-                                          });
-                                        },),
-                                      border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(8.0),
-                                          borderSide: BorderSide.none),
-                                      filled: true,
-                                      fillColor: Color(0xFFD9F0FC),
-                                      hintText: "Password",
-                                      prefixIcon: Icon(
-                                        Icons.password,
-                                        color: Color(0xFF417BFB),
-                                      ))),
-                              SizedBox(height: 30),
-                              Column(
-                                children: [
-                                  SizedBox(
-                                    width: double.infinity,
-                                    child: Container(
-                                      child: Column(
-                                        children: [GestureDetector(
-                                          
-                                          onTap: () async {
-                                              _email = myController.text;
-                                            print(_email);
-                                            if(_email.length>0&&_email.contains('@')&&_email.contains('.'))
-                                            {
-                                              try{
-                                              await _auth.sendPasswordResetEmail(email: _email);
-                                              showError(
-                                                    "Password Reset Link has been sent to your E-mail");
-                                              }
-                                              catch(e)
-                                              {
-                                                showError(e.toString());
-                                              }
-                                              
-                                            }
-                                            else
-                                              showError("Please enter valid E-mail");
-                                              },
-                                          child: Text(
-                                            "Forgot Password",
-                                            style: TextStyle(color: Color(0xFF0042D1),fontWeight: FontWeight.w400,fontSize: 16.0),
-                                            textAlign: TextAlign.right,
+                      controller: myController,
+                      onSaved: (input) => _email = input!,
+                      validator: (input) {
+                                      if (input!.isEmpty) return 'Enter Email';
+                                      if (!input.contains('@') ||
+                                          !input.contains('.'))
+                                        return 'Invalid Email';
+                                      return null;
+                                    },
+                      keyboardType: TextInputType.emailAddress,
+                      decoration: InputDecoration(
+                        border:OutlineInputBorder(borderRadius: BorderRadius.circular(8.0),
+                        borderSide: BorderSide.none),
+                        filled: true,
+                        fillColor: Color(0xFFD9F0FC),
+                        hintText: "E-mail",
+                        
+                        prefixIcon: Icon(Icons.email,color:Color(0xFF417BFB) ,))
+                      ),
+                      SizedBox(height:40),
+                      TextFormField(
+                        obscureText: !_passwordVisible,
+                         onSaved: (input) => _password = input!,
+                         validator: (input) {
+                                      if (input!.length < 6)
+                                        return 'Provide Minimum 6 Character';
+                                      return null;
+                                    },
+                                    decoration: InputDecoration(
+                                      suffixIcon: IconButton(
+                                          icon: Icon(
+                                            // Based on passwordVisible state choose the icon
+                                            _passwordVisible
+                                            ? Icons.visibility
+                                            : Icons.visibility_off,
+                                            color: Theme.of(context).primaryColorDark,
                                             ),
-                                        ),
-                                        SizedBox(height: 20.0,),
-                                        GestureDetector(
-                                          onTap: ()  {
-                                              Navigator.pushReplacement(context,MaterialPageRoute(builder: (context)=>Regsiter()));
-                                          },
-                                          child: Text(
-                                              "Create a new account",
+                                          onPressed: () {
+                                            // Update the state i.e. toogle the state of passwordVisible variable
+                                            setState(() {
+                                                _passwordVisible = !_passwordVisible;
+                                            });
+                                          },),
+                                        border: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(8.0),
+                                            borderSide: BorderSide.none),
+                                        filled: true,
+                                        fillColor: Color(0xFFD9F0FC),
+                                        hintText: "Password",
+                                        prefixIcon: Icon(
+                                          Icons.password,
+                                          color: Color(0xFF417BFB),
+                                        ))),
+                                SizedBox(height: 30),
+                                Column(
+                                  children: [
+                                    SizedBox(
+                                      width: double.infinity,
+                                      child: Container(
+                                        child: Column(
+                                          children: [GestureDetector(
+                                            
+                                            onTap: () async {
+                                                _email = myController.text;
+                                              print(_email);
+                                              if(_email.length>0&&_email.contains('@')&&_email.contains('.'))
+                                              {
+                                                try{
+                                                await _auth.sendPasswordResetEmail(email: _email);
+                                                showError(
+                                                      "Password Reset Link has been sent to your E-mail");
+                                                }
+                                                catch(e)
+                                                {
+                                                  showError(e.toString());
+                                                }
+                                                
+                                              }
+                                              else
+                                                showError("Please enter valid E-mail");
+                                                },
+                                            child: Text(
+                                              "Forgot Password",
                                               style: TextStyle(color: Color(0xFF0042D1),fontWeight: FontWeight.w400,fontSize: 16.0),
-                                              textAlign: TextAlign.left,
+                                              textAlign: TextAlign.right,
                                               ),
+                                          ),
+                                          SizedBox(height: 20.0,),
+                                          GestureDetector(
+                                            onTap: ()  {
+                                                Navigator.pushReplacement(context,MaterialPageRoute(builder: (context)=>Regsiter()));
+                                            },
+                                            child: Text(
+                                                "Create a new account",
+                                                style: TextStyle(color: Color(0xFF0042D1),fontWeight: FontWeight.w400,fontSize: 16.0),
+                                                textAlign: TextAlign.left,
+                                                ),
+                                          ),
+                                          ],
                                         ),
-                                        ],
+            
+                                        
                                       ),
-
                                       
                                     ),
-                                    
-                                  ),
-                                ],
-                              ),
-                              SizedBox(height: 30),
-                    SizedBox(
-                      width: double.infinity,
-                      height: 50,
-                      child: ElevatedButton(onPressed: (){login();}, 
-                      style: ButtonStyle(
-                       backgroundColor: MaterialStateProperty.all(Color(0xFF0029E2)),
-                        shape: MaterialStateProperty.all<
-                                  RoundedRectangleBorder>(
-                                  RoundedRectangleBorder(
-                                    
-                                  borderRadius:BorderRadius.circular(18.0), 
-                                        side: BorderSide(color: Color(0xFF0029E2))))
-                      ),
-                      child: Text("LOGIN",style: TextStyle(fontSize: 25,fontWeight: FontWeight.w600),)),
-                    )
-                ],
-                  ),
-            )
-              
-              ),),
+                                  ],
+                                ),
+                                SizedBox(height: 30),
+                      SizedBox(
+                        width: double.infinity,
+                        height: 50,
+                        child: ElevatedButton(onPressed: (){login();}, 
+                        style: ButtonStyle(
+                         backgroundColor: MaterialStateProperty.all(Color(0xFF0029E2)),
+                          shape: MaterialStateProperty.all<
+                                    RoundedRectangleBorder>(
+                                    RoundedRectangleBorder(
+                                      
+                                    borderRadius:BorderRadius.circular(18.0), 
+                                          side: BorderSide(color: Color(0xFF0029E2))))
+                        ),
+                        child: Text("LOGIN",style: TextStyle(fontSize: 25,fontWeight: FontWeight.w600),)),
+                      )
+                  ],
+                    ),
+              )
+                
+                ),
+            ),),
           ),
           ]
           ),

@@ -1,5 +1,6 @@
 // --no-sound-null-safety
 import 'package:flutter/material.dart';
+import 'package:noted/ui/splash.dart';
 import 'package:noted/ui/test.dart';
 
 import 'authentication/start.dart';
@@ -15,9 +16,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Noted',
       debugShowCheckedModeBanner: false,
-      home: Start(),
+      home: Splash(),
     );
   }
 }

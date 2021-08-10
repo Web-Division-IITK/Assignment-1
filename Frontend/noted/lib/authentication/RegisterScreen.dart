@@ -130,8 +130,9 @@ class _RegsiterState extends State<Regsiter> {
             'email': _email,
             'password': _password
           }).then((value) => print("Registered"));
-          _dialog.hide();
+          
           showSuccess('Account created');
+          _dialog.hide();
           }
           catch(e){
             print("abcdef"+e.toString());

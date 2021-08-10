@@ -91,7 +91,7 @@ class _StartState extends State<Start> {
   }
 
   navigateToSignUp() async {
-    Navigator.pushReplacement(
+    Navigator.push(
         context, MaterialPageRoute(builder: (context) => Regsiter()));
   }
 
@@ -207,61 +207,148 @@ class _StartState extends State<Start> {
                           topLeft: Radius.circular(30),
                           topRight: Radius.circular(30),
                         )),
-                    child: Padding(
-                        padding: const EdgeInsets.all(24.0),
-                        child: Form(
-                          key: _formKey,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              
-                              SizedBox(height: 40),
-                              SizedBox(
-                                  width: MediaQuery.of(context).size.width,
-                                  height: 50,
-                                  child: ElevatedButton(
-                                 onPressed: () {
-                                   Navigator.pushReplacement(
-                                       context,
-                                       MaterialPageRoute(
-                                           builder: (context) =>
-                                               Test()));
-                                 },
-                                 style: ButtonStyle(
-                                     backgroundColor:
-                                         MaterialStateProperty.all(
-                                             Color(0xFF0029E2)),
-                                     shape: MaterialStateProperty.all<
-                                             RoundedRectangleBorder>(
-                                         RoundedRectangleBorder(
-                                             borderRadius:
-                                                 BorderRadius.circular(18.0),
-                                             side: BorderSide(
-                                                 color:
-                                                     Color(0xFF0029E2))))),
-                                 child: Text(
-                                   "LOGIN",
-                                   style: TextStyle(
-                                       fontSize: 25,
-                                       fontWeight: FontWeight.w600),
-                                 )),
-                                ),
-                              SizedBox(height: 30,),
+                    child: SingleChildScrollView(
+                      child: Padding(
+                          padding: const EdgeInsets.all(24.0),
+                          child: Form(
+                            key: _formKey,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                    
+                                SizedBox(height: 20.0),
+                             SizedBox(
+                               height: 100,
+                               child: Image.asset('assets/images/start.png')),
+                               SizedBox(
+                              height: 40,
+                            ),
+                                SizedBox(
+                                    width: MediaQuery.of(context).size.width,
+                                    height: 50,
+                                    child: ElevatedButton(
+                                   onPressed: () {
+                                     Navigator.push(
+                                         context,
+                                         MaterialPageRoute(
+                                             builder: (context) =>
+                                                 Test()));
+                                   },
+                                   style: ButtonStyle(
+                                       backgroundColor:
+                                           MaterialStateProperty.all(
+                                               Color(0xFF0029E2)),
+                                       shape: MaterialStateProperty.all<
+                                               RoundedRectangleBorder>(
+                                           RoundedRectangleBorder(
+                                               borderRadius:
+                                                   BorderRadius.circular(18.0),
+                                               side: BorderSide(
+                                                   color:
+                                                       Color(0xFF0029E2))))),
+                                   child: Text(
+                                     "LOGIN",
+                                     style: TextStyle(
+                                         fontSize: 25,
+                                         fontWeight: FontWeight.w600),
+                                   )),
+                                  ),
+                                SizedBox(height: 30,),
+                                SizedBox(
+                                width: MediaQuery.of(context).size.width,
+                                height: 50,
+                                child: ElevatedButton(
+                                    onPressed: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) => Regsiter()));
+                                    },
+                                    style: ButtonStyle(
+                                        backgroundColor:
+                                            MaterialStateProperty.all(
+                                                Color(0xFF0029E2)),
+                                        shape: MaterialStateProperty.all<
+                                                RoundedRectangleBorder>(
+                                            RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(18.0),
+                                                side: BorderSide(
+                                                    color: Color(0xFF0029E2))))),
+                                    child: Text(
+                                      "REGISTER",
+                                      style: TextStyle(
+                                          fontSize: 25,
+                                          fontWeight: FontWeight.w600),
+                                    )),
+                              ),
+                              SizedBox(height:30),
                               SizedBox(
                               width: MediaQuery.of(context).size.width,
                               height: 50,
                               child: ElevatedButton(
                                   onPressed: () {
-                                    Navigator.pushReplacement(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => Regsiter()));
+                                   signInwithGoogle();
                                   },
                                   style: ButtonStyle(
-                                      backgroundColor:
-                                          MaterialStateProperty.all(
-                                              Color(0xFF0029E2)),
+                                      backgroundColor: MaterialStateProperty.all(
+                                          Color(0xFF0029E2)),
+                                      shape: MaterialStateProperty.all<
+                                              RoundedRectangleBorder>(
+                                          RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(18.0),
+                                              side: BorderSide(
+                                                  color: Color(0xFF0029E2))))),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children:[
+                                      IconButton(
+                                      icon:Image.asset('assets/images/google.png'),
+                                       onPressed: () {signInwithGoogle();},),
+                                      Text(
+                                      "Sign up with Google",
+                                      style: TextStyle(
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.w600),
+                                    ),
+                                    
+                                    ]
+                                  )),
+                                  
+                            ),
+                             SizedBox(
+                              height: 15,
+                            ),
+                            Row(
+                            children: <Widget>[
+                                Expanded(
+                                    child: Divider(color: Colors.black,)
+                                ),       
+                    
+                                Text("OR"),        
+                    
+                                Expanded(
+                                    child: Divider(
+                                color: Colors.black,
+                              )
+                                ),
+                            ]
+                        ),
+                        SizedBox(
+                              height: 30,
+                            ),
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width,
+                              height: 50,
+                              child: ElevatedButton(
+                                  onPressed: () {
+                                    SystemNavigator.pop();
+                                  },
+                                  style: ButtonStyle(
+                                      backgroundColor: MaterialStateProperty.all(
+                                          Color(0xFF0029E2)),
                                       shape: MaterialStateProperty.all<
                                               RoundedRectangleBorder>(
                                           RoundedRectangleBorder(
@@ -270,96 +357,17 @@ class _StartState extends State<Start> {
                                               side: BorderSide(
                                                   color: Color(0xFF0029E2))))),
                                   child: Text(
-                                    "REGISTER",
+                                    "QUIT",
                                     style: TextStyle(
                                         fontSize: 25,
                                         fontWeight: FontWeight.w600),
                                   )),
                             ),
-                            SizedBox(height:30),
-                            SizedBox(
-                            width: MediaQuery.of(context).size.width,
-                            height: 50,
-                            child: ElevatedButton(
-                                onPressed: () {
-                                 signInwithGoogle();
-                                },
-                                style: ButtonStyle(
-                                    backgroundColor: MaterialStateProperty.all(
-                                        Color(0xFF0029E2)),
-                                    shape: MaterialStateProperty.all<
-                                            RoundedRectangleBorder>(
-                                        RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(18.0),
-                                            side: BorderSide(
-                                                color: Color(0xFF0029E2))))),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children:[
-                                    IconButton(
-                                    icon:Image.asset('assets/images/google.png'),
-                                     onPressed: () {signInwithGoogle();},),
-                                    Text(
-                                    "Sign up with Google",
-                                    style: TextStyle(
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.w600),
-                                  ),
-                                  
-                                  ]
-                                )),
-                                
+                              ],
+                            ),
                           ),
-                           SizedBox(
-                            height: 15,
                           ),
-                          Row(
-                          children: <Widget>[
-                              Expanded(
-                                  child: Divider(color: Colors.black,)
-                              ),       
-
-                              Text("OR"),        
-
-                              Expanded(
-                                  child: Divider(
-                              color: Colors.black,
-                            )
-                              ),
-                          ]
-                      ),
-                      SizedBox(
-                            height: 30,
-                          ),
-                          SizedBox(
-                            width: MediaQuery.of(context).size.width,
-                            height: 50,
-                            child: ElevatedButton(
-                                onPressed: () {
-                                  SystemNavigator.pop();
-                                },
-                                style: ButtonStyle(
-                                    backgroundColor: MaterialStateProperty.all(
-                                        Color(0xFF0029E2)),
-                                    shape: MaterialStateProperty.all<
-                                            RoundedRectangleBorder>(
-                                        RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(18.0),
-                                            side: BorderSide(
-                                                color: Color(0xFF0029E2))))),
-                                child: Text(
-                                  "QUIT",
-                                  style: TextStyle(
-                                      fontSize: 25,
-                                      fontWeight: FontWeight.w600),
-                                )),
-                          ),
-                            ],
-                          ),
-                        ),
-                        ),
+                    ),
                   ),
                 ),
               ],
