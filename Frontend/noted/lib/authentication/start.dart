@@ -131,6 +131,7 @@ class _StartState extends State<Start> {
         showError(e.toString());
       }
     } catch (e) {
+       _dialog.hide();
       showError(e.toString());
     }
   }
