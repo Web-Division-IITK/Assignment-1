@@ -7,10 +7,10 @@ class Note {
 }
 
 final Map<String, String> categories = {
-  'Notes': 'all your notes',
-  'Work': 'work notes',
-  'Home': 'home notes',
-  'Others': 'miscellaneous',
+  'Notes': 'All your notes',
+  'Work': 'Work notes',
+  'Home': 'Home notes',
+  'Others': 'Miscellaneous',
 };
 
 final List<Note> notes = [
