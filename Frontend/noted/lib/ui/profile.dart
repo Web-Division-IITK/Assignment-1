@@ -124,6 +124,7 @@ class _ProfilePageState extends State<ProfilePage> {
       }
       catch(e)
       {
+        _dialog.hide();
         showError(e.toString());
       }
     } else {

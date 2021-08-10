@@ -181,9 +181,11 @@ class _EditNotesState extends State<EditNotes> {
           );
           print("EDITED");
           print(response.body);
+          _dialog.hide();
           showSuccess( "Your note has been updated");
-           _dialog.hide();
+           
         } catch (e) {
+          _dialog.hide();
           showError(e.toString());
         }
       } else {

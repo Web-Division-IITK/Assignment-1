@@ -156,12 +156,14 @@ class _AddNotesState extends State<AddNotes> {
             MaterialPageRoute(builder: (context) => NotesScreen()),
           );
         print(response.body);
+        _dialog.hide();
         showSuccess("Your note has been saved");
-         _dialog.hide();
+         
         
           }
           catch(e)
           {
+             _dialog.hide();
             showError(e.toString());
           }
           }

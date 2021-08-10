@@ -131,7 +131,6 @@ class _RegsiterState extends State<Regsiter> {
             'password': _password
           }).then((value) => print("Registered"));
           
-          
           _dialog.hide();
            Navigator.pushReplacement(
               context, MaterialPageRoute(builder: (context) => NotesScreen()));
@@ -139,8 +138,9 @@ class _RegsiterState extends State<Regsiter> {
           }
           catch(e){
             print("abcdef"+e.toString());
-            showError(e.toString());
              _dialog.hide();
+            showError(e.toString());
+            
           }
           if(user!=null)
           {
@@ -152,8 +152,9 @@ class _RegsiterState extends State<Regsiter> {
         }
           catch(e)
           {
+              _dialog.hide();
             showError(e.toString());
-             _dialog.hide();
+           
           }
         
       }

@@ -68,16 +68,16 @@ class _NotesScreenState extends State<NotesScreen>
     var response = await http.delete(
       Uri.parse("https://immense-castle-94326.herokuapp.com/aliens/" + id),
     );
-    showSuccess('Note deleted');
     _dialog.hide();
+    showSuccess('Note deleted');
+    
     print(response.body);
-    this.setState(() {
-      notesC--;
-    });
+    
     }
     catch(e)
     {
       print(e);
+      _dialog.hide();
       showError(e.toString());
     }
                         })
@@ -653,7 +653,7 @@ late SimpleFontelicoProgressDialog _dialog;
                                       color: Color(0xFF2950FF), width: 2.0),
                                   borderRadius: BorderRadius.circular(10)),
                               child: Padding(
-                                padding: EdgeInsets.all(3.0),
+                                padding: EdgeInsets.all(5.0),
                                 child: Text(
                                   'Favorite',
                                   style: TextStyle(
@@ -670,7 +670,6 @@ late SimpleFontelicoProgressDialog _dialog;
                              onTap: () {
                                this.setState(() {
                                   _selectedTag = 2;
-                                  print("2 selected");
                                   _tabController.index = _selectedTag;
                                });
                             },
@@ -682,7 +681,7 @@ late SimpleFontelicoProgressDialog _dialog;
                                       color: Color(0xFF2950FF), width: 2.0),
                                   borderRadius: BorderRadius.circular(10)),
                               child: Padding(
-                                padding: EdgeInsets.all(3.0),
+                                padding: EdgeInsets.all(5.0),
                                 child: Text(
                                   'Done',
                                   style: TextStyle(

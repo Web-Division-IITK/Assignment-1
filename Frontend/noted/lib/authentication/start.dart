@@ -127,6 +127,7 @@ class _StartState extends State<Start> {
         _dialog.hide();
         navigateToHome();
       } catch (e) {
+         _dialog.hide();
         showError(e.toString());
       }
     } catch (e) {
