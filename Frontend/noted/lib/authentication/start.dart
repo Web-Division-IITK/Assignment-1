@@ -345,7 +345,34 @@ class _StartState extends State<Start> {
                               height: 50,
                               child: ElevatedButton(
                                   onPressed: () {
-                                    SystemNavigator.pop();
+                                    AwesomeDialog(
+                                        context: context,
+                                        dialogType: DialogType.WARNING,
+                                        headerAnimationLoop: false,
+                                        animType: AnimType.TOPSLIDE,
+                                        showCloseIcon: true,
+                                        closeIcon: Icon(
+                                            Icons.close_fullscreen_outlined),
+                                        title: 'Warning',
+                                        btnOkColor: Color(0xFF0029E2),
+                                        btnCancelColor: Color(0xFF353B57),
+                                        desc:
+                                            'Are you sure you want to quit the app?',
+                                        btnCancelOnPress: () {},
+                                        onDissmissCallback: (type) {
+                                          debugPrint(
+                                              'Dialog Dissmiss from callback $type');
+                                        },
+                                        btnOkOnPress: () async {
+                                          try {
+                                          SystemNavigator.pop();                                         
+                                          } catch (e) {
+                                            print(e);
+                                            showError(e.toString());
+                                          }
+                                        })
+                                      ..show();
+                                    
                                   },
                                   style: ButtonStyle(
                                       backgroundColor: MaterialStateProperty.all(

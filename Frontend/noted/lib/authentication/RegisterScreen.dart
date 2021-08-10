@@ -140,6 +140,7 @@ class _RegsiterState extends State<Regsiter> {
           catch(e){
             print("abcdef"+e.toString());
             showError(e.toString());
+             _dialog.hide();
           }
           if(user!=null)
           {
@@ -152,7 +153,7 @@ class _RegsiterState extends State<Regsiter> {
           catch(e)
           {
             showError(e.toString());
-            showError(e.toString());
+             _dialog.hide();
           }
         
       }

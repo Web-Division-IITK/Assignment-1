@@ -104,7 +104,9 @@ class _TestState extends State<Test> {
 
         navigateToHome();
       } catch (e) {
+         _dialog.hide();
         showError(e.toString());
+        
         print(e);
       }
     }
