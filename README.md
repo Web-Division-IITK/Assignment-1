@@ -1,6 +1,7 @@
 ## NOTED
 
 --------------------------------------------------------------------------------------------------
+#Play Store Link: https://play.google.com/store/apps/details?id=com.sahil.noted&hl=en_IN&gl=US
 
 ## A simple note keeping mobile application
 
