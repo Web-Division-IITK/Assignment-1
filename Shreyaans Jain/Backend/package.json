@@ -1,0 +1,24 @@
+{
+  "name": "note-making",
+  "version": "1.0.0",
+  "description": "Notes",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shreyaansjain/Note-Making.git"
+  },
+  "author": "Shreyaans Jain",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shreyaansjain/Note-Making/issues"
+  },
+  "homepage": "https://github.com/shreyaansjain/Note-Making#readme",
+  "dependencies": {
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "mongoose": "^5.13.3"
+  }
+}

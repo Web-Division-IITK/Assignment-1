@@ -1,0 +1,57 @@
+
+.headerh3{
+    font-size:xx-large;
+    font-weight: bolder;
+}
+.headerh4{
+    font-size:large;
+    font-weight: bolder;
+}
+.inline,.inline li{
+    display:inline-block;
+    
+} 
+#headerleft{
+    margin-left: 25%;
+}
+.inline li a{
+    margin: 6px;
+    list-style-type: none;
+    text-decoration:none;
+}
+.inline li a:hover{
+    opacity: 0.5;
+}
+#buttons{
+    margin-left: 45%;
+}
+.center p,#Comprehensive,#people{
+    text-align: center;
+    
+}
+#people{
+  margin: 20px;
+}
+ .box div div{
+  margin: 10px;
+} 
+.inlinebox div{
+    display: inline-block;
+}
+.box,#lastcenter{
+    margin-left: 30%;
+}
+#lastcenter div{
+    font-size: 20px;
+    margin-top: 20px;
+ height: 200px;
+ width: 200px;
+ vertical-align: text-top;
+}
+#footer{
+    text-align: center;
+    margin-left: 25%;
+    padding-right: 10px;
+    padding-left: 10px;
+    font-size: 20px;
+}

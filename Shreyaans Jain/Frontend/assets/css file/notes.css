@@ -1,0 +1,36 @@
+body{
+    background-image: radial-gradient(white,lightgray);
+}
+.container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-self: center;
+    height: 100%;
+    width:100%;
+    /* border: 2px solid black; */
+}
+.item{
+    display: flex;
+    align-self: center;
+    font-size: xx-large;
+    margin: 10px;
+    padding: 6px;
+    height: 52px;
+    /* border: 2px solid black; */
+}
+#date1{
+    display: flex;
+    align-self: center;
+    font-size: xx-large;
+    margin: 1px 80px 1px -107px;
+    padding: 6px;
+    height: 52px;
+    /* border: 2px solid black; */
+}
+#field{
+
+    height: 100px;
+    font-size: 14pt;
+    /* width: 300px; */
+}
